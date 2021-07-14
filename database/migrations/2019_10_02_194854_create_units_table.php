@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateUnitsTable extends Migration
 {
@@ -14,14 +14,14 @@ class CreateUnitsTable extends Migration
     public function up()
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->id();
-            $table->string('unit_name');
-            $table->integer('unit_id');
-            $table->string('unit\'s_father')->nullable;
-            $table->string('description')->nullable;
-            $table->string('create_by')->references('name')->on('users');
+            $table->bigIncrements('id');
+            $table->string('unit_name')->unique();
+            $table->string('unit_id')->unique();
+            $table->string('unit_father')->nullable();
+            $table->string('description')->nullable();
+            $table->string('created_by')->nullable();
             $table->timestamps();
-            $table->string('update_by')->references('name')->on('users');
+            $table->string('updated_by')->nullable();
         });
     }
 

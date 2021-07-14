@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.userLayout')
 
 @section('content')
 <div class="container">
+    <a class="btn btn-secondary" href="./">Go Back</a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -56,6 +57,10 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <a href="{{  route('register')  }}">
+                                <button type="button" class="btn btn-primary">
+                                    Register
+                                </button></a>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -63,6 +68,8 @@
                                     </a>
                                 @endif
                             </div>
+
+                            
                         </div>
                     </form>
                 </div>
