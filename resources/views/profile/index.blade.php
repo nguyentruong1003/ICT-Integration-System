@@ -23,7 +23,7 @@
 </br></br>
     <div class="row">
         <table class="table text-center">
-            <thead class="thead-dark">
+            <thead class="thead-light">
                 <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
@@ -31,8 +31,8 @@
                 <th scope="col">Unit</th>
                 <th scope="col">Description</th>
                 <th scope="col">Created At</th>
-                <th scope="col">Updated At</th>
                 <th scope="col">Created By</th>
+                <th scope="col">Updated At</th>
                 <th scope="col">Updated By</th>
                 <th scope="col">Tools</th>
                 </tr>
@@ -46,8 +46,8 @@
                     <td>{{($user->unit)? $user->unit : 'empty'}}</td>
                     <td>{{($user->description)? $user->description : 'empty'}}</td>
                     <td>{{$user->created_at}}</td>
-                    <td>{{$user->updated_at}}</td>  
                     <td>{{($user->created_by)? $user->created_by : 'empty'}}</td>
+                    <td>{{$user->updated_at}}</td>  
                     <td>{{($user->updated_by)? $user->updated_by : 'empty'}}</td> 
                     <td class="justify-content-center"> 
                         <a href={{"users-".$user->id}} class="btn btn-info btn-sm text-light">View</a>

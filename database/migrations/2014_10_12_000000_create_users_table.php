@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('updated_by')->nullable();
             $table->string('unit')->references('unit_name')->on('units')->default(0);
-            $table->boolean('admin')->default(0);
+            $table->boolean('admin');
             $table->rememberToken();
         });
     }

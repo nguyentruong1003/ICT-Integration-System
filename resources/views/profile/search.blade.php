@@ -2,10 +2,6 @@
 
 @section('content')
 <div class="container">
-    <div style="display: inline-flex">
-        <a href="./users-create"><button class="btn btn-info btn-sm text-light">CREATE</button></a>
-        <!-- <label class="btn-sm">SEARCH</label> -->
-    </div>
     <div style="float: right">
         <form method="head" action="./search">
             <input type="text" placeholder="Tìm kiếm..." name="search">
