@@ -27,15 +27,6 @@
                             </div>
                         @enderror
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="unit">Unit</label>
-                        <input type="text" name="unit" class="form-control @error('unit') is-invalid @enderror" id="unit">
-                        @error('unit')
-                            <div class="invalid-feedback">
-                                    {{ $message }}
-                            </div>
-                        @enderror
-                    </div> -->
                     <div class="form-group">
                         <label for="unit_father">Unit's Father</label>
                         <input type="text" name="unit_father" class="form-control" id="unit_father" value='{{$unit->unit_father}}'>
@@ -46,20 +37,6 @@
                         <input type="text" name="description" class="form-control" id="description" value='{{$unit->description}}'>
                     </div>
                     
-                    <!-- <div class="form-group">
-                        <label for="permissionSelect">Permission</label>
-                        <select class="form-control" name="permission" id="permissionSelect">
-                            <option value="read">Read</option>
-                            <option value="write">Write</option>
-                            <option value="execute">Execute</option>
-                            <option value="delete">Delete</option>
-                        </select>
-                    </div> -->
-                    <!-- <div class="form-group">
-                        <div class="custom-file">    
-                            <input type="file" class="custom-file-input" id="image" name="image">
-                            <label class="custom-file-label" for="image">Upload Image</label>
-                        </div>
                     </div> -->
                     <div class="form-group">
                         <label for="updated_by">Updated By</label>

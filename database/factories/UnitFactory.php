@@ -24,10 +24,11 @@ class UnitFactory extends Factory
     public function definition()
     {
         return [
-            'unit_name' => $this->faker->company(),
-            'unit_id' =>  Str::random(4),
+            'unit_name' => $this->faker->jobTitle(),
+            'unit_id' =>  Str::upper(Str::random(6)),
             'unit_father' => "None",
-            'created_by' => "Faker",
+            'created_by' => "Faker",          
+            'updated_by' => "Faker",
             //
         ];
     }

@@ -7,7 +7,6 @@
     <div class="row">
         <div class="offset-md-2 col-md-8 mt-3 user-info">
         <p><strong>Email: </strong> {{$user->email}}</p> 
-            <!-- <p><strong>Password: </strong> {{$user->password}}</p>  -->
             <p><strong>Birthday: </strong> {{$user->birth_date}}</p> 
             <p><strong>Address: </strong> {{$user->address}}</p> 
             <p><strong>Unit: </strong> {{$user->unit}}</p> 
@@ -16,8 +15,6 @@
             <p><strong>Created By: </strong> {{$user->created_by}}</p>
             <p><strong>Last Updated At: </strong> {{$user->updated_at}}</p>  
             <p><strong>Last Updated By: </strong> {{$user->updated_by}}</p> 
-
-            <!-- <a href="./profile-edit" class="btn btn-primary">Edit Profile</a> -->
         </div>
     </div>
 </div>

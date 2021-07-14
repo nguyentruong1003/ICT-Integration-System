@@ -23,23 +23,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('/home_users', function() {
-//     return view('home');
-// });
-
-// Route::get('/admin', function () {
-//     return view('admin/index');
-// })->middleware('checkadmin::class');
-
-// Route::get('/users_info', [App\Http\Controllers\Admin\AdminUsersController::class, 'index'])->middleware('checkadmin::class');
-
-// Route::get('/admin/users_create',  [App\Http\Controllers\Admin\AdminUsersController::class, 'create'])->middleware('checkadmin::class');
-
-// Route::get('/units_info', function () {
-//     return view('admin/units_info');
-// })->middleware('checkadmin::class');
-
-
 Route::get('/', [App\Http\Controllers\LandingController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['web','auth']);
 Route::get('/admin-panel', [App\Http\Controllers\AdminController::class, 'index'])->middleware(['web','auth']);

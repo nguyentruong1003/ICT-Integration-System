@@ -4,13 +4,11 @@
 <div class="container">
     <div style="display: inline-flex">
         <a href="./users-create"><button class="btn btn-info btn-sm text-light">CREATE</button></a>
-        <!-- <label class="btn-sm">SEARCH</label> -->
     </div>
     <div style="float: right">
             <form method="head" action="./search">
             <input type="text" placeholder="Tìm kiếm..." name="search">
             <select name="ontype">
-                <!-- <option value="all"> </option> -->
                 <option value="name">Họ Tên</option>
                 <option value="description">Mô Tả</option>
                 <option value="address">Địa Chỉ</option>

@@ -25,16 +25,6 @@
                             </div>
                         @enderror
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="pass">New Password</label>
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="pass">
-                        @error('password')
-                            <div class="invalid-feedback">
-                                    {{ $message }}
-                            </div>
-                        @enderror
-                    </div> -->
-                    
                     <div class="form-group">
                         <label for="birth_date">Birth Date</label>
                         <input type="date" name="birth_date" class="form-control" id="birth_date" value='{{$user->birth_date}}'>

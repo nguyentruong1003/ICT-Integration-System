@@ -34,18 +34,6 @@
                             </div>
                         @enderror
                     </div>
-
-                    
-                    <!-- <div class="form-group">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="male" name="gender" value="M" class="custom-control-input" />
-                            <label class="custom-control-label" for="male">Male</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="female" name="gender" value="F" class="custom-control-input" />
-                            <label class="custom-control-label" for="female">Female</label>
-                        </div>
-                    </div> -->
                     <div class="form-group">
                         <label for="birth_date">Birthday <label style="color:red">*</label></label>
                         <input type="date" name="birth_date" class="form-control" id="birth_date" min="1000-01-01" max="9999-12-31">
@@ -69,30 +57,13 @@
                             <option disabled value="">-Choose-</option>
                             <option value="None">None</option>
                             @foreach ($unit_name as $value)
-                            <!-- <lable> {{ $value }} </label> -->
                             <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                             
                         </select>
-                        <!-- <input type="text" name="unit" class="form-control" id="unit"> -->
                         
                         
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="permissionSelect">Permission</label>
-                        <select class="form-control" name="permission" id="permissionSelect">
-                            <option value="read">Read</option>
-                            <option value="write">Write</option>
-                            <option value="execute">Execute</option>
-                            <option value="delete">Delete</option>
-                        </select>
-                    </div> -->
-                    <!-- <div class="form-group">
-                        <div class="custom-file">    
-                            <input type="file" class="custom-file-input" id="image" name="image">
-                            <label class="custom-file-label" for="image">Upload Image</label>
-                        </div>
-                    </div> -->
                     <div class="form-group">
                         <label for="created_by">Created By</label>
                         <input type="text" name="created_by" class="form-control @error('created_by') is-invalid @enderror" id="created_by" value='{{ $current_user->name }}' readonly>

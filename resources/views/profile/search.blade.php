@@ -6,7 +6,6 @@
         <form method="head" action="./search">
             <input type="text" placeholder="Tìm kiếm..." name="search">
             <select name="ontype">
-                <!-- <option value="all"> </option> -->
                 <option value="name">Họ Tên</option>
                 <option value="description">Mô Tả</option>
                 <option value="address">Địa Chỉ</option>
@@ -49,13 +48,6 @@
                     <td>{{$user->updated_at}}</td>  
                     <td>{{($user->updated_by)? $user->updated_by : 'empty'}}</td> 
                     <td class="justify-content-center"> 
-                        <a href={{"users-".$user->id}} class="btn btn-info btn-sm text-light">View</a>
-                        <!-- <a href={{"users-update-".$user->id}} class="btn btn-success btn-sm text-light">Update</a>
-                        <form action="{{url('users-'.$user->id)}}" method="POST" style="display:inline-block">
-                            @csrf
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm text-light" value="Delete">
-                        </form> -->
                     </td>
                 </tr>
             @empty
