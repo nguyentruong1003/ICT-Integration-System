@@ -4,17 +4,17 @@
 <div class="container">
     <div style="float: right">
         <form method="head" action="./search">
-            <input type="text" placeholder="Tìm kiếm..." name="search">
+            <input type="text" placeholder="Search..." name="search">
             <select name="ontype">
-                <option value="name">Họ Tên</option>
-                <option value="description">Mô Tả</option>
-                <option value="address">Địa Chỉ</option>
+                <option value="name">Name</option>
+                <option value="description">Description</option>
+                <option value="address">Address</option>
             </select>
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
     <div></br>
-        <label style="color: red; font-weight: bold">Từ khóa: {{ $key }}</br>Tìm kiếm theo: {{ $ontype }}</br>KẾT QUẢ: {{ sizeof($data) }}<label>
+        <label style="color: red; font-weight: bold">Key: {{ $key }}</br>Search by: {{ $ontype }}</br> RESULTS: {{ sizeof($data) }}<label>
     </div>
 
     <div class="row">

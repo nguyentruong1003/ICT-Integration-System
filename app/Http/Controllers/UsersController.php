@@ -202,15 +202,15 @@ class UsersController extends Controller
         if ($request->search != '') {
             if ($request->ontype == 'name') {
                 $data = User::where('name','like','%'.$request->search.'%')->where('admin','=','0')->get();
-                $ontype = "Họ Tên";
+                $ontype = "Name";
             }
             else if ($request->ontype == 'description') {
                 $data = User::where('description','like','%'.$request->search.'%')->where('admin','=','0')->get();
-                $ontype = "Mô Tả";
+                $ontype = "Description";
             }
             else if ($request->ontype == 'address') {
                 $data = User::where('address','like','%'.$request->search.'%')->where('admin','=','0')->get();
-                $ontype = "Địa Chỉ";
+                $ontype = "Address";
             }
         }
             

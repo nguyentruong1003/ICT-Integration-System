@@ -2,23 +2,17 @@
 
 @section('content')
 <div class="container">
-    <!-- <a href="./users-create"><button class="btn btn-primary">CREATE</button></a></br></br> -->
-    
-    <!-- <div style="display: inline-flex">
-        <a href="./users-create"><button class="btn btn-info btn-sm text-light">CREATE</button></a>
-        <label class="btn-sm">SEARCH</label>
-    </div> -->
     <div style="float: right">
-            <form method="head" action="./search">
-            <input type="text" placeholder="Tìm kiếm..." name="search">
+        <form method="head" action="./search">
+            <input type="text" placeholder="Search..." name="search">
             <select name="ontype">
-                <option value="name">Họ Tên</option>
-                <option value="description">Mô Tả</option>
-                <option value="address">Địa Chỉ</option>
+                <option value="name">Name</option>
+                <option value="description">Description</option>
+                <option value="address">Address</option>
             </select>
             <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+        </form>
+    </div>
 </br></br>
     <div class="row">
         <table class="table text-center">
