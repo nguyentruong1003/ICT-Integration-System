@@ -163,11 +163,6 @@ class UsersController extends Controller
             $user->unit = $request->unit;
             $user->address = $request->address;
             $user->updated_by = $request->updated_by;
-            // $user->gender = $request->gender; 
-            // $user->country = $request->country;
-            // if($user->password) {
-            //     $user->password = Hash::make($request->password);
-            // }
            
             $user->save();
 
@@ -203,6 +198,7 @@ class UsersController extends Controller
 
     public function search(Request $request)
     {
+        
         if ($request->search != '') {
             if ($request->ontype == 'name') {
                 $data = User::where('name','like','%'.$request->search.'%')->where('admin','=','0')->get();
@@ -217,7 +213,14 @@ class UsersController extends Controller
                 $ontype = "Địa Chỉ";
             }
         }
+            
         $key = $request->search;
-        return view('users.search', compact('data', 'key', 'ontype'));
+        if(Auth::user()->admin) {
+            return view('users.search', compact('data', 'key', 'ontype'));
+        }
+        else {
+            return view('profile.search', compact('data', 'key', 'ontype'));
+        }
+        
     }
 }

@@ -62,16 +62,8 @@ Route::get('/units-{id}', [App\Http\Controllers\UnitsController::class, 'show'])
 Route::put('/units-{id}', [App\Http\Controllers\UnitsController::class, 'update'])->middleware(['web','auth']);
 Route::delete('/units-{id}', [App\Http\Controllers\UnitsController::class, 'destroy'])->middleware(['web','auth']);
 
-// Route::get('/units', [App\Http\Controllers\UnitsController::class, 'index'])->middleware(['web','auth']);
-// Route::get('/units-{id}', [App\Http\Controllers\UnitsController::class, 'show'])->middleware(['web','auth']);
-// Route::put('/units-{id}', [App\Http\Controllers\UnitsController::class, 'update'])->middleware(['web','auth']);
-// Route::get('/units-create', [App\Http\Controllers\UnitsController::class, 'create'])->middleware(['web','auth']);
-// Route::post('/units-store', [App\Http\Controllers\UnitsController::class, 'store'])->middleware(['web','auth']);
-// Route::get('/units-update-{id}', [App\Http\Controllers\UnitsController::class, 'edit'])->middleware(['web','auth']);
-
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->middleware(['web','auth']);
 Route::get('/profile-edit', [App\Http\Controllers\ProfileController::class, 'edit'])->middleware(['web','auth']);
 Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->middleware(['web','auth']);
 
-Route::get('/search', [App\Http\Controllers\UsersController::class, 'search'])->name('search');
-// Route::get('/search', [App\Http\Controllers\UsersController::class, 'search']);
+Route::get('/search', [App\Http\Controllers\UsersController::class, 'search'])->middleware(['web','auth'])->name('search');

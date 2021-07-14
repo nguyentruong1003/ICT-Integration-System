@@ -24,20 +24,7 @@ class ProfileController extends Controller
 
     
     public function edit()
-    {
-        // if(Auth::user()->admin == 0) { 
-        //     $id = Auth::user()->id;
-        //     $user = User::find($id);
-        //     return view('profile.edit', compact('user'));
-        // }
-        // else {
-        //     return redirect('/admin-panel');
-        // }
-        
-            // $id = Auth::user()->id;
-            // $user = User::find($id);
-            // return view('profile.edit', compact('user'));
-        
+    {       
         if(Auth::user()->admin == 1) { 
             $current_user = Auth::user(); 
             $id = Auth::user()->id;
