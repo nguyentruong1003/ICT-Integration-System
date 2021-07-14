@@ -48,6 +48,7 @@
                     <td>{{$user->updated_at}}</td>  
                     <td>{{($user->updated_by)? $user->updated_by : 'empty'}}</td> 
                     <td class="justify-content-center"> 
+                        <a href={{"users-".$user->id}} class="btn btn-info btn-sm text-light">View</a>
                     </td>
                 </tr>
             @empty
