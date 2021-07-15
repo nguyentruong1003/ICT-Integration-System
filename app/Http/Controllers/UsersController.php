@@ -205,6 +205,10 @@ class UsersController extends Controller
                 $data = User::where('name','like','%'.$request->search.'%')->where('admin','=','0')->get();
                 $ontype = "Name";
             }
+            else if ($request->ontype == 'email') {
+                $data = User::where('email','like','%'.$request->search.'%')->where('admin','=','0')->get();
+                $ontype = "Email";
+            }
             else if ($request->ontype == 'description') {
                 $data = User::where('description','like','%'.$request->search.'%')->where('admin','=','0')->get();
                 $ontype = "Description";
@@ -213,15 +217,33 @@ class UsersController extends Controller
                 $data = User::where('address','like','%'.$request->search.'%')->where('admin','=','0')->get();
                 $ontype = "Address";
             }
-        }
+            else if ($request->ontype == 'unit') {
+                $data = User::where('unit','like','%'.$request->search.'%')->where('admin','=','0')->get();
+                $ontype = "Unit";
+            }
+        
             
-        $key = $request->search;
-        if(Auth::user()->admin) {
-            return view('users.search', compact('data', 'key', 'ontype'));
+            $key = $request->search;
+            if(Auth::user()->admin) {
+                return view('users.search', compact('data', 'key', 'ontype'));
+            }
+            else {
+                return view('profile.search', compact('data', 'key', 'ontype'));
+            }
+        }
+        else if ($request->from_date && $request->to_date) {
+            $data = User::whereBetween('birth_date', [$request->from_date, $request->to_date])->orderBy('birth_date', 'ASC')->get();
+            $key = $request->from_date . " -> " . $request->to_date;
+            $ontype = "Birthday";
+            if(Auth::user()->admin) {
+                return view('users.search', compact('data', 'key', 'ontype'));
+            }
+            else {
+                return view('profile.search', compact('data', 'key', 'ontype'));
+            }
         }
         else {
-            return view('profile.search', compact('data', 'key', 'ontype'));
+            return redirect('/users');
         }
-        
     }
 }
