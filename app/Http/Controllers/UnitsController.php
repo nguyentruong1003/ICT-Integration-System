@@ -124,6 +124,7 @@ class UnitsController extends Controller
     {
         if(Auth::user()->admin) {
             $unit = Unit::find($id);
+            
             $unit->delete();
             return redirect('/admin-panel')->with('msg_success', 'Unit Deleted Successfully');
         }

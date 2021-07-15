@@ -12,4 +12,7 @@ class Unit extends Model
 {
     use HasFactory, Notifiable;
     //
+    protected $hidden = [
+        'unit_child'
+    ];
 }

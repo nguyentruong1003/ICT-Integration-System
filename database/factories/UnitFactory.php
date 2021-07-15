@@ -26,7 +26,7 @@ class UnitFactory extends Factory
         return [
             'unit_name' => $this->faker->jobTitle(),
             'unit_id' =>  Str::upper(Str::random(6)),
-            'unit_father' => "None",
+            'unit_father' => Unit::pluck('unit_name')->random(),
             'created_by' => "Faker",          
             'updated_by' => "Faker",
             //
