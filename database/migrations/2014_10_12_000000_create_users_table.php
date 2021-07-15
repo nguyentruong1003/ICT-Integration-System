@@ -25,13 +25,13 @@ class CreateUsersTable extends Migration
             $table->string('created_by')->nullable();
             $table->timestamps();
             $table->string('updated_by')->nullable();
-            $table->string('unit');
-            $table->boolean('admin')->default(0);
+            $table->string('unit')->nullable();
+            $table->boolean('admin')->default(0); 
             $table->rememberToken();
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('unit')->references('unit_name')->on('units')->ondelete('set NULL');
+            $table->foreign('unit')->references('unit_name')->on('units')->onDelete('set NULL');
         });
 
         DB::table('users')->insert([
@@ -39,6 +39,7 @@ class CreateUsersTable extends Migration
             'email' => 'nguyenvantruong2k@gmail.com',
             'password' => Hash::make('12345678'),
             'created_by' => 'Developer',
+            'updated_by' => 'Developer',
             'unit' => 'root',
             'admin' => '1',
             'created_at' =>  \Carbon\Carbon::now(),

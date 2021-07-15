@@ -34,7 +34,6 @@ class UserFactory extends Factory
             'address' => $this->faker->streetName(), 
             'remember_token' => Str::random(10),
             'unit' => Unit::pluck('unit_name')->random(),
-            'admin' => 0,
             'created_by' => "Faker",
             'updated_by' => "Faker",
         ];

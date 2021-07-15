@@ -28,6 +28,7 @@ class CreateUnitsTable extends Migration
             'unit_name' => 'root',
             'unit_id' => 'ADMIN',
             'created_by' => 'Developer',
+            'updated_by' => 'Developer',
             'created_at' =>  \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);

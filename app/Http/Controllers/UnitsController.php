@@ -125,6 +125,24 @@ class UnitsController extends Controller
         if(Auth::user()->admin) {
             $unit = Unit::find($id);
             
+            $id_users = DB::table('users')->select('id')->where('unit',$unit->unit_name)->get();
+            foreach ($id_users as $id_user) {
+                $id = $id_user->id;
+                $user = User::find($id);
+                $user->unit = $unit->unit_father;
+
+                $user->save();
+            }
+
+            $id_units = DB::table('units')->select('id')->where('unit_father',$unit->unit_name)->get();
+            foreach ($id_units as $id_unit) {
+                $id = $id_unit->id;
+                $unit_tmp = Unit::find($id);
+                $unit_tmp->unit_father = $unit->unit_father;
+
+                $unit_tmp->save();
+            }
+
             $unit->delete();
             return redirect('/admin-panel')->with('msg_success', 'Unit Deleted Successfully');
         }

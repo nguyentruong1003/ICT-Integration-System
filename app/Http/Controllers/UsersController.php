@@ -85,14 +85,7 @@ class UsersController extends Controller
             $user->created_by = $request->created_by;
            
             $user->save();
-
-            // $units = Unit::select('id')->where('unit_name',$request->unit)->get();
-            // $id_unit = $units->id;
-            $unit = Unit::find($request->unit);
-            $unit->user_id = $user->email;
-
-            $unit->save();
-
+            
             return redirect('/admin-panel')->with('msg_success', 'User Created Successfully');
             
         }
