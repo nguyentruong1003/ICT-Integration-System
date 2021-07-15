@@ -1,7 +1,7 @@
 @extends('users.layout')
 
 @section('content_2')
-<div></br>
+<div>
     <label style="color: red; font-weight: bold">Key: {{ $key }}</br>Search by: {{ $ontype }}</br> RESULTS: {{ sizeof($data) }}<label>
 </div>
 
