@@ -26,14 +26,25 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('updated_by')->nullable();
             $table->string('unit');
-            $table->boolean('admin');
+            $table->boolean('admin')->default(0);
             $table->rememberToken();
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('unit')->references('unit_name')->on('units')->onDelete('cascade');
-            //($users->unit = ((Unit::find('unit_name')->unit_father)? Unit::find('unit_name')->unit_father : 'None'));
+            $table->foreign('unit')->references('unit_name')->on('units')->ondelete('set NULL');
         });
+
+        DB::table('users')->insert([
+            'name' => 'Yukihito Hikaru',
+            'email' => 'nguyenvantruong2k@gmail.com',
+            'password' => Hash::make('12345678'),
+            'created_by' => 'Developer',
+            'unit' => 'root',
+            'admin' => '1',
+            'created_at' =>  \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
+
     }
 
     /**

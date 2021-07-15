@@ -17,14 +17,20 @@ class CreateUnitsTable extends Migration
             $table->bigIncrements('id');
             $table->string('unit_name')->unique();
             $table->string('unit_id')->unique();
-            $table->string('unit_father');
-            // $table->string('unit_child')->default('');
-            // $table->string('user_id')->default('');
+            $table->string('unit_father')->nullable();
             $table->string('description')->nullable();
             $table->string('created_by')->nullable();
             $table->timestamps();
             $table->string('updated_by')->nullable();
         });
+
+        DB::table('units')->insert([
+            'unit_name' => 'root',
+            'unit_id' => 'ADMIN',
+            'created_by' => 'Developer',
+            'created_at' =>  \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
     }
 
     /**
