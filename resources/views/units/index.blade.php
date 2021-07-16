@@ -4,6 +4,18 @@
 <div class="container">
         <a href="./units-create"><button class="btn btn-info btn-sm text-light">CREATE</button></a></br></br>
         <div class="row">
+        <div class="col-md-8">
+           
+           {{--Success Msg--}}
+           @if (session('msg_success'))
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+                   <strong>{{session('msg_success')}}</strong>
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+           @endif            
+        </div>
             <table class="table text-center">
                 <thead class="thead-light">
                     <tr>

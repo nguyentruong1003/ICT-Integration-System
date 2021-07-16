@@ -73,7 +73,7 @@ class UnitsController extends Controller
            
             $unit->save();
 
-            return redirect('/admin-panel')->with('msg_success', 'Unit Created Successfully');
+            return redirect('/units')->with('msg_success', 'Unit Created Successfully');
             
         }
         else {
@@ -113,7 +113,7 @@ class UnitsController extends Controller
            
             $unit->save();
 
-            return redirect('/admin-panel')->with('msg_success', 'Unit Updated Successfully');
+            return redirect('/units')->with('msg_success', 'Unit Updated Successfully');
         }
         else {
             return redirect('/home');
@@ -144,7 +144,7 @@ class UnitsController extends Controller
             }
 
             $unit->delete();
-            return redirect('/admin-panel')->with('msg_success', 'Unit Deleted Successfully');
+            return redirect('/units')->with('msg_success', 'Unit Deleted Successfully');
         }
         else {
             return redirect('/home');

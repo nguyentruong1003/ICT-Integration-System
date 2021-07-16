@@ -86,7 +86,7 @@ class UsersController extends Controller
            
             $user->save();
             
-            return redirect('/admin-panel')->with('msg_success', 'User Created Successfully');
+            return redirect('/users')->with('msg_success', 'User Created Successfully');
             
         }
         else {
@@ -167,7 +167,7 @@ class UsersController extends Controller
            
             $user->save();
 
-            return redirect('/admin-panel')->with('msg_success', 'User Updated Successfully');
+            return redirect('/users')->with('msg_success', 'User Updated Successfully');
         }
         else {
             return redirect('/home');
@@ -185,7 +185,7 @@ class UsersController extends Controller
         if(Auth::user()->admin) {
             $user = User::find($id);
             $user->delete();
-            return redirect('/admin-panel')->with('msg_success', 'User Deleted Successfully');
+            return redirect('/users')->with('msg_success', 'User Deleted Successfully');
         }
         else {
             return redirect('/home');
