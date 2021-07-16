@@ -150,10 +150,8 @@ class UsersController extends Controller
             $validatedData = $request->validate([
                 'name' => 'required|min:3|max:255',
                 'email' => 'required|max:190',
-                // 'password' => 'nullable|min:8|confirmed',
                 'unit' => 'required|max:40',
                 'address' => 'required|max:255',
-                // 'update' => 'required|min:3|max:255'
             ]);
 
             $user = User::find($id);

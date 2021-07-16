@@ -16,7 +16,7 @@ class UnitsController extends Controller
     {
         $units = DB::table('units')
                 ->select('*')
-                ->paginate(20);
+                ->paginate(100);
 
         // $units = $units->get();
 
@@ -40,7 +40,12 @@ class UnitsController extends Controller
     {
         if(Auth::user()->admin) {
             $current_user = Auth::user();
-            return view('units.create', compact('current_user'));
+            $units = DB::table('units')->select('unit_name')->get();
+            $unit_name = array();
+            foreach ($units as $unit) {
+                $unit_name[] = $unit->unit_name;
+            }
+            return view('units.create', compact('current_user', 'unit_name'));
         }
         else {
             return redirect('/home');
@@ -51,24 +56,15 @@ class UnitsController extends Controller
         if(Auth::user()->admin) {
 
             $validatedData = $request->validate([
-                'unit_name' => 'required|max:100|min:3',
-                'unit_id' => 'required|min:2|max:50',
-                // 'password' => 'required|min:8',
-                // 'unit' => 'required|max:40',
-                // 'address' => 'required|max:255',
-                // 'create_by' => 'required|min:3|max:255'
+                'unit_name' => 'required|unique:units|max:100|min:3',
+                'unit_id' => 'required|unique:units|min:2|max:50',
             ]);
             
             $unit = new Unit;
             $unit->unit_name = $request->unit_name;
             $unit->unit_id = $request->unit_id;
-            // $unit->birth_date = $request->birth_date;
-            // $unit->gender = $request->gender; 
-            
             $unit->unit_father = $request->unit_father;
             $unit->description = $request->description;
-            // $unit->address = $request->address;
-            // $unit->password = Hash::make($request->password);
             $unit->created_by = $request->created_by;
            
             $unit->save();
@@ -84,9 +80,14 @@ class UnitsController extends Controller
     public function edit($id)
     {
         if(Auth::user()->admin) {
-            $unit = Unit::findOrFail($id);
+            $unit = Unit::find($id);
             $current_user = Auth::user();
-            return view('units.edit', compact('unit', 'current_user'));
+            $units = DB::table('units')->select('unit_name')->get();
+            $unit_name = array();
+            foreach ($units as $value) {
+                $unit_name[] = $value->unit_name;
+            }
+            return view('units.edit', compact('unit', 'current_user', 'unit_name'));
 
         }
         else {

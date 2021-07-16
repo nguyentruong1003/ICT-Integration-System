@@ -9,7 +9,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="full_name">Full Name <label style="color:red">*</label></label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="full_name">
+                        <input autofocus type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="full_name">
                         @error('name')
                             <div class="invalid-feedback">
                                     {{ $message }}
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label for="unit">Unit</label>
                         <select class="form-control" name="unit" id="unit">
-                            <option disabled value="">-Choose-</option>
+                            <option disabled value="None">--Choose--</option>
                             <option value="None">None</option>
                             @foreach ($unit_name as $value)
                             <option value="{{ $value }}">{{ $value }}</option>

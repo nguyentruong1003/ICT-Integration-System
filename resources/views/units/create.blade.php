@@ -9,7 +9,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="unit_name">Name <label style="color:red">*</label></label>
-                        <input type="text" name="unit_name" class="form-control @error('unit_name') is-invalid @enderror" id="unit_name">
+                        <input autofocus type="text" name="unit_name" class="form-control @error('unit_name') is-invalid @enderror" id="unit_name">
                         @error('unit_name')
                             <div class="invalid-feedback">
                                     {{ $message }}
@@ -27,9 +27,13 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="unit_father">Unit's Father</label>
-                        <input type="text" name="unit_father" class="form-control" id="unit_father">
-                        
+                        <label for="unit_father">Unit Father</label>
+                        <select class="form-control" name="unit_father" id="unit">
+                            <option disabled value="None">--Choose--</option>
+                            @foreach ($unit_name as $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
