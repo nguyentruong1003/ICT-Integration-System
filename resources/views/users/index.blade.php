@@ -14,6 +14,16 @@
                </div>
            @endif            
    </div>
+   <div>
+           @if (session('msg_search'))
+               <div class="alert alert-dismissible fade show" role="alert">
+                   <strong style="color:red">{{session('msg_search')}}</strong>
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+           @endif
+   </div>
     <table class="table text-center">
         <thead class="thead-light">
             <tr>

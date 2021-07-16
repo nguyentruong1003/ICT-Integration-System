@@ -243,7 +243,7 @@ class UsersController extends Controller
             }
         }
         else {
-            return redirect('/users');
+            return redirect('/users')->with('msg_search', 'You have not entered the search keyword!');
         }
     }
 }

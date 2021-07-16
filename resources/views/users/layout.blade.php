@@ -9,6 +9,7 @@
         <ul style="list-style-type: none">
             <li><form style="float: right" method="head" action="./search">
                 <input type="text" placeholder="Search..." name="search">
+                
                 <select name="ontype">
                     <option value="name">Name</option>
                     <option value="email">Email</option>
