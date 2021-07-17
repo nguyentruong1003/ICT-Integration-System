@@ -52,9 +52,9 @@
                 <td>{{($user->address)? $user->address : 'empty'}}</td>
                 <td>{{($user->description)? $user->description : 'empty'}}</td>
                 <td>{{$user->created_at}}</td>
-                <td>{{($user->created_by)? $user->created_by : 'empty'}}</td>
+                <td>{{($user->created_by == $current_user->name)? 'You' : $user->created_by}}</td>
                 <td>{{$user->updated_at}}</td>  
-                <td>{{($user->updated_by)? $user->updated_by : 'empty'}}</td> 
+                <td>{{($user->updated_by == $current_user->name)? 'You' : (($user->updated_by)? $user->updated_by : 'empty')}}</td> 
                 <td class="justify-content-center"> 
                     <a href={{"users-".$user->id}} class="btn btn-info btn-sm text-light">View</a>
                     <a href={{"users-update-".$user->id}} class="btn btn-success btn-sm text-light">Update</a>

@@ -23,7 +23,8 @@ class UsersController extends Controller
                         ->orderBy('created_at', 'DESC')
                         ->paginate(100);
         if(Auth::user()->admin) {
-            return view('users.index', compact('users'));
+            $current_user = Auth::user();
+            return view('users.index', compact('users', 'current_user'));
         }
         else {
             return view('/profile.index', compact('users'));
@@ -104,7 +105,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         if(Auth::user()->admin) {
-            return view('users.view', compact('user'));
+            $current_user = Auth::user();
+            return view('users.view', compact('user', 'current_user'));
         }
         else {
             return view('profile.view', compact('user'));

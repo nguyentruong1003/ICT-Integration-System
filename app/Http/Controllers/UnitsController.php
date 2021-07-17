@@ -18,9 +18,11 @@ class UnitsController extends Controller
                 ->select('*')
                 ->paginate(100);
 
-        // $units = $units->get();
-
-        return view('units.index', compact('units'));
+        $current_user = Auth::user();
+        if ($current_user->admin) {
+        return view('units.index', compact('units', 'current_user'));
+        }
+        return redirect('/home');
     }
 
     
@@ -29,7 +31,8 @@ class UnitsController extends Controller
     {
         if(Auth::user()->admin) {
             $unit = Unit::find($id);
-            return view('units.view', compact('unit'));
+            $current_user = Auth::user();
+            return view('units.view', compact('unit', 'current_user'));
         }
         else {
             return redirect('/home');

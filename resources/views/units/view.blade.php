@@ -10,9 +10,9 @@
             <p><strong>Unit's Father: </strong> {{$unit->unit_father}}</p> 
             <p><strong>Description: </strong> {{$unit->description}}</p> 
             <p><strong>Created At: </strong> {{$unit->created_at}}</p> 
-            <p><strong>Created By: </strong> {{$unit->created_by}}</p>
+            <p><strong>Created By: </strong> {{($unit->created_by == $current_user->name)? 'You' : $unit->created_by}}</p>
             <p><strong>Last Updated At: </strong> {{$unit->updated_at}}</p>  
-            <p><strong>Last Updated By: </strong> {{$unit->updated_by}}</p>  
+            <p><strong>Last Updated By: </strong> {{($unit->updated_by == $current_user->name)? 'You' : (($unit->updated_by)? $unit->updated_by : 'empty')}}</p>  
 
             <a href={{"units-update-".$unit->id}} class="btn btn-success btn-sm text-light">Update</a>
         </div>

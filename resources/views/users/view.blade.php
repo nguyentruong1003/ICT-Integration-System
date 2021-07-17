@@ -12,9 +12,9 @@
             <p><strong>Unit: </strong> {{$user->unit}}</p> 
             <p><strong>Description: </strong> {{$user->description}}</p> 
             <p><strong>Created At: </strong> {{$user->created_at}}</p> 
-            <p><strong>Created By: </strong> {{$user->created_by}}</p>
+            <p><strong>Created By: </strong> {{($user->created_by == $current_user->name)? 'You' : $user->created_by}}</p>
             <p><strong>Last Updated At: </strong> {{$user->updated_at}}</p>  
-            <p><strong>Last Updated By: </strong> {{$user->updated_by}}</p>  
+            <p><strong>Last Updated By: </strong> {{($user->updated_by == $current_user->name)? 'You' : (($user->updated_by)? $user->updated_by : 'empty')}}</p>  
 
             <a href={{"users-update-".$user->id}} class="btn btn-success btn-sm text-light">Update</a>
         </div>

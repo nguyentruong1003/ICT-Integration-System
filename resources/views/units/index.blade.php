@@ -41,9 +41,9 @@
                         <td>{{($unit->unit_father)? $unit->unit_father : 'empty'}}</td>
                         <td>{{($unit->description)? $unit->description : 'empty'}}</td>
                         <td>{{$unit->created_at}}</td> 
-                        <td>{{($unit->created_by)? $unit->created_by : 'empty'}}</td>
+                        <td>{{($unit->created_by == $current_user->name)? 'You' : $unit->created_by}}</td>
                         <td>{{$unit->updated_at}}</td> 
-                        <td>{{($unit->updated_by)? $unit->updated_by : 'empty'}}</td>  
+                        <td>{{($unit->updated_by == $current_user->name)? 'You' : (($unit->updated_by)? $unit->updated_by : 'empty')}}</td> 
                         <td class="justify-content-center"> 
                         <a href={{"units-".$unit->id}} class="btn btn-info btn-sm text-light">View</a>
                         <a href={{"units-update-".$unit->id}} class="btn btn-success btn-sm text-light">Update</a>
