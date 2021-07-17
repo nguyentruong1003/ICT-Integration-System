@@ -22,12 +22,13 @@ class UsersController extends Controller
                         ->where('admin', '=', 0)
                         ->orderBy('created_at', 'DESC')
                         ->paginate(100);
+        $users_count = sizeof(User::where('admin', '0')->get());
         if(Auth::user()->admin) {
             $current_user = Auth::user();
-            return view('users.index', compact('users', 'current_user'));
+            return view('users.index', compact('users', 'current_user', 'users_count'));
         }
         else {
-            return view('/profile.index', compact('users'));
+            return view('/profile.index', compact('users', 'users_count'));
         }
     }
 
@@ -106,6 +107,7 @@ class UsersController extends Controller
         $user = User::find($id);
         if(Auth::user()->admin) {
             $current_user = Auth::user();
+            // $users_count = User::where('admin', 0)->count();
             return view('users.view', compact('user', 'current_user'));
         }
         else {
@@ -199,7 +201,7 @@ class UsersController extends Controller
 
     public function search(Request $request)
     {
-        
+        $current_user = Auth::user();
         if ($request->search != '') {
             if ($request->ontype == 'name') {
                 $data = User::where('name','like','%'.$request->search.'%')->where('admin','=','0')->get();
@@ -225,10 +227,10 @@ class UsersController extends Controller
             
             $key = $request->search;
             if(Auth::user()->admin) {
-                return view('users.search', compact('data', 'key', 'ontype'));
+                return view('users.search', compact('data', 'key', 'ontype', 'current_user'));
             }
             else {
-                return view('profile.search', compact('data', 'key', 'ontype'));
+                return view('profile.search', compact('data', 'key', 'ontype', 'current_user'));
             }
         }
         else if ($request->from_date && $request->to_date) {
@@ -236,10 +238,10 @@ class UsersController extends Controller
             $key = $request->from_date . " -> " . $request->to_date;
             $ontype = "Birthday";
             if(Auth::user()->admin) {
-                return view('users.search', compact('data', 'key', 'ontype'));
+                return view('users.search', compact('data', 'key', 'ontype', 'current_user'));
             }
             else {
-                return view('profile.search', compact('data', 'key', 'ontype'));
+                return view('profile.search', compact('data', 'key', 'ontype', 'current_user'));
             }
         }
         else {

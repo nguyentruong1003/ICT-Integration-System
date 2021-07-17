@@ -28,6 +28,7 @@
     </div>
 </br></br>
 </br></br>
+<h4>Users List ({{ $users_count }} users available)</h4>
     <div class="row">
         <table class="table text-center">
             <thead class="thead-light">

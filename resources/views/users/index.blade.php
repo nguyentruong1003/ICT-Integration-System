@@ -2,7 +2,7 @@
 
 @section('content_2')
 
-<h4>Users List</h4>
+<h4>Users List ({{ $users_count }} users available)</h4>
 <div class="row">
     <div class="col-md-8">
            

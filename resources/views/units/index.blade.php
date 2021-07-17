@@ -5,7 +5,7 @@
         <a href="./units-create"><button class="btn btn-info btn-sm text-light">CREATE</button></a></br></br>
         <div class="row">
             
-        <h4>Units List</h4>
+        <h4>Units List ({{ $units_count }} units available)</h4>
         <div class="col-md-8">
            
            {{--Success Msg--}}

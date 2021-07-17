@@ -19,8 +19,9 @@ class UnitsController extends Controller
                 ->paginate(100);
 
         $current_user = Auth::user();
+        $units_count = sizeof(Unit::all());
         if ($current_user->admin) {
-        return view('units.index', compact('units', 'current_user'));
+        return view('units.index', compact('units', 'current_user', 'units_count'));
         }
         return redirect('/home');
     }
