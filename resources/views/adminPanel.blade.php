@@ -15,8 +15,13 @@
             @endif
 
             <div class="text-center">
-                <h1 class="display-4">Users Count</h1>
-                <h1 class="display-3">{{$users_count}}</h1>
+                <h1><strong>ADMINISTRATOR</strong></h1>
+                    <ul>
+                        <li class="nav navbar nav-tabs"><a href="./users">USERS LIST</a></li>
+                        <li class="nav navbar nav-tabs"><a href="./units">UNITS LIST</a></li>
+                        
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

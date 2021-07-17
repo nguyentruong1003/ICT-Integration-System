@@ -25,7 +25,18 @@
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form></li>
         </ul>
+        
     </div>
+    <div class="row" style="float: right">
+           @if (session('msg_search'))
+               <div class="alert alert-dismissible fade show" role="alert">
+                   <strong style="color:red">{{session('msg_search')}}</strong>
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+           @endif
+   </div>
 </br></br>
 </br></br>
 <h4>Users List ({{ $users_count }} users available)</h4>

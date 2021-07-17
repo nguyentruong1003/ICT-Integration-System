@@ -68,7 +68,7 @@ class UsersController extends Controller
                 'name' => 'required|max:255|min:3',
                 'email' => 'required|unique:users|max:190',
                 'password' => 'required|min:8',
-                // 'unit' => 'required|max:40',
+                'birth_date' => 'required',
                 'address' => 'required|max:255',
                 // 'create_by' => 'required|min:3|max:255'
             ]);

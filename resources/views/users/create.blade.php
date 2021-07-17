@@ -36,7 +36,12 @@
                     </div>
                     <div class="form-group">
                         <label for="birth_date">Birthday <label style="color:red">*</label></label>
-                        <input type="date" name="birth_date" class="form-control" id="birth_date" min="1000-01-01" max="9999-12-31">
+                        <input type="date" name="birth_date" class="form-control @error('birth_date') is-invalid @enderror" id="birth_date" min="1000-01-01" max="9999-12-31">
+                        @error('birth_date')
+                            <div class="invalid-feedback">
+                                    {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="address">Address <label style="color:red">*</label></label>
