@@ -21,10 +21,9 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Tài khoản Admin mặc định
- - Username: nguyenvantruong2k@gmail.com
- - Password: 12345678
+## Project Tech
 
-## User Faker
- - Username: email fake
- - Password: 12345678
+- Laravel 8
+- Livewire 2
+- Turbolinks
+- Bootstrap 4
