@@ -30,10 +30,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
         });
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreign('unit')->references('unit_name')->on('units')->onDelete('set NULL');
-        });
-
         DB::table('users')->insert([
             'name' => 'Yukihito Hikaru',
             'email' => 'nguyenvantruong2k@gmail.com',
