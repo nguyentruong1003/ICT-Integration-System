@@ -1,8 +1,7 @@
-@extends('layouts.userLayout')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <a class="btn btn-secondary" href="./">Go Back</a>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -67,11 +66,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
-
-                                <a href="{{  route('login')  }}">
-                                <button type="button" class="btn btn-primary">
-                                    Login
-                                </button></a>
                             </div>
                         </div>
                     </form>

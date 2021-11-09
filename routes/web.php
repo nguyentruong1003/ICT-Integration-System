@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,40 +14,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
+Route::get('/', function () {
+    return view('auth.login');
+});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::group([
+        'prefix' => 'master',
+    ], function () {
+        Route::get('/', 'App\Http\Controllers\Admin\Config\MasterController@index')->name('admin.config.master');
+        Route::get('delete/{id}', 'App\Http\Controllers\Admin\Config\MasterController@delete')->name('admin.config.master.delete');
+        Route::get('create', 'App\Http\Controllers\Admin\Config\MasterController@create')->name('admin.config.master.create');
+        Route::get('edit/{id}', 'App\Http\Controllers\Admin\Config\MasterController@edit')->name('admin.config.master.edit');
+        Route::post('insert', 'App\Http\Controllers\Admin\Config\MasterController@insert')->name('admin.config.master.insert');
+        Route::post('update', 'App\Http\Controllers\Admin\Config\MasterController@update')->name('admin.config.master.update');
+    });
 
-Route::get('/', [App\Http\Controllers\LandingController::class, 'index']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['web','auth']);
-Route::get('/admin-panel', [App\Http\Controllers\AdminController::class, 'index'])->middleware(['web','auth']);
-
-Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->middleware(['web','auth']);
-Route::get('/users-create', [App\Http\Controllers\UsersController::class, 'create'])->middleware(['web','auth']);
-Route::post('/users-store', [App\Http\Controllers\UsersController::class, 'store'])->middleware(['web','auth']);
-
-Route::get('/users-update-{id}', [App\Http\Controllers\UsersController::class, 'edit'])->middleware(['web','auth']);
-Route::get('/users-{id}', [App\Http\Controllers\UsersController::class, 'show'])->middleware(['web','auth']);
-Route::put('/users-{id}', [App\Http\Controllers\UsersController::class, 'update'])->middleware(['web','auth']);
-Route::delete('/users-{id}', [App\Http\Controllers\UsersController::class, 'destroy'])->middleware(['web','auth']);
-
-Route::get('/units', [App\Http\Controllers\UnitsController::class, 'index'])->middleware(['web','auth']);
-Route::get('/units-create', [App\Http\Controllers\UnitsController::class, 'create'])->middleware(['web','auth']);
-Route::post('/units-store', [App\Http\Controllers\UnitsController::class, 'store'])->middleware(['web','auth']);
-
-Route::get('/units-update-{id}', [App\Http\Controllers\UnitsController::class, 'edit'])->middleware(['web','auth']);
-Route::get('/units-{id}', [App\Http\Controllers\UnitsController::class, 'show'])->middleware(['web','auth']);
-Route::put('/units-{id}', [App\Http\Controllers\UnitsController::class, 'update'])->middleware(['web','auth']);
-Route::delete('/units-{id}', [App\Http\Controllers\UnitsController::class, 'destroy'])->middleware(['web','auth']);
-
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->middleware(['web','auth']);
-Route::get('/profile-edit', [App\Http\Controllers\ProfileController::class, 'edit'])->middleware(['web','auth']);
-Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->middleware(['web','auth']);
-
-Route::get('/search', [App\Http\Controllers\UsersController::class, 'search'])->middleware(['web','auth'])->name('search');
+    Route::group([
+        'prefix' => 'user',
+    ], function () {
+        Route::get('/', 'App\Http\Controllers\Admin\UserController@index')->name('admin.user.index');
+    });
+});
