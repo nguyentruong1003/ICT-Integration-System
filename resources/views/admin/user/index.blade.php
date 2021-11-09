@@ -7,7 +7,7 @@
         <div class="p-2 pb-3 d-flex align-items-center justify-content-between">
             <div class="">
                 <h4 class="m-0">
-                    Danh sách tin tức quỹ
+                    Danh sách người dùng
                 </h4>
             </div>
             <div class="paginate">
@@ -17,7 +17,7 @@
                     </div>
                     <span class="px-2">/</span>
                     <div class="">
-                        <div class="disable">Quản lý tin tức quỹ</div>
+                        <div class="disable">Quản lý người dùng</div>
                     </div>
                 </div>
             </div>
