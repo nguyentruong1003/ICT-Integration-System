@@ -15,7 +15,7 @@
                 
                 <div>
                     <div class="input-group">
-                        <a href="#">
+                        <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalCreate" wire:click="resetInputFields">
                             <div class="btn-sm btn-primary">
                                 <i class="fa fa-plus"></i> TẠO MỚI
                             </div>
@@ -34,7 +34,7 @@
                         <th>Hành động</th>
                     </tr>
                 </thead>
-                <div wire:loading class="loader"></div>
+                {{-- <div wire:loading class="loader"></div> --}}
                 <tbody>
                     @forelse($data as $key => $row)
                         <tr>
@@ -43,9 +43,9 @@
                             <td>{{ $row->email }}</td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
                             <td>
-                                <a href="#" 
-                                        class="btn-sm border-0 bg-transparent">
-                                        <img src="/images/pent2.svg" alt="Edit">
+                                <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
+                                    class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">
+                                    <img src="/images/pent2.svg" alt="Edit">
                                 </a>
                                 @include('livewire.common.buttons._delete')
                             </td>
@@ -61,4 +61,16 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
+    @include('livewire.admin.user._modalCreateEdit')
 </div>
+
+<script>
+    $("document").ready(function () {
+        window.livewire.on('close-modal-create', () => {
+            document.getElementById('close-modal-create').click()
+        });
+        window.livewire.on('close-modal-edit', () => {
+            document.getElementById('close-modal-edit').click()
+        });
+    })
+</script>
