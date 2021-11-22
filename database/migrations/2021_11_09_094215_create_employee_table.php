@@ -13,13 +13,15 @@ class CreateEmployeeTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('code')->comment("Mã nhân viên");
             $table->string('fullname')->comment("Họ tên đầy đủ");
             $table->string('email')->comment("Email");
             $table->string('phone')->comment("SĐT");
             $table->date('birthday')->comment("Ngày sinh");
+            $table->tinyInteger('sex')->comment("Giới tính: 0 = Nam, 1 = Nữ");
+            $table->string('identify_code')->comment("CMND/CCCD");
             // $table->foreignId('unit_id')->nullable()->comment("Đơn vị")->constrained('unit');
             $table->string('ex_ward_id')->length(5)->nullable()->comment("Xã/Phường");
             $table->string('ex_district_id')->length(5)->nullable()->comment("Huyện/Quận");

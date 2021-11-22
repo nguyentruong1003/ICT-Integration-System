@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use DB;
 
 class CreateUsersTable extends Migration
 {
@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        DB::table('users')->insert([
+        User::insert([
             'name' => 'Administrator',
             'email' => 'admin@test.com',
             'password' => bcrypt('123456'),

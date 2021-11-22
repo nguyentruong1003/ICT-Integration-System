@@ -5,10 +5,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group search-expertise">
-                            {{-- <div class="search-expertise inline-block">
+                            <div class="search-expertise inline-block">
                                 <input type="text" placeholder="Tìm kiếm theo tên" name="search"
                                     class="form-control" id='input_vn_name' autocomplete="off" wire:model.debounce.1000ms="searchName">
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,11 +43,18 @@
                 </thead>
                 {{-- <div wire:loading class="loader"></div> --}}
                 <tbody>
-                    {{-- @forelse($data as $key => $row)
+                    @forelse($data as $key => $row)
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
-                            <td>{!! boldTextSearch($row->name, $searchName) !!}</td>
+                            <td>{{ $row->code }}</td>
+                            <td>{!! boldTextSearch($row->fullname, $searchName) !!}</td>
                             <td>{{ $row->email }}</td>
+                            <td>{{ $row->phone }}</td>
+                            <td>{{ $row->birthday }}</td>
+                            <td>{{ $row->unit }}</td>
+                            <td>{{ $row->address }}</td>
+                            <td>{{ $row->description }}</td>
+                            <td>{{ $row->note }}</td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
                             <td>
                                 <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
@@ -59,7 +66,7 @@
                         </tr>
                     @empty
                         <td colspan='12' class='text-center'>Không tìm thấy dữ liệu</td>
-                    @endforelse --}}
+                    @endforelse
                 </tbody>
             </table>
         </div>
