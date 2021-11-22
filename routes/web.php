@@ -39,4 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
     ], function () {
         Route::get('/', 'App\Http\Controllers\Admin\UserController@index')->name('admin.user.index');
     });
+
+    Route::group([
+        'prefix' => 'employee',
+    ], function () {
+        Route::get('/', 'App\Http\Controllers\Admin\EmployeeController@index')->name('admin.employee.index');
+    });
 });

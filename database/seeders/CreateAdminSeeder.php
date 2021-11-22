@@ -16,11 +16,10 @@ class CreateAdminSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
+        // DB::table('users')->truncate();
         User::create([
             'name' => 'Administrator',
             'email' => 'admin@test.com',
-            'email_verified_at' => now(),
             'password' => bcrypt('123456'),
             'created_at' => now(),
             'updated_at' => now(),
