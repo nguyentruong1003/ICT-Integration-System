@@ -48,6 +48,13 @@
               <p>Master data</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.employee.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Nhân viên</p>
+            </a>
+          </li>
           
           
         </ul>
