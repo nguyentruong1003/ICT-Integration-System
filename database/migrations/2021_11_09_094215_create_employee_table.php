@@ -29,8 +29,8 @@ class CreateEmployeeTable extends Migration
             $table->string('address')->nullable()->comment("Địa chỉ cụ thể");
             $table->string('description')->nullable()->comment("Mô tả");
             $table->string('note')->nullable()->comment("Ghi chú");
-            $table->foreignId('created_by')->comment("Người tạo")->constrained('users');
-            $table->foreignId('updated_by')->comment("Người cập nhật")->constrained('users');
+            $table->foreignId('created_by')->nullable()->comment("Người tạo")->constrained('users');
+            $table->foreignId('updated_by')->nullable()->comment("Người cập nhật")->constrained('users');
             $table->timestamps();
         });
     }

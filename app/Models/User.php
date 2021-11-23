@@ -24,11 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
-        'gw_user_id',
-        'gw_pass',
-        'lang',
-        'group_id',
-        'user_info_id'
+        'created_by',
+        'updated_by',
     ];
 
     /**
@@ -46,53 +43,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     public function roles()
     {
         return $this->morphToMany(Role::class, 'model', 'model_has_roles');
-    }
-
-    public function info()
-    {
-        return $this->belongsTo(UserInf::class, 'user_info_id');
-    }
-
-    public function notificationConfig()
-    {
-        return $this->hasMany(SystemConfig::class, 'admin_id')->where('type', ESystemConfigType::NOTIFICATION)->first();
-    }
-
-    public function group()
-    {
-        return $this->belongsTo(GroupUser::class, 'group_id');
-    }
-
-    private static $searchable = [
-        'name'
-    ];
-    public static function getListSearchAble()
-    {
-        return self::$searchable;
-    }
-
-    /**
-     * @return \App\Models\User[]
-     */
-    public function getDepartmentLeaders()
-    {
-        $department = $this->info->department ?? null;
-        if (empty($department)) {
-            return null;
-        }
-        $positionIds = MasterData::query()->where('type', 1)->whereIn('order_number', [1, 2])->get('id')->pluck('id')->all();
-        return $department->userInfos()->with('account')->whereIn('position_id', $positionIds)->get()->pluck('account');
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
     }
 }

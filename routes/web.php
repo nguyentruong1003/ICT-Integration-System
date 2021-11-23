@@ -45,4 +45,10 @@ Route::group(['middleware' => ['auth']], function () {
     ], function () {
         Route::get('/', 'App\Http\Controllers\Admin\EmployeeController@index')->name('admin.employee.index');
     });
+
+    Route::group([
+        'prefix' => 'unit',
+    ], function () {
+        Route::get('/', 'App\Http\Controllers\Admin\UnitController@index')->name('admin.unit.index');
+    });
 });
