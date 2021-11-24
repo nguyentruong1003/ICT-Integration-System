@@ -18,7 +18,8 @@ class ListData extends BaseLive
 
     public function render() {
     	$data = $this->searchData();
-        return view('livewire.admin.system.audit.list-data', ['data' => $data]);
+        $userList = User::all();
+        return view('livewire.admin.system.audit.list-data', ['data' => $data, 'userList' => $userList]);
     }
 
     public function searchData() {
@@ -40,9 +41,9 @@ class ListData extends BaseLive
                     ->orWhereRaw('lower(note) like ? ', ['%' . trim(mb_strtolower($searchTerm, 'UTF-8')) . '%']);
             });
         }
-        // if (!empty($this->userId)) {
-        //     $query->where('user_id', $this->userId);
-        // }
+        if (!empty($this->userId)) {
+            $query->where('user_id', $this->userId);
+        }
         if(!is_null($this->from_date)) {
             $query->where('created_at', '>=', $this->from_date);
         }
@@ -81,5 +82,15 @@ class ListData extends BaseLive
         });
         $data->setCollection($tmp);
         return $data;
+    }
+
+    public function resetSearch()
+    {
+        $this->reset([
+            'searchTerm',
+            'userId',
+            'from_date',
+            'to_date',
+        ]);
     }
 }

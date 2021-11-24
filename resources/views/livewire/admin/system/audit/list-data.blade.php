@@ -12,7 +12,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-md-3">
+                    <div class="col-md-3">
                         <div>
                             <select wire:model.debounce.1000ms="userId" class="form-control">
                                 <option value=''>
@@ -25,16 +25,25 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div> --}}
+                    </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input type="date" class="form-control" name="fromDate" wire:model.debounce.1000ms="from_date" autocomplete="off">
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input type="date" class="form-control" name="toDate" wire:model.debounce.1000ms="to_date" autocomplete="off">
                     </div>
+
+                    <div class="col-md-2">
+                        @include('layouts.partials.button._reset')
+                    </div>
                 </div>
+                {{-- <div>
+                    <div class="input-group">
+                        @include('layouts.partials.button._reset')
+                    </div>
+                </div> --}}
             </div>
             
             <table class="table table-bordered table-hover dataTable dtr-inline">
