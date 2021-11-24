@@ -44,10 +44,10 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->code }}</td>
                             <td>{!! boldTextSearch($row->name, $searchName) !!}</td>
-                            <td>{{ $row->father_id }}</td>
+                            <td>{{ ($row->father_unit->name) ?? '' }}</td>
                             <td>{{ $row->description }}</td>
                             <td>{{ $row->note }}</td>
-                            <td>{{ $row->creator->name }}</td>
+                            <td>{{ ($row->creator->name) ?? '' }}</td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
                             <td>
                                 <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
@@ -68,4 +68,17 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
+    @include('livewire.admin.unit._modalCreate')
+    @include('livewire.admin.unit._modalEdit')
 </div>
+
+<script>
+    $("document").ready(function () {
+        window.livewire.on('close-modal-create', () => {
+            document.getElementById('close-modal-create').click()
+        });
+        window.livewire.on('close-modal-edit', () => {
+            document.getElementById('close-modal-edit').click()
+        });
+    })
+</script>

@@ -3,21 +3,108 @@
 namespace App\Http\Livewire\Admin\Unit;
 
 use App\Http\Livewire\Base\BaseLive;
+use App\Models\Employee;
 use App\Models\Unit;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class UnitList extends BaseLive
 {
     public $searchName;
+    public $name, $code, $description, $father_id, $created_by, $note;
     
     public function render()
     {
-        $query = Unit::query();
+        $query = Unit::query()->where('id', '!=', '1');
 
-        $data = $query->orderBy('id','asc')->paginate($this->perPage);
+        $data = $query->orderBy('name','asc')->paginate($this->perPage);
+        $current_user = Auth::user();
+        $unit_list = Unit::select('name', 'id')->get();
+        // dd($current_user);
 
         return view('livewire.admin.unit.unit-list', [
             'data' => $data,
+            'current_user' => $current_user,
+            'unit_list' => $unit_list,
         ]);
+    }
+
+    public function store() {
+        $this->validate([
+            'code' => 'required|unique:units',
+            'name' => 'required',
+        ]);
+        $unit = new Unit;
+        $unit->code = Str::upper($this->code);
+        $unit->name = $this->name;
+        $unit->father_id = ($this->father_id) ?? '1';
+        $unit->description = $this->description;
+        $unit->note = $this->note;
+        $unit->created_by = Auth::user()->id;
+        $unit->save();
+
+        $this->resetInputFields();
+        $this->emit('close-modal-create');
+        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.add')] );
+    }
+
+    public function resetInputFields() {
+        $this->reset([
+            'name',
+            'code',
+            'description',
+            'father_id',
+            'note',
+            'created_by',
+        ]);
+    }
+
+    public function delete(){
+        $unit = Unit::findOrFail($this->deleteId);
+        // $employees = Employee::where('unit',$unit->id)->get();
+        // foreach ($employees as $employee) {
+        //     $tmp = User::findorfail($employee->id);
+        //     $tmp->unit = $unit->unit_father;
+        //     $tmp->save();
+        // }
+
+        $units_child = Unit::where('father_id',$unit->id)->get();
+        foreach ($units_child as $unit_child) {
+            $tmp = Unit::findorfail($unit_child->id);
+            $tmp->father_id = $unit->father_id;
+            $tmp->save();
+        }
+        $unit->delete();
+        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.delete')] );
+        
+    }
+
+    public function edit($id){
+        $unit = Unit::findOrFail($id);
+        $this->name = $unit->name;
+        $this->code = $unit->code;
+        $this->father_id = $unit->father_id;
+        $this->description = $unit->description;
+        $this->note = $unit->note;
+    }
+
+    public function update() {
+        $this->validate([
+            'code' => 'required|unique:units',
+            'name' => 'required',
+        ]);
+        $unit = Unit::findorfail($this->id);
+        $unit->code = Str::upper($this->code);
+        $unit->name = $this->name;
+        $unit->father_id = ($this->father_id) ?? '1';
+        $unit->description = $this->description;
+        $unit->note = $this->note;
+        $unit->updated_by = Auth::user()->id;
+        $unit->save();
+
+        $this->resetInputFields();
+        $this->emit('close-modal-edit');
+        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.update')] );
     }
 }
