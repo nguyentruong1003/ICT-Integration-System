@@ -23,6 +23,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/lang/{lang}','App\Http\Controllers\LangController@changeLang')->name('lang');
     Route::group([
         'prefix' => 'master',
     ], function () {
@@ -45,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
         'prefix' => 'employee',
     ], function () {
         Route::get('/', 'App\Http\Controllers\Admin\EmployeeController@index')->name('admin.employee.index');
+        Route::get('/create', 'App\Http\Controllers\Admin\EmployeeController@create')->name('admin.config.master.create');
+        Route::post('/store', 'App\Http\Controllers\Admin\EmployeeController@store')->name('admin.config.master.store');
     });
 
     Route::group([
