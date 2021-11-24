@@ -35,14 +35,21 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group([
-        'prefix' => 'user',
+        'prefix' => 'system',
     ], function () {
-        Route::get('/', 'App\Http\Controllers\Admin\UserController@index')->name('admin.user.index');
+        Route::get('/user', 'App\Http\Controllers\Admin\System\UserController@index')->name('admin.system.user.index');
+        Route::get('/audit', 'App\Http\Controllers\Admin\System\AuditController@index')->name('admin.system.audit.list');
     });
 
     Route::group([
         'prefix' => 'employee',
     ], function () {
         Route::get('/', 'App\Http\Controllers\Admin\EmployeeController@index')->name('admin.employee.index');
+    });
+
+    Route::group([
+        'prefix' => 'unit',
+    ], function () {
+        Route::get('/', 'App\Http\Controllers\Admin\UnitController@index')->name('admin.unit.index');
     });
 });

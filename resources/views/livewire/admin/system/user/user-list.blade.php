@@ -61,7 +61,7 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
-    @include('livewire.admin.user._modalCreateEdit')
+    @include('livewire.admin.system.user._modalCreateEdit')
 </div>
 
 <script>

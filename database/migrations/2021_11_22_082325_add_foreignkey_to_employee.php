@@ -13,7 +13,7 @@ class AddForeignkeyToEmployee extends Migration
      */
     public function up()
     {
-        Schema::table('employee', function (Blueprint $table) {
+        Schema::table('employees', function (Blueprint $table) {
             //
             $table->foreign('ex_ward_id')->references('ward_code')->on('ex_ward');
             $table->foreign('ex_district_id')->references('district_code')->on('ex_district');

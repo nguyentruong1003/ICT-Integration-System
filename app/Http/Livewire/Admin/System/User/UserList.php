@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\User;
+namespace App\Http\Livewire\Admin\System\User;
 
 use App\Http\Livewire\Base\BaseLive;
 use App\Models\User;
@@ -25,7 +25,7 @@ class UserList extends BaseLive
 
         $data=$query->orderBy('id','asc')->paginate($this->perPage);
 
-        return view('livewire.admin.user.user-list' ,compact('data'));
+        return view('livewire.admin.system.user.user-list' ,compact('data'));
     }
 
     public function resetInputFields() {

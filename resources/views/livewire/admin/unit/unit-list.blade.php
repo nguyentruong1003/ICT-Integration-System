@@ -28,33 +28,26 @@
                 <thead class="">
                     <tr>
                         <th>STT</th>
-                        <th>Mã nhân viên</th>
-                        <th>Họ tên</th>
-                        <th>Email</th>
-                        <th>SĐT</th>
-                        <th>Ngày sinh</th>
-                        <th>Đơn vị</th>
-                        <th>Địa chỉ</th>
+                        <th>Mã đơn vị</th>
+                        <th>Tên đơn vị</th>
+                        <th>Đơn vị cha</th>
                         <th>Mô tả</th>
                         <th>Ghi chú</th>
+                        <th>Người tạo</th>
                         <th>Ngày tạo</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
-                {{-- <div wire:loading class="loader"></div> --}}
                 <tbody>
                     @forelse($data as $key => $row)
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->code }}</td>
-                            <td>{!! boldTextSearch($row->fullname, $searchName) !!}</td>
-                            <td>{{ $row->email }}</td>
-                            <td>{{ $row->phone }}</td>
-                            <td>{{ $row->birthday }}</td>
-                            <td>{{ $row->unit }}</td>
-                            <td>{{ $row->address }}</td>
+                            <td>{!! boldTextSearch($row->name, $searchName) !!}</td>
+                            <td>{{ ($row->father_unit->name) ?? '' }}</td>
                             <td>{{ $row->description }}</td>
                             <td>{{ $row->note }}</td>
+                            <td>{{ ($row->creator->name) ?? '' }}</td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
                             <td>
                                 <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
@@ -75,9 +68,11 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
+    @include('livewire.admin.unit._modalCreate')
+    @include('livewire.admin.unit._modalEdit')
 </div>
 
-{{-- <script>
+<script>
     $("document").ready(function () {
         window.livewire.on('close-modal-create', () => {
             document.getElementById('close-modal-create').click()
@@ -86,4 +81,4 @@
             document.getElementById('close-modal-edit').click()
         });
     })
-</script> --}}
+</script>
