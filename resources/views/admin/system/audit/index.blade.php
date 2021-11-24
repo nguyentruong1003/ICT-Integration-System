@@ -1,13 +1,13 @@
 @extends('layouts.master')
 @section('title')
-    <title>Danh sách người dùng</title>
+    <title>Dữ liệu Audit</title>
 @endsection
 @section('content')
     <div class="body-content p-2">
         <div class="p-2 pb-3 d-flex align-items-center justify-content-between">
             <div class="">
                 <h4 class="m-0">
-                    Danh sách người dùng
+                    Dữ liệu Audit
                 </h4>
             </div>
             <div class="paginate">
@@ -17,11 +17,11 @@
                     </div>
                     <span class="px-2">/</span>
                     <div class="">
-                        <div class="disable">Quản lý người dùng</div>
+                        <div class="disable">Dữ liệu Audit</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   @livewire('admin.user.user-list')
+   @livewire('admin.system.audit.list-data')
 @endsection

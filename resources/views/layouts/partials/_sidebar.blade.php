@@ -35,9 +35,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.user.index') }}" class="nav-link">
+                <a href="{{ route('admin.system.user.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách người dùng</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.system.audit.list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dữ liệu Audit</p>
                 </a>
               </li>
               <li class="nav-item">
