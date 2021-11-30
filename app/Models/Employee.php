@@ -11,4 +11,12 @@ class Employee extends Model implements Auditable
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
     protected $table = "employees";
+
+    public function unit() {
+        return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
+    public function province() {
+        return $this->belongsTo(Province::class, 'ex_province_id', 'province_code');
+    }
 }

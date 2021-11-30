@@ -8,7 +8,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">Thành phố/Tỉnh:</label>
                         <div class="col">
-                            <select wire:model.lazy="province_id" name='city' id="supplyProvince" class="form-control-sm form-control" {{$status?'disabled':''}}>
+                            <select wire:model.lazy="province_id" name='province' id="supplyProvince" class="form-control-sm form-control" {{$status?'disabled':''}}>
                                 <option value="" hidden>--Chọn Thành phố/Tỉnh--</option>
                                 @foreach($province as $key=> $item)
                                     <option value="{{$key}}" {{$key==$province_id?'selected':''}}>{{$item}}</option>

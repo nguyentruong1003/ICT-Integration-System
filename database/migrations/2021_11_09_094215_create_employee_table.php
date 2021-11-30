@@ -21,7 +21,7 @@ class CreateEmployeeTable extends Migration
             $table->string('phone')->comment("SĐT");
             $table->date('birthday')->comment("Ngày sinh");
             $table->tinyInteger('sex')->comment("Giới tính: 1 = Nam, 2 = Nữ");
-            $table->string('identify_code')->comment("CMND/CCCD");
+            $table->string('identity_code')->comment("CMND/CCCD");
             // $table->foreignId('unit_id')->nullable()->comment("Đơn vị")->constrained('unit');
             $table->string('ex_ward_id')->length(5)->nullable()->comment("Xã/Phường");
             $table->string('ex_district_id')->length(5)->nullable()->comment("Huyện/Quận");

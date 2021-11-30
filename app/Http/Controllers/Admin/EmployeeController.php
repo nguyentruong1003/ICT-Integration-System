@@ -42,11 +42,15 @@ class EmployeeController extends Controller
         $em->sex = $request->sex;
         $em->phone = $request->phone;
         $em->email = $request->email;
-        // $em->unit_id = ($request->unit_id) ?? '1';
-        $em->identify_code = '0';
+        $em->unit_id = ($request->unit) ?? '1';
+        $em->identity_code = $request->identity_code;
         $em->description = $request->description;
         $em->note = $request->note;
         $em->created_by = Auth::user()->id;
+        $em->ex_province_id = $request->province;
+        $em->ex_district_id = $request->district;
+        $em->ex_ward_id = $request->ward;
+        $em->address = $request->address;
         $em->save();
 
         return redirect()->route('admin.employee.index')->with('success', "__('notification.common.success.add')"); 

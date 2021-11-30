@@ -22,6 +22,6 @@
         </div>
     </div>
     {!! Form::open(['method' => 'POST',  'autocomplete' => "off", 'route' => ['admin.employee.store']]) !!}
-        @include('admin.employee._form')
+        @include('admin.employee._formEmployee')
     {!! Form::close() !!}
 @endsection

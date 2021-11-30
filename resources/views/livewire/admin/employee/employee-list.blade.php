@@ -30,14 +30,11 @@
                         <th>STT</th>
                         <th>Mã nhân viên</th>
                         <th>Họ tên</th>
-                        <th>Email</th>
-                        <th>SĐT</th>
                         <th>Ngày sinh</th>
-                        <th>Đơn vị</th>
+                        <th>Giới tính</th>
                         <th>Địa chỉ</th>
-                        <th>Mô tả</th>
+                        <th>Đơn vị</th>
                         <th>Ghi chú</th>
-                        <th>Ngày tạo</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -48,14 +45,11 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->code }}</td>
                             <td>{!! boldTextSearch($row->fullname, $searchName) !!}</td>
-                            <td>{{ $row->email }}</td>
-                            <td>{{ $row->phone }}</td>
-                            <td>{{ $row->birthday }}</td>
-                            <td>{{ $row->unit }}</td>
-                            <td>{{ $row->address }}</td>
-                            <td>{{ $row->description }}</td>
+                            <td>{{ ReFormatDate($row->birthday,'d/m/Y') }}</td>
+                            <td>{{ ($row->sex == 1) ? 'Nam' : 'Nữ' }}</td>
+                            <td>{{ ($row->ex_province_id) ? $row->province->short_name : '' }}</td>
+                            <td>{{ ($row->unit->name) ?? 'root' }}</td>
                             <td>{{ $row->note }}</td>
-                            <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
                             <td>
                                 <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
                                     class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">

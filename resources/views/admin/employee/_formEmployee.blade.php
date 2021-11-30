@@ -70,7 +70,18 @@
             </div>
         </div>
 
-        {{-- @livewire('component.address') --}}
+        <div class="form-content">
+            <div class="row">
+                <div class="col">
+                    <label>CMND/CCCD<span class="text-danger"> *</span></label>
+                    <div class="input-group form-group">
+                        {!! Form::number('identity_code', null, array('placeholder' => 'CMND/CCCD','class' => 'form-control-sm form-control')) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @livewire('component.address')
 
         <div class="form-content">
             <div class="row">
