@@ -6,8 +6,8 @@
                     <div class="col-md-12">
                         <div class="form-group search-expertise">
                             <div class="search-expertise inline-block">
-                                <input type="text" placeholder="Tìm kiếm theo tên" name="search"
-                                    class="form-control" id='input_vn_name' autocomplete="off" wire:model.debounce.1000ms="searchName">
+                                <input type="text" placeholder="Tìm kiếm..." name="search"
+                                    class="form-control" id='input_vn_name' autocomplete="off" wire:model.debounce.1000ms="searchTerm">
                             </div>
                         </div>
                     </div>
@@ -42,11 +42,11 @@
                     @forelse($data as $key => $row)
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
-                            <td>{{ $row->code }}</td>
-                            <td>{!! boldTextSearch($row->name, $searchName) !!}</td>
+                            <td>{!! boldTextSearch($row->code, $searchTerm) !!}</td>
+                            <td>{!! boldTextSearch($row->name, $searchTerm) !!}</td>
                             <td>{{ ($row->father_unit->name) ?? '' }}</td>
-                            <td>{{ $row->description }}</td>
-                            <td>{{ $row->note }}</td>
+                            <td>{!! boldTextSearch($row->description, $searchTerm) !!}</td>
+                            <td>{!! boldTextSearch($row->note, $searchTerm) !!}</td>
                             <td>{{ ($row->creator->name) ?? '' }}</td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
                             <td>

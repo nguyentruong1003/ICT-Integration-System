@@ -15,7 +15,7 @@
                 
                 <div>
                     <div class="input-group">
-                        <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalCreate" wire:click="resetInputFields">
+                        <a href="{{route('admin.employee.create')}}" class="btn btn-viewmore-news mr0">
                             <div class="btn-sm btn-primary">
                                 <i class="fa fa-plus"></i> TẠO MỚI
                             </div>
@@ -76,14 +76,3 @@
     </div>
     @include('livewire.common._modalDelete')
 </div>
-
-{{-- <script>
-    $("document").ready(function () {
-        window.livewire.on('close-modal-create', () => {
-            document.getElementById('close-modal-create').click()
-        });
-        window.livewire.on('close-modal-edit', () => {
-            document.getElementById('close-modal-edit').click()
-        });
-    })
-</script> --}}

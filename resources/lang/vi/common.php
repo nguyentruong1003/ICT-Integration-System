@@ -13,4 +13,10 @@ return [
         'search' => 'Tìm kiếm',
         'close' => 'Đóng',
     ],
+    'confirm_message' => [
+        'confirm_title'=> 'Xác nhận',
+        'are_you_sure_delete' => 'Bạn có chắc chắn muốn xóa không? Thao tác này không thể phục hồi.',
+        'are_you_sure_unassign' => 'Are you sure you want to unassigned?',
+        'confirm_to_delete' => 'Confirm',
+    ],
 ];

@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class EmployeeList extends BaseLive
 {
+    public $searchName;
     public function render()
     {
         $query = Employee::query();
@@ -17,5 +18,11 @@ class EmployeeList extends BaseLive
         return view('livewire.admin.employee.employee-list', [
             'data' => $data,
         ]);
+    }
+
+    public function delete(){
+        Employee::findorfail($this->deleteId)->delete();
+        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.delete')] );
+        
     }
 }

@@ -44,7 +44,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="close-modal-create" wire:click.prevent="resetInputFields()" class="btn btn-secondary close-btn" data-dismiss="modal">{{__('common.button.cancel')}}</button>
+                    <button type="button" id="close-modal-edit" wire:click.prevent="resetInputFields()" class="btn btn-secondary close-btn" data-dismiss="modal">{{__('common.button.cancel')}}</button>
                     <button type="button" class="btn btn-primary close-modal" wire:click.prevent="update">{{__('common.button.save')}}</button>
                 </div>
             </div>

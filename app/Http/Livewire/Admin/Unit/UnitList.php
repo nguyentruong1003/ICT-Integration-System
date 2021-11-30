@@ -12,11 +12,18 @@ use Illuminate\Support\Str;
 class UnitList extends BaseLive
 {
     public $searchName;
-    public $name, $code, $description, $father_id, $created_by, $note;
+    public $unit_id, $name, $code, $description, $father_id, $created_by, $note;
     
     public function render()
     {
         $query = Unit::query()->where('id', '!=', '1');
+
+        if ($this->searchTerm) {
+            $query->where('code', 'like', '%' . trim($this->searchTerm) . '%')
+                ->orwhere('name', 'like', '%' . trim($this->searchTerm) . '%')
+                ->orwhere('description', 'like', '%' . trim($this->searchTerm) . '%')
+                ->orwhere('note', 'like', '%' . trim($this->searchTerm) . '%');
+        }
 
         $data = $query->orderBy('name','asc')->paginate($this->perPage);
         $current_user = Auth::user();
@@ -81,20 +88,23 @@ class UnitList extends BaseLive
     }
 
     public function edit($id){
+        $this->updateMode = true;
         $unit = Unit::findOrFail($id);
+        $this->unit_id = $id;
         $this->name = $unit->name;
         $this->code = $unit->code;
         $this->father_id = $unit->father_id;
         $this->description = $unit->description;
         $this->note = $unit->note;
+        $this->resetValidation();
     }
 
     public function update() {
         $this->validate([
-            'code' => 'required|unique:units',
+            'code' => 'required|unique:units,code,'. $this->unit_id,
             'name' => 'required',
         ]);
-        $unit = Unit::findorfail($this->id);
+        $unit = Unit::findorfail($this->unit_id);
         $unit->code = Str::upper($this->code);
         $unit->name = $this->name;
         $unit->father_id = ($this->father_id) ?? '1';
