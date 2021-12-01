@@ -19,4 +19,12 @@ class Employee extends Model implements Auditable
     public function province() {
         return $this->belongsTo(Province::class, 'ex_province_id', 'province_code');
     }
+
+    public function creator() {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updater() {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

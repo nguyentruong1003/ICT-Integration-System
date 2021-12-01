@@ -55,4 +55,56 @@ class EmployeeController extends Controller
 
         return redirect()->route('admin.employee.index')->with('success', "__('notification.common.success.add')"); 
     }
+
+    public function edit($id) {
+        $data = Employee::findorfail($id);
+        $unit_list = Unit::where('id', '!=', '1')->get();
+        $current_user = Auth::user();
+        $this->check = 2;
+        // dd($data);
+        return view('admin.employee.edit', [
+            'data' => $data,
+            'unit_list' => $unit_list,
+            'current_user' => $current_user, 
+            'check' => $this->check,
+        ]);
+    }
+
+    public function update($id, Request $request) {
+        $this->validate($request, [
+
+        ]);
+        // dd($request);
+        $em = Employee::findorfail($id);
+        $em->fullname = $request->fullname;
+        $em->code = Str::upper($request->code);
+        $em->birthday = $request->birthday;
+        $em->sex = $request->sex;
+        $em->phone = $request->phone;
+        $em->email = $request->email;
+        $em->unit_id = ($request->unit) ?? '1';
+        $em->identity_code = $request->identity_code;
+        $em->description = $request->description;
+        $em->note = $request->note;
+        $em->updated_by = Auth::user()->id;
+        $em->ex_province_id = $request->province;
+        $em->ex_district_id = $request->district;
+        $em->ex_ward_id = $request->ward;
+        $em->address = $request->address;
+        $em->save();
+
+        return redirect()->route('admin.employee.index')->with('success', "__('notification.common.success.add')"); 
+    }
+
+    public function show($id) {
+        $data = Employee::findorfail($id);
+        $unit_list = Unit::where('id', '!=', '1')->get();
+        $this->check = 0;
+        // dd($data);
+        return view('admin.employee.show', [
+            'data' => $data,
+            'unit_list' => $unit_list,
+            'check' => $this->check,
+        ]);
+    }
 }

@@ -51,8 +51,12 @@
                             <td>{{ ($row->unit->name) ?? 'root' }}</td>
                             <td>{{ $row->note }}</td>
                             <td>
-                                <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
-                                    class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">
+                                <a href="{{ route('admin.employee.show', ['id' => $row->id]) }}"
+                                    class="btn btn-xs btn-cancel">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ route('admin.employee.edit', ['id' => $row->id]) }}"
+                                    class="btn border-0 bg-transparent">
                                     <img src="/images/pent2.svg" alt="Edit">
                                 </a>
                                 @include('livewire.common.buttons._delete')
