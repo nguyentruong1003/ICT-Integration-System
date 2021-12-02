@@ -41,6 +41,20 @@
         </form>
       </div>
     </li>
+    
+    <!-- Multi language -->
+    <li class="nav-item">
+        @if (\Illuminate\Support\Facades\App::isLocale('en'))
+          <a class="nav-link btn-sm" href="{{ route('lang', ['lang' => 'vi']) }}">
+          <img src="{{ asset('assets/icon/VN.png') }}" alt="">
+          </a>
+        @else
+          <a class="nav-link btn-sm" href="{{ route('lang', ['lang' => 'en']) }}">
+            <img style="width: 28px;height: 20px" src="{{ asset('assets/icon/EN.png') }}" alt="">
+          </a>
+        @endif
+    </li>
+    
 
     <!-- Messages Dropdown Menu -->
     <li class="nav-item dropdown">
