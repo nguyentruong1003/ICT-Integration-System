@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link">
       <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminKR 103</span>
+      <span class="brand-text font-weight-light">AdminKR</span>
     </a>
 
     <!-- Sidebar -->
@@ -11,7 +11,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="/dist/img/logo-web.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="{{ route('home') }}" class="d-block">Yukihito Hikaru</a>
@@ -38,6 +38,12 @@
                 <a href="{{ route('admin.system.user.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách người dùng</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.system.role.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quản lý vai trò</p>
                 </a>
               </li>
               <li class="nav-item">

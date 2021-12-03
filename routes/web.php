@@ -40,6 +40,11 @@ Route::group(['middleware' => ['auth']], function () {
     ], function () {
         Route::get('/user', 'App\Http\Controllers\Admin\System\UserController@index')->name('admin.system.user.index');
         Route::get('/audit', 'App\Http\Controllers\Admin\System\AuditController@index')->name('admin.system.audit.list');
+        Route::group([
+            'prefix' => 'role',
+        ], function () {
+            Route::get('/', 'App\Http\Controllers\Admin\System\RoleController@index')->name('admin.system.role.index');
+        });
     });
 
     Route::group([

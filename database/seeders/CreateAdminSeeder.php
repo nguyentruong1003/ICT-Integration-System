@@ -26,13 +26,11 @@ class CreateAdminSeeder extends Seeder
                 'email' => 'admin_kr_test@gmail.com',
                 'password' => Hash::make('kr2021^'), // password
                 "admin" => 1,
-                // 'gw_user_id' => '0000000',
-                // 'gw_pass' => $pass,
             ]);
         }
 
         $user->password = Hash::make($pass);
-        $role = Role::updateOrCreate(['name' => 'admin_kerry', 'guard_name' => 'web']);
+        $role = Role::updateOrCreate(['name' => 'admin', 'guard_name' => 'web']);
 
         $permissions = Permission::pluck('id','id')->all();
 

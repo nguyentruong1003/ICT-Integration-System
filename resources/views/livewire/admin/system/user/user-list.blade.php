@@ -30,6 +30,7 @@
                         <th>STT</th>
                         <th>Tên</th>
                         <th>Email</th>
+                        <th>Vai trò</th>
                         <th>Ngày tạo</th>
                         <th>Hành động</th>
                     </tr>
@@ -41,6 +42,11 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{!! boldTextSearch($row->name, $searchName) !!}</td>
                             <td>{{ $row->email }}</td>
+                            <td>
+                                @foreach($row->roles as $value)
+                                    <span class="badge badge-success">{{ $value->name }}</span>
+                                @endforeach
+                            </td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
                             <td>
                                 <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
