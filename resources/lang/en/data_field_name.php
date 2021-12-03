@@ -91,5 +91,6 @@ return [
     ],
     'system' => [
         'admin_right' => 'Administration',
+        'hrm' => 'HRM', // Human resource management
     ],
 ];

@@ -91,5 +91,6 @@ return [
     ],
     'system' => [
         'admin_right' => 'Quản trị hệ thống',
+        'hrm' => 'Quản lý nhân sự',
     ],
 ];

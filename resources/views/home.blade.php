@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+    <title>{{__('header.home_title')}}</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

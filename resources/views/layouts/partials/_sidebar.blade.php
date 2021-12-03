@@ -25,6 +25,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          @if (checkPermission('admin.system.user.index'))
           <li class="nav-item @if (in_array(Route::currentRouteName(), ['admin.system.user.index', 'admin.system.audit.list', 'admin.system.role.index'])) menu-open @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-lock"></i>
@@ -54,12 +55,13 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          @endif
+          {{-- <li class="nav-item">
             <a href="{{ route('admin.employee.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.employee.index') active @endif">
               <i class="fas fa-user nav-icon"></i>
               <p>{{__('data_field_name.employee.management')}}</p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item">
             <a href="{{ route('admin.unit.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.unit.index') active @endif">
@@ -68,12 +70,74 @@
             </a>
           </li>
 
+          @if (checkPermission('admin.employee.index'))
+          <li class="nav-item @if (in_array(Route::currentRouteName(), ['admin.employee.index'])) menu-open @endif">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                {{__('data_field_name.system.hrm')}}
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.employee.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.employee.index') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>{{__('data_field_name.employee.management')}}</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quản lý HĐLĐ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quản lý lương thưởng</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
+
           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Quản lý ngân sách
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lịch sử thay đổi ngân sách</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quản lý HĐLĐ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quản lý lương thưởng</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          {{-- <li class="nav-item">
             <a href="{{route('admin.config.master', [])}}" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Master data</p>
             </a>
-          </li>
+          </li> --}}
           
           
         </ul>
