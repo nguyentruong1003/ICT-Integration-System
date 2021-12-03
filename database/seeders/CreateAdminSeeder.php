@@ -18,14 +18,14 @@ class CreateAdminSeeder extends Seeder
      */
     public function run()
     {
-        $pass = 'kr2021^';
+        $pass = 'password';
         $user = User::where('name', 'admin_kr')->first();
         if(!$user) {
             $user = User::updateOrCreate([
                 'name' => 'admin_kr',
-                'email' => 'admin_kr_test@gmail.com',
-                'password' => Hash::make('kr2021^'), // password
-                "admin" => 1,
+                'email' => 'admin_kr@gmail.com',
+                'password' => Hash::make('password'), // password
+                'status' => 1,
             ]);
         }
 

@@ -25,7 +25,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          <li class="nav-item @if (in_array(Route::currentRouteName(), ['admin.system.user.index', 'admin.system.audit.list', 'admin.system.role.index'])) menu-open @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-lock"></i>
               <p>
@@ -35,35 +35,34 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.system.user.index') }}" class="nav-link">
+                <a href="{{ route('admin.system.user.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.user.index') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.user.management')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.system.role.index') }}" class="nav-link">
+                <a href="{{ route('admin.system.role.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.role.index') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.role.management')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.system.audit.list') }}" class="nav-link">
+                <a href="{{ route('admin.system.audit.list') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.audit.list') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.audit.list')}}</p>
                 </a>
               </li>
-              
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ route('admin.employee.index') }}" class="nav-link">
+            <a href="{{ route('admin.employee.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.employee.index') active @endif">
               <i class="fas fa-user nav-icon"></i>
               <p>{{__('data_field_name.employee.management')}}</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('admin.unit.index') }}" class="nav-link">
+            <a href="{{ route('admin.unit.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.unit.index') active @endif">
               <i class="fas fa-box nav-icon"></i>
               <p>{{__('data_field_name.unit.management')}}</p>
             </a>

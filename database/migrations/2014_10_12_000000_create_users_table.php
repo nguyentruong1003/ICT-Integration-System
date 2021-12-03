@@ -19,20 +19,14 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->tinyInteger('admin')->default('0');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->tinyInteger('status')->default('1')->comment("Trạng thái: 1 => Hoạt động, 2 => Không hoạt động");
             $table->foreignId('created_by')->nullable()->comment("Người tạo")->constrained('users');
             $table->foreignId('updated_by')->nullable()->comment("Người cập nhật")->constrained('users');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });
-
-        User::insert([
-            'name' => 'Administrator',
-            'email' => 'admin@test.com',
-            'password' => bcrypt('123456'),
-            'created_at' => now(),
-        ]);
     }
 
     /**

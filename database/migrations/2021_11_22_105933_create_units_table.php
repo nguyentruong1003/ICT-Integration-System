@@ -21,17 +21,11 @@ class CreateUnitsTable extends Migration
             $table->foreignId('father_id')->nullable()->comment("Đơn vị cha")->constrained('units');
             $table->string('description')->nullable()->comment("Mô tả");
             $table->string('note')->nullable()->comment("Ghi chú");
+            $table->tinyInteger('status')->default('1')->comment("Trạng thái: 1 => Hoạt động, 2 => Không hoạt động");
             $table->foreignId('created_by')->nullable()->comment("Người tạo")->constrained('users');
             $table->foreignId('updated_by')->nullable()->comment("Người cập nhật")->constrained('users');
             $table->timestamps();
         });
-
-        Unit::insert([
-            'code' => '00000',
-            'name' => 'root',
-            'created_by' => '1',
-            'created_at' => now(),
-        ]);
     }
 
     /**
