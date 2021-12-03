@@ -27,3 +27,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 - Livewire 2
 - Turbolinks
 - Bootstrap 4
+
+## Admin Account
+    Username: admin_kr@admin.kr
+    Password: password

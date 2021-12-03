@@ -23,7 +23,7 @@ class CreateAdminSeeder extends Seeder
         if(!$user) {
             $user = User::updateOrCreate([
                 'name' => 'admin_kr',
-                'email' => 'admin_kr@gmail.com',
+                'email' => 'admin_kr@admin.kr',
                 'password' => Hash::make('password'), // password
                 'status' => 1,
             ]);
