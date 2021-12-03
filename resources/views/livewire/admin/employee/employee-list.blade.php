@@ -14,6 +14,7 @@
                 </div>
                 
                 <div>
+                    @if($checkCreatePermission)
                     <div class="input-group">
                         <a href="{{route('admin.employee.create')}}" class="btn btn-viewmore-news mr0">
                             <div class="btn-sm btn-primary">
@@ -21,6 +22,7 @@
                             </div>
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
             
@@ -35,7 +37,9 @@
                         <th>{{__('data_field_name.employee.address')}}</th>
                         <th>{{__('data_field_name.employee.unit')}}</th>
                         <th>{{__('data_field_name.employee.note')}}</th>
+                        @if($checkEditPermission || $checkDestroyPermission)
                         <th>{{__('data_field_name.common.action')}}</th>
+                        @endif
                     </tr>
                 </thead>
                 {{-- <div wire:loading class="loader"></div> --}}
@@ -44,23 +48,29 @@
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->code }}</td>
-                            <td>{!! boldTextSearch($row->fullname, $searchName) !!}</td>
+                            <td>
+                                <a href="{{ route('admin.employee.show', ['id' => $row->id]) }}">
+                                    {!! boldTextSearch($row->fullname, $searchName) !!}
+                                </a>
+                            </td>
                             <td>{{ ReFormatDate($row->birthday,'d/m/Y') }}</td>
                             <td>{{ ($row->sex == 1) ? 'Nam' : 'Nữ' }}</td>
                             <td>{{ ($row->ex_province_id) ? $row->province->short_name : '' }}</td>
                             <td>{{ ($row->unit->name) ?? 'root' }}</td>
                             <td>{{ $row->note }}</td>
+                            @if($checkEditPermission || $checkDestroyPermission)
                             <td>
-                                <a href="{{ route('admin.employee.show', ['id' => $row->id]) }}"
-                                    class="btn btn-xs btn-cancel">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+                                @if($checkEditPermission)
                                 <a href="{{ route('admin.employee.edit', ['id' => $row->id]) }}"
                                     class="btn border-0 bg-transparent">
                                     <img src="/images/pent2.svg" alt="Edit">
                                 </a>
-                                @include('livewire.common.buttons._delete')
+                                @endif
+                                @if($checkDestroyPermission)
+                                    @include('livewire.common.buttons._delete')
+                                @endif
                             </td>
+                            @endif
                         </tr>
                     @empty
                         <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>

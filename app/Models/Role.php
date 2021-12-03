@@ -22,4 +22,9 @@ class Role extends Model
     public function users() {
         return $this->morphedByMany(User::class, 'model', 'model_has_roles');
     }
+
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Models\Permission');
+    }
 }

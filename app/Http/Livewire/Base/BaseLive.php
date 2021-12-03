@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Base;
 
+use App\Http\Livewire\BasePermission;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 abstract class BaseLive extends Component
 {
 	use WithPagination;
+    use BasePermission;
 
 	public $deleteId;
     public $reset = false;
