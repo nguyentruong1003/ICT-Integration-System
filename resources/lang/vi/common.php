@@ -13,6 +13,7 @@ return [
         'search' => 'Tìm kiếm',
         'close' => 'Đóng',
         'back' => 'Quay lại',
+        'reset' => 'Làm mới',
     ],
     'confirm_message' => [
         'confirm_title'=> 'Xác nhận',

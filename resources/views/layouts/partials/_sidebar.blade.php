@@ -29,7 +29,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-lock"></i>
               <p>
-                Quản trị hệ thống
+                {{__('data_field_name.system.admin_right')}}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -37,19 +37,19 @@
               <li class="nav-item">
                 <a href="{{ route('admin.system.user.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách người dùng</p>
+                  <p>{{__('data_field_name.user.management')}}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('admin.system.role.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý vai trò</p>
+                  <p>{{__('data_field_name.role.management')}}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('admin.system.audit.list') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dữ liệu Audit</p>
+                  <p>{{__('data_field_name.audit.list')}}</p>
                 </a>
               </li>
               
@@ -58,14 +58,14 @@
           <li class="nav-item">
             <a href="{{ route('admin.employee.index') }}" class="nav-link">
               <i class="fas fa-user nav-icon"></i>
-              <p>Danh sách nhân viên</p>
+              <p>{{__('data_field_name.employee.management')}}</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('admin.employee.index') }}" class="nav-link">
+            <a href="{{ route('admin.unit.index') }}" class="nav-link">
               <i class="fas fa-box nav-icon"></i>
-              <p>Danh sách đơn vị</p>
+              <p>{{__('data_field_name.unit.management')}}</p>
             </a>
           </li>
 

@@ -6,7 +6,7 @@
                     <div class="col-md-12">
                         <div class="form-group search-expertise">
                             <div class="search-expertise inline-block">
-                                <input type="text" placeholder="Tìm kiếm..." name="search"
+                                <input type="text" placeholder="{{__('data_field_name.common.search')}}" name="search"
                                     class="form-control" id='input_vn_name' autocomplete="off" wire:model.debounce.1000ms="searchTerm">
                             </div>
                         </div>
@@ -17,7 +17,7 @@
                     <div class="input-group">
                         <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalCreate" wire:click="resetInputFields">
                             <div class="btn-sm btn-primary">
-                                <i class="fa fa-plus"></i> TẠO MỚI
+                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
                             </div>
                         </a>
                     </div>
@@ -27,15 +27,15 @@
             <table class="table table-bordered table-hover dataTable dtr-inline">
                 <thead class="">
                     <tr>
-                        <th>STT</th>
-                        <th>Mã đơn vị</th>
-                        <th>Tên đơn vị</th>
-                        <th>Đơn vị cha</th>
-                        <th>Mô tả</th>
-                        <th>Ghi chú</th>
-                        <th>Người tạo</th>
-                        <th>Ngày tạo</th>
-                        <th>Hành động</th>
+                        <th>{{__('data_field_name.common.order_number')}}</th>
+                        <th>{{__('data_field_name.unit.code')}}</th>
+                        <th>{{__('data_field_name.unit.name')}}</th>
+                        <th>{{__('data_field_name.unit.unit_father')}}</th>
+                        <th>{{__('data_field_name.unit.description')}}</th>
+                        <th>{{__('data_field_name.unit.note')}}</th>
+                        <th>{{__('data_field_name.common.creator')}}</th>
+                        <th>{{__('data_field_name.common.create_date')}}</th>
+                        <th>{{__('data_field_name.common.action')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +58,7 @@
                             </td>
                         </tr>
                     @empty
-                        <td colspan='12' class='text-center'>Không tìm thấy dữ liệu</td>
+                        <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>
                     @endforelse
                 </tbody>
             </table>

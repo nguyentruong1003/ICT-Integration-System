@@ -41,3 +41,7 @@
     line-height: 27px!important;
 
 }
+
+.text-upper {
+    text-transform: uppercase;
+}

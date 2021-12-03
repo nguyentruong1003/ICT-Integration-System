@@ -1,7 +1,7 @@
 <div class="form-content">
     <div class="row">
         <div class="col">
-            <label>Địa chỉ</label>
+            <label>{{__('data_field_name.address.title')}}</label>
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">

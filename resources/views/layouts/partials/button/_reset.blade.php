@@ -1,1 +1,1 @@
-<button type="button" class="btn-sm btn-primary" wire:click="resetSearch()"><i class="fa fa-undo"></i> Làm mới</button>
+<button type="button" class="btn-sm btn-primary" wire:click="resetSearch()"><i class="fa fa-undo"></i> {{__('common.button.reset')}}</button>

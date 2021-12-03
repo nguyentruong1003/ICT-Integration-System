@@ -6,7 +6,7 @@
                     <div class="col-md-3">
                         <div class="form-group search-expertise">
                             <div class="search-expertise inline-block">
-                                <input type="text" placeholder="Tìm kiếm" name="search"
+                                <input type="text" placeholder="{{__('data_field_name.common.search')}}" name="search"
                                     class="form-control" id='input_vn_name' autocomplete="off" wire:model.debounce.1000ms="searchTerm">
                             </div>
                         </div>
@@ -16,7 +16,7 @@
                         <div>
                             <select wire:model.debounce.1000ms="userId" class="form-control">
                                 <option value=''>
-                                    --Người tác động--
+                                    --{{__('data_field_name.audit.performer')}}--
                                 </option>
                                 @foreach($userList as $item)
                                     <option value="{{$item['id']}}">
@@ -49,17 +49,17 @@
             <table class="table table-bordered table-hover dataTable dtr-inline">
                 <thead class="">
                     <tr>
-                        <th>Người tác động</th>
-                        <th>Thao tác</th>
-                        <th>Loại bảng Audit</th>
+                        <th>{{__('data_field_name.audit.performer')}}</th>
+                        <th>{{__('data_field_name.audit.event')}}</th>
+                        <th>{{__('data_field_name.audit.audittable_type')}}</th>
                         {{-- <th>ID bảng Audit</th> --}}
-                        <th>Giá trị cũ</th>
-                        <th>Giá trị mới</th>
-                        <th>Ngày tác động</th>
-                        <th>URL</th>
-                        <th>Địa chỉ IP</th>
+                        <th>{{__('data_field_name.audit.old_values')}}</th>
+                        <th>{{__('data_field_name.audit.new_values')}}</th>
+                        <th>{{__('data_field_name.audit.impact_date')}}</th>
+                        {{-- <th>{{__('data_field_name.audit.url')}}</th> --}}
+                        <th>{{__('data_field_name.audit.ip_address')}}</th>
                         {{-- <th>Tác nhân</th> --}}
-                        <th>Ghi chú</th>
+                        <th>{{__('data_field_name.audit.note')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,7 +68,7 @@
                             <td class="text-left">{!! boldTextSearch($row['perfomer'], $searchTerm) !!}</td>
                             <td class="text-left">{!! boldTextSearch($row['event'], $searchTerm) !!}<br>
                                 <a href="" data-toggle="modal" data-target="{{'#show' . $row['id']}}">
-                                    Xem chi tiết
+                                    {{__('data_field_name.common.view_detail')}}
                                 </a>
                                 @include('livewire.admin.system.audit.detail')
                             </td>
@@ -99,7 +99,7 @@
                             <td class="text-left">{!! boldTextSearch($row['note'], $searchTerm) !!}</td>
                         </tr>
                     @empty
-                        <td colspan='12' class='text-center'>Không tìm thấy dữ liệu</td>
+                        <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>
                     @endforelse
                 </tbody>
             </table>

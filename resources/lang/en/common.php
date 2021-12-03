@@ -13,6 +13,7 @@ return [
         'search' => 'Search',
         'close' => 'Close',
         'back' => 'Back',
+        'reset' => 'Reset',
     ],
     'confirm_message' => [
         'confirm_title'=>'Confimation',
