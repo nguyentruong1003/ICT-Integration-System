@@ -73,6 +73,20 @@ return [
         'create' => 'Thêm mới vai trò',
         'edit' => 'Cập nhật vai trò',
         'name' => 'Tên',
+        'function' => 'Chức năng',
+        'function_code' => 'Mã chức năng',
+        'status' => 'Trạng thái',
+        'active' => 'Hoạt động',
+        'inactive' => 'Không hoạt động',
+        'note' => 'Ghi chú',
+        'permission' => [
+            'view' => 'Xem',
+            'show' => 'Chi tiết',
+            'edit' => 'Chỉnh sửa',
+            'delete' => 'Xóa',
+            'add' => 'Thêm mới',
+            'download' => 'Tải xuống',
+        ],
     ],
     'audit' => [
         'list' => 'Dữ liệu audit',
@@ -90,7 +104,7 @@ return [
         'user_agent' => 'Tác nhân',
     ],
     'system' => [
-        'admin_right' => 'Quản trị hệ thống',
+        'admin_right' => 'Quản trị điều hành',
         'hrm' => 'Quản lý nhân sự',
     ],
 ];

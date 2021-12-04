@@ -33,8 +33,7 @@ class CreatePermissionTables extends Migration
             $table->string('name');
             $table->string('guard_name');
             $table->tinyInteger('status')->default('1')->comment("Trạng thái: 1 => Hoạt động, 2 => Không hoạt động");
-            $table->string('unsign_text', 1000)->nullable()->comment('luu tim kiem khong dau');
-            $table->index(['unsign_text']);
+            $table->string('note')->nullable()->comment('Ghi chú');
             $table->bigInteger('admin_id')->nullable()->comment('Nguoi tao');
             $table->softDeletes();
             $table->timestamps();

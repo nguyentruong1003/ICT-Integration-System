@@ -26,7 +26,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           @if (checkPermission('admin.system.user.index'))
-          <li class="nav-item @if (in_array(Route::currentRouteName(), ['admin.system.user.index', 'admin.system.audit.list', 'admin.system.role.index'])) menu-open @endif">
+          <li class="nav-item @if (in_array(Route::currentRouteName(), ['admin.system.user.index', 'admin.system.audit.index', 'admin.system.role.index'])) menu-open @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-lock"></i>
               <p>
@@ -48,7 +48,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.system.audit.list') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.audit.list') active @endif">
+                <a href="{{ route('admin.system.audit.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.audit.index') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.audit.list')}}</p>
                 </a>

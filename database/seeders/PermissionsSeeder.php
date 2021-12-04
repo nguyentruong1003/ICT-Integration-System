@@ -26,7 +26,7 @@ class PermissionsSeeder extends Seeder
             }
         }
 
-        $arrAction = ['index', 'show', 'edit', 'destroy', 'create', 'download', 'wait_approve', 'approve'];
+        $arrAction = ['index', 'show', 'edit', 'destroy', 'create', 'download'];
         if (!empty($urls)) {
             foreach ($urls as $url) {
                 foreach ($arrAction as $action) {

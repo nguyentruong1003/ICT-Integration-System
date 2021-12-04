@@ -39,11 +39,15 @@ Route::group(['middleware' => ['auth']], function () {
         'prefix' => 'system',
     ], function () {
         Route::get('/user', 'App\Http\Controllers\Admin\System\UserController@index')->name('admin.system.user.index');
-        Route::get('/audit', 'App\Http\Controllers\Admin\System\AuditController@index')->name('admin.system.audit.list');
+        Route::get('/audit', 'App\Http\Controllers\Admin\System\AuditController@index')->name('admin.system.audit.index');
         Route::group([
             'prefix' => 'role',
         ], function () {
             Route::get('/', 'App\Http\Controllers\Admin\System\RoleController@index')->name('admin.system.role.index');
+            Route::get('/create', 'App\Http\Controllers\Admin\System\RoleController@create')->name('admin.system.role.create');
+            Route::post('/store', 'App\Http\Controllers\Admin\System\RoleController@store')->name('admin.system.role.store');
+            Route::get('/edit/{id}', 'App\Http\Controllers\Admin\System\RoleController@edit')->name('admin.system.role.edit');
+            Route::post('update/{id}', 'App\Http\Controllers\Admin\System\RoleController@update')->name('admin.system.role.update');
         });
     });
 

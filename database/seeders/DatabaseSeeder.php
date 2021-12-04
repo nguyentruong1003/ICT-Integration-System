@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             PermissionsSeeder::class,
             CreateAdminSeeder::class,
             UnitRawDBSeeder::class,
+            RoleRawDBSeeder::class,
+            MenuSeeder::class,
         ]);
     }
 }
