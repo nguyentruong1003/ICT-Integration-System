@@ -31,3 +31,15 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ## Admin Account
     Username: admin_kr@admin.kr
     Password: password
+
+## Setup environment for project
+    -- use Git bash --
+    git clone https://github.com/nguyentruong1003/Users_Management.git
+    -- use Terminal in IDE --
+    _ composer install
+    _ npm install
+    _ cp .env.example .env
+    _ php artisan key:generate
+    _ php artisan migrate
+    _ php artisan db:seed
+    _ php artisan serve
