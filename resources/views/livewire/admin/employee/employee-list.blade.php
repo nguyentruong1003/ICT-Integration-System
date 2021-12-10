@@ -47,15 +47,14 @@
                         <th>{{__('data_field_name.employee.fullname')}}</th>
                         <th>{{__('data_field_name.employee.birthday')}}</th>
                         <th>{{__('data_field_name.employee.sex')}}</th>
-                        <th>{{__('data_field_name.employee.address')}}</th>
-                        {{-- <th>{{__('data_field_name.employee.unit')}}</th> --}}
-                        <th>{{__('data_field_name.employee.note')}}</th>
+                        <th>Phòng ban</th>
+                        <th>Chức vụ</th>
+                        <th>Người quản lý</th>
                         @if($checkEditPermission || $checkDestroyPermission)
                         <th>{{__('data_field_name.common.action')}}</th>
                         @endif
                     </tr>
                 </thead>
-                {{-- <div wire:loading class="loader"></div> --}}
                 <tbody>
                     @forelse($data as $key => $row)
                         <tr>
@@ -67,10 +66,10 @@
                                 </a>
                             </td>
                             <td>{{ ReFormatDate($row->birthday,'d/m/Y') }}</td>
-                            <td>{{ ($row->sex == 1) ? 'Nam' : 'Nữ' }}</td>
-                            <td>{{ ($row->ex_province_id) ? $row->province->short_name : '' }}</td>
-                            {{-- <td>{{ ($row->unit->name) ?? 'root' }}</td> --}}
-                            <td>{{ $row->note }}</td>
+                            <td>{{ \App\Enums\ECommon::codeToValue(1, $row->sex) }}</td>
+                            <td>{{ ($row->department->name) ?? '' }}</td>
+                            <td>{{ ($row->position->value) ?? '' }}</td>
+                            <td>{{ $row->manager_id }}</td>
                             @if($checkEditPermission || $checkDestroyPermission)
                             <td>
                                 @if($checkEditPermission)

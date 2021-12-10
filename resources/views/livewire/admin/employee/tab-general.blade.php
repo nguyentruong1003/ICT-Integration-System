@@ -14,16 +14,17 @@
 
         <div class="form-group col-lg-6">
             <label>Ngày sinh <span class="text-danger">*</span></label>
-            <input type="date" class="form-control" wire:model.lazy="birthday" {{ $editable ? '' : 'disabled' }}>
+            <input type="date" class="form-control" wire:model.lazy="birthday" {{ $editable ? '' : 'disabled' }} max={{ now()->format('Y-m-d') }}>
             @error('birthday') @include('layouts.partials.text._error') @enderror
         </div>
 
         <div class="form-group col-lg-6">
             <label>Giới tính <span class="text-danger">*</span></label>
-            <select class="form-control" wire:model.lazy="sex">
+            <select class="form-control" wire:model.lazy="sex" {{ $editable ? '' : 'disabled' }}>
                 <option value="">--Chọn--</option>
-                <option value="1">Nam</option>
-                <option value="2">Nữ</option>
+                @foreach (\App\Enums\ECommon::getListData()['1'] as $id => $value)
+                    <option value="{{ $id }}">{{ $value }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -41,12 +42,22 @@
 
         <div class="form-group col-lg-6">
             <label>Đơn vị <span class="text-danger">*</span></label>
-            
+            <select class="form-control" wire:model.lazy="department_id" {{ $editable ? '' : 'disabled' }}>
+                <option value="">--Chọn--</option>
+                @foreach ($departments as $department)
+                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="form-group col-lg-6">
             <label>Chức vụ <span class="text-danger">*</span></label>
-            
+            <select class="form-control" wire:model.lazy="position_id" {{ $editable ? '' : 'disabled' }}>
+                <option value="">--Chọn--</option>
+                @foreach ($positions as $position)
+                <option value="{{ $position->id }}">{{ $position->value }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="form-group col-lg-6">
@@ -59,10 +70,10 @@
         </div>
     </div>
 
-    @if ($editable)
-        <div class="w-100 clearfix my-2">
-            <button class="float-right btn ml-1 btn-primary">{{__('common.button.save')}}</button>
-            <a href="{{ route('admin.employee.index') }}" type="submit" class="btn btn-secondary float-right mr-1">{{__('common.button.back')}}</a>          
-        </div>
-    @endif
+    <div class="w-100 clearfix my-2">
+        @if ($editable)
+        <button class="float-right btn ml-1 btn-primary">{{__('common.button.save')}}</button>
+        @endif
+        <a href="{{ route('admin.employee.index') }}" type="submit" class="btn btn-secondary float-right mr-1">{{__('common.button.back')}}</a>          
+    </div>
 </form>

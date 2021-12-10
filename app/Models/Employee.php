@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EMasterData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -12,12 +13,8 @@ class Employee extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     protected $table = "employee";
 
-    public function unit() {
-        return $this->belongsTo(Unit::class, 'unit_id');
-    }
-
-    public function province() {
-        return $this->belongsTo(Province::class, 'ex_province_id', 'province_code');
+    public function department() {
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
     public function creator() {
@@ -26,5 +23,9 @@ class Employee extends Model implements Auditable
 
     public function updater() {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function position() {
+        return $this->belongsTo(MasterData::class, 'position_id');
     }
 }

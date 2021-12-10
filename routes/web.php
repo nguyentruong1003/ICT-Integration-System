@@ -25,14 +25,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/lang/{lang}','App\Http\Controllers\LangController@changeLang')->name('lang');
     Route::group([
-        'prefix' => 'master',
+        'prefix' => 'config',
     ], function () {
-        Route::get('/', 'App\Http\Controllers\Admin\Config\MasterController@index')->name('admin.config.master');
-        // Route::get('delete/{id}', 'App\Http\Controllers\Admin\Config\MasterController@delete')->name('admin.config.master.delete');
-        // Route::get('create', 'App\Http\Controllers\Admin\Config\MasterController@create')->name('admin.config.master.create');
-        // Route::get('edit/{id}', 'App\Http\Controllers\Admin\Config\MasterController@edit')->name('admin.config.master.edit');
-        // Route::post('insert', 'App\Http\Controllers\Admin\Config\MasterController@insert')->name('admin.config.master.insert');
-        // Route::post('update', 'App\Http\Controllers\Admin\Config\MasterController@update')->name('admin.config.master.update');
+        Route::get('/master', 'App\Http\Controllers\Admin\Config\MasterController@index')->name('admin.config.master.index');
     });
 
     Route::group([

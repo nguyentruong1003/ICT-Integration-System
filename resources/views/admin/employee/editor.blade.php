@@ -45,11 +45,11 @@
         </ul>
         <div class="tab-content pt-3" id="myTabContent">
             <div class="tab-pane fade show active" id="general" role="tabpanel">
-                @livewire('admin.employee.tab-general', ['id' => ($data->id) ?? 0])
+                @livewire('admin.employee.tab-general', ['id' => ($data->id) ?? 0, 'editable' => $editable])
             </div>
             @if (!empty($data))
                 <div class="tab-pane fade" id="private" role="tabpanel">
-                    @livewire('admin.employee.tab-private', ['id' => ($data->id) ?? 0])
+                    @livewire('admin.employee.tab-private', ['id' => ($data->id) ?? 0, 'editable' => $editable])
                 </div>
                 {{-- <div class="tab-pane fade" id="academic" role="tabpanel">
                     @livewire('staffmanagement::staff.staff-diploma-list', ['staffId' => $staff->id, 'editable' => $editable])

@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Admin\Employee;
 
+use App\Enums\EMasterData;
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\MasterData;
 use Livewire\Component;
 
 class TabGeneral extends Component
@@ -15,7 +17,7 @@ class TabGeneral extends Component
 
     public $employee;
     public $fullname, $code, $emp_id, $sex, $birthday, $unit_id, $phone, $email;
-    public $units;
+    public $departments;
     public $positions;
     public $editable = true;
 
@@ -47,11 +49,11 @@ class TabGeneral extends Component
     //     return Staff::lang();
     // }
 
-    public function mount($id)
+    public function mount($id, $editable)
     {
-        $this->units = Department::all()->pluck('name', 'id')->toArray();
-        // $this->positions = Employee::query()->where('type', StaffMasterData::TYPE_POSITION)->get()->pluck('value', 'id');
-
+        $this->departments = Department::all();
+        $this->positions = MasterData::query()->where('type', EMasterData::TYPE_POSITION)->get();
+        $this->editable = $editable;
         $employee = Employee::query()->findOrNew($id);
         if ($employee) {
             $this->emp_id = $id;

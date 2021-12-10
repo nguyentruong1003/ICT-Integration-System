@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Admin\Employee;
 
+use App\Enums\EMasterData;
 use App\Models\Employee;
 use App\Models\EmployeePrivate;
+use App\Models\MasterData;
+use App\Models\Province;
 use Livewire\Component;
 
 class TabPrivate extends Component
@@ -17,9 +20,10 @@ class TabPrivate extends Component
     public $emp_id, $marital_status, $other_email, $address, $temporary_address, $ethnic_id, $religion_id, $nationality_id;
     public $identity_card, $identity_card_date, $identity_card_place, $description, $note;
 
-    // public $ethnics;
-    // public $religions;
-    // public $nations;
+    public $ethnics;
+    public $religions;
+    public $nationalities;
+    public $provinces;
     public $editable = true;
 
     // protected $listeners = [
@@ -28,16 +32,6 @@ class TabPrivate extends Component
     //     'set-identity-card-date' =>'setIdentityCardDate',
     //     'set-passport-date' =>'setPassportDate'
     // ];
-
-    // public function mount($id)
-    // {
-    //     $this->emp_id = $id;
-        // $this->profile = Profile::query()->where('staff_id', $staffId)->firstOrNew();
-
-        // $this->ethnics = StaffMasterData::query()->where('type', StaffMasterData::TYPE_ETHNIC)->get()->pluck('value', 'id')->all();
-        // $this->religions = StaffMasterData::query()->where('type', StaffMasterData::TYPE_RELIGION)->get()->pluck('value', 'id')->all();
-        // $this->nations = StaffMasterData::query()->where('type', StaffMasterData::TYPE_NATIONALITY)->get()->pluck('value', 'id')->all();
-    // }
 
     // protected function rules()
     // {
@@ -69,11 +63,16 @@ class TabPrivate extends Component
     //     return Profile::lang();
     // }
 
-    public function mount($id)
+    public function mount($id, $editable)
     {
         $profile = EmployeePrivate::query()->where('emp_id', $id)->firstOrNew();
+        $this->ethnics = MasterData::query()->where('type', EMasterData::TYPE_ETHNIC)->get();
+        $this->religions = MasterData::query()->where('type', EMasterData::TYPE_RELIGION)->get();
+        $this->nationalities = MasterData::query()->where('type', EMasterData::TYPE_NATIONALITY)->get();
+        $this->provinces = Province::query()->orderBy('short_name', 'asc')->get()->pluck('short_name');
         $this->emp_name = Employee::where('id', $id)->first()->name;
         $this->emp_id = $id;
+        $this->editable = $editable;
         if ($profile) {
             $this->profile_id = $profile->id;
             $this->other_email = $profile->other_email;
