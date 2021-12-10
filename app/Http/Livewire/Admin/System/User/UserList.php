@@ -10,6 +10,7 @@ class UserList extends BaseLive
 {
 
     public $searchName;
+    public $user_id;
     public $name;
     public $email;
     public $password;
@@ -18,7 +19,6 @@ class UserList extends BaseLive
 
     public function render() {
         $query=User::query();
-
         if ($this->searchName) {
             $query->where('name', 'like', '%' . trim(mb_strtolower($this->searchName, 'UTF-8')) . '%');
         }
@@ -63,6 +63,7 @@ class UserList extends BaseLive
     public function edit($id){
         $this->updateMode = true;
         $user = User::findOrFail($id);
+        $this->user_id = $id;
         $this->name = $user->name;
         $this->email = $user->email;
         // $this->password = $user->password;
@@ -71,18 +72,18 @@ class UserList extends BaseLive
     }
 
     public function update(){
-
+        // dd($this);
         $this->validate([
             
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|unique:users,email,' .$this->user_id,
             'password' => 'required',
             'confirm_password'=> 'required_with:password|same:password',
         ],[],[
 
         ]);
 
-        $user = User::findorfail($this->id);
+        $user = User::findorfail($this->user_id);
         $user->name = $this->name;
         $user->email = $this->email;
         $user->password = bcrypt($this->password);

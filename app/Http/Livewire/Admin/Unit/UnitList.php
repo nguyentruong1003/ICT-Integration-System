@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Admin\Unit;
 
 use App\Http\Livewire\Base\BaseLive;
+use App\Models\Department;
 use App\Models\Employee;
-use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -16,7 +16,7 @@ class UnitList extends BaseLive
     
     public function render()
     {
-        $query = Unit::query()->where('id', '!=', '1');
+        $query = Department::query()->where('id', '!=', '1');
 
         if ($this->searchTerm) {
             $query->where('code', 'like', '%' . trim($this->searchTerm) . '%')
@@ -27,7 +27,7 @@ class UnitList extends BaseLive
 
         $data = $query->orderBy('name','asc')->paginate($this->perPage);
         $current_user = Auth::user();
-        $unit_list = Unit::select('name', 'id')->get();
+        $unit_list = Department::select('name', 'id')->get();
         // dd($current_user);
 
         return view('livewire.admin.unit.unit-list', [
@@ -39,13 +39,12 @@ class UnitList extends BaseLive
 
     public function store() {
         $this->validate([
-            'code' => 'required|unique:units',
+            'code' => 'required|unique:departments',
             'name' => 'required',
         ]);
-        $unit = new Unit;
+        $unit = new Department();
         $unit->code = Str::upper($this->code);
         $unit->name = $this->name;
-        $unit->father_id = ($this->father_id) ?? '1';
         $unit->description = $this->description;
         $unit->note = $this->note;
         $unit->created_by = Auth::user()->id;
@@ -68,20 +67,13 @@ class UnitList extends BaseLive
     }
 
     public function delete(){
-        $unit = Unit::findOrFail($this->deleteId);
+        $unit = Department::findOrFail($this->deleteId);
         // $employees = Employee::where('unit',$unit->id)->get();
         // foreach ($employees as $employee) {
         //     $tmp = User::findorfail($employee->id);
         //     $tmp->unit = $unit->unit_father;
         //     $tmp->save();
         // }
-
-        $units_child = Unit::where('father_id',$unit->id)->get();
-        foreach ($units_child as $unit_child) {
-            $tmp = Unit::findorfail($unit_child->id);
-            $tmp->father_id = $unit->father_id;
-            $tmp->save();
-        }
         $unit->delete();
         $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.delete')] );
         
@@ -89,7 +81,7 @@ class UnitList extends BaseLive
 
     public function edit($id){
         $this->updateMode = true;
-        $unit = Unit::findOrFail($id);
+        $unit = Department::findOrFail($id);
         $this->unit_id = $id;
         $this->name = $unit->name;
         $this->code = $unit->code;
@@ -101,10 +93,10 @@ class UnitList extends BaseLive
 
     public function update() {
         $this->validate([
-            'code' => 'required|unique:units,code,'. $this->unit_id,
+            'code' => 'required|unique:departments,code,'. $this->unit_id,
             'name' => 'required',
         ]);
-        $unit = Unit::findorfail($this->unit_id);
+        $unit = Department::findorfail($this->unit_id);
         $unit->code = Str::upper($this->code);
         $unit->name = $this->name;
         $unit->father_id = ($this->father_id) ?? '1';

@@ -43,7 +43,7 @@
                             <td>{{ $row->email }}</td>
                             <td>
                                 @foreach($row->roles as $value)
-                                    <span class="badge badge-success">{{ $value->name }}</span>
+                                    <span class="badge @if ($value->name == 'admin') badge-success @else badge-primary @endif">{{ $value->name }}</span>
                                 @endforeach
                             </td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>

@@ -6,6 +6,7 @@
                     <label>{{__('data_field_name.employee.fullname')}}<span class="text-danger" {{ ($check == 0) ? 'hidden' : '' }}> *</span></label>
                     <div class="input-group form-group">
                         {!! Form::text('fullname', null, array('placeholder' => '{{__("data_field_name.employee.fullname")}}', 'class' => 'form-control-sm form-control', 'disabled' => $check==0)) !!}
+                        {{-- <input type="text" name="fullname"> --}}
                         @error('fullname')
                             @include('layouts.partials.text._error')
                         @enderror

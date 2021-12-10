@@ -34,11 +34,5 @@ class RawDBSeeder extends Seeder
         $role_staff->syncPermissions($permission_staff);
 
         // unit
-        Unit::updateOrCreate([
-            'code' => '00000',
-            'name' => 'root',
-            'created_by' => '1',
-            'created_at' => now(),
-        ]);
     }
 }

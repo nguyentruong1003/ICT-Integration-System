@@ -10,7 +10,7 @@ class Employee extends Model implements Auditable
 {
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
-    protected $table = "employees";
+    protected $table = "employee";
 
     public function unit() {
         return $this->belongsTo(Unit::class, 'unit_id');

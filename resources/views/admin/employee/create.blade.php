@@ -21,7 +21,8 @@
             </div>
         </div>
     </div>
-    {!! Form::open(['method' => 'POST',  'autocomplete' => "off", 'route' => ['admin.employee.store']]) !!}
+    {{-- {!! Form::open(['method' => 'POST',  'autocomplete' => "off", 'route' => ['admin.employee.store']]) !!}
         @include('admin.employee._formEmployee')
-    {!! Form::close() !!}
+    {!! Form::close() !!} --}}
+    @livewire('admin.employee.tab-general', ['id' => 0])
 @endsection

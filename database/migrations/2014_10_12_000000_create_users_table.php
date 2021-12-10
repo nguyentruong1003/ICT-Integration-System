@@ -20,9 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->tinyInteger('status')->default('1')->comment("Trạng thái: 1 => Hoạt động, 2 => Không hoạt động");
-            $table->foreignId('created_by')->nullable()->comment("Người tạo")->constrained('users');
-            $table->foreignId('updated_by')->nullable()->comment("Người cập nhật")->constrained('users');
+            $table->integer('created_by')->nullable()->comment('Người tạo - Map với user');
+            $table->integer('updated_by')->nullable()->comment('Người cập nhật - Map với user');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

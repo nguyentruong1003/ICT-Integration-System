@@ -18,15 +18,10 @@ class CreateMasterData extends Migration
             $table->string('v_key', 255)->comment('gia tri');
             $table->string('v_value')->nullable()->comment('gia tri');
             $table->integer('order_number')->nullable()->comment('gia tri');
-            $table->tinyInteger('type')->comment('1:POSSITION chuc danh ; 2: dan toc; 3 : ton giao; 4: quoc tich; 5: trinh do hoc van; 6: xep loai');
-            $table->string('v_value_en')->nullable()->comment('gia tri');
-            $table->bigInteger('parent_id')->nullable()->comment('danh muc cha neu co');
+            $table->tinyInteger('type')->nullable()->comment('Loại giá trị');
             $table->string('v_content', 1000)->nullable()->comment('noi dung');
-            $table->string('v_content_en', 1000)->nullable()->comment('noi dung en');
             $table->string('url', 1000)->nullable()->comment('URL');
-            $table->string('image', 1000)->nullable()->comment('duong dan anh');
             $table->string('note', 1000)->nullable()->comment('ghi chú');
-            $table->string('note_en', 1000)->nullable()->comment('ghi chu en');
         });
     }
 

@@ -1,6 +1,19 @@
 <div class="body-content p-2">
     <div class="card">
         <div class="card-body p-2">
+            <div class="session-area">
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        {!! \Session::get('success') !!}
+                    </div>
+                @endif
+                @if (\Session::has('error'))
+                    <div class="alert alert-warning">
+                        {!! \Session::get('error') !!}
+                    </div>
+                @endif
+            </div>
+
             <div class="filter d-flex align-items-center justify-content-between mb-2">
                 <div class="row">
                     <div class="col-md-12">
@@ -35,7 +48,7 @@
                         <th>{{__('data_field_name.employee.birthday')}}</th>
                         <th>{{__('data_field_name.employee.sex')}}</th>
                         <th>{{__('data_field_name.employee.address')}}</th>
-                        <th>{{__('data_field_name.employee.unit')}}</th>
+                        {{-- <th>{{__('data_field_name.employee.unit')}}</th> --}}
                         <th>{{__('data_field_name.employee.note')}}</th>
                         @if($checkEditPermission || $checkDestroyPermission)
                         <th>{{__('data_field_name.common.action')}}</th>
@@ -50,13 +63,13 @@
                             <td>{{ $row->code }}</td>
                             <td>
                                 <a href="{{ route('admin.employee.show', ['id' => $row->id]) }}">
-                                    {!! boldTextSearch($row->fullname, $searchName) !!}
+                                    {!! boldTextSearch($row->name, $searchName) !!}
                                 </a>
                             </td>
                             <td>{{ ReFormatDate($row->birthday,'d/m/Y') }}</td>
                             <td>{{ ($row->sex == 1) ? 'Nam' : 'Nữ' }}</td>
                             <td>{{ ($row->ex_province_id) ? $row->province->short_name : '' }}</td>
-                            <td>{{ ($row->unit->name) ?? 'root' }}</td>
+                            {{-- <td>{{ ($row->unit->name) ?? 'root' }}</td> --}}
                             <td>{{ $row->note }}</td>
                             @if($checkEditPermission || $checkDestroyPermission)
                             <td>
@@ -84,3 +97,11 @@
     </div>
     @include('livewire.common._modalDelete')
 </div>
+
+<script>
+    $('document').ready(function() {
+        setTimeout(function() {
+            $('.session-area').fadeOut(2500);
+        }, 2500);
+    })
+</script>

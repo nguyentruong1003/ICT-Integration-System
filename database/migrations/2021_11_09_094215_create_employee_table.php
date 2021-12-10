@@ -13,24 +13,21 @@ class CreateEmployeeTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('employee', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('code')->comment("Mã nhân viên");
-            $table->string('fullname')->comment("Họ tên đầy đủ");
+            $table->string('name')->comment("Họ tên");
             $table->string('email')->comment("Email");
             $table->string('phone')->comment("SĐT");
             $table->date('birthday')->comment("Ngày sinh");
             $table->tinyInteger('sex')->comment("Giới tính: 1 = Nam, 2 = Nữ");
-            $table->string('identity_code')->comment("CMND/CCCD");
-            $table->string('ex_ward_id')->length(5)->nullable()->comment("Xã/Phường");
-            $table->string('ex_district_id')->length(5)->nullable()->comment("Huyện/Quận");
-            $table->string('ex_province_id')->length(5)->nullable()->comment("Tỉnh/Thành phố");
-            $table->string('address')->nullable()->comment("Địa chỉ cụ thể");
-            $table->string('description')->nullable()->comment("Mô tả");
-            $table->tinyInteger('status')->default('1')->comment("Trạng thái");
-            $table->string('note')->nullable()->comment("Ghi chú");
-            $table->foreignId('created_by')->nullable()->comment("Người tạo")->constrained('users');
-            $table->foreignId('updated_by')->nullable()->comment("Người cập nhật")->constrained('users');
+            $table->integer('department_id')->nullable()->comment('Đơn vị');
+            $table->unsignedBigInteger('position_id')->nullable()->comment("Chức vụ");
+            $table->unsignedBigInteger('working_address_id')->nullable()->comment('Địa điểm làm việc');
+            $table->unsignedBigInteger('manager_id')->nullable()->comment('Người quản lý');
+            $table->unsignedBigInteger('user_id')->nullable()->comment('Map với user');
+            $table->integer('created_by')->nullable()->comment('Người tạo - Map với user');
+            $table->integer('updated_by')->nullable()->comment('Người cập nhật - Map với user');
             $table->timestamps();
         });
     }
