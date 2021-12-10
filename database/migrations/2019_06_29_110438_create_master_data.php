@@ -15,11 +15,10 @@ class CreateMasterData extends Migration
     {
         Schema::create('master_data', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('v_key', 255)->comment('gia tri');
-            $table->string('v_value')->nullable()->comment('gia tri');
-            $table->integer('order_number')->nullable()->comment('gia tri');
-            $table->tinyInteger('type')->nullable()->comment('Loại giá trị');
-            $table->string('v_content', 1000)->nullable()->comment('noi dung');
+            $table->string('key', 255)->comment('key');
+            $table->string('value')->nullable()->comment('gia tri');
+            $table->integer('order')->nullable()->comment('thứ tự ưu tiên');
+            $table->tinyInteger('type')->nullable()->comment('loại');
             $table->string('url', 1000)->nullable()->comment('URL');
             $table->string('note', 1000)->nullable()->comment('ghi chú');
         });

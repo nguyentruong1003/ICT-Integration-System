@@ -1,0 +1,105 @@
+<?php
+return [
+    [
+        'key' => 'religion',
+        'value' => 'Không',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '1',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Phật giáo',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '1',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Công giáo',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '2',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Tin lành',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '3',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Cao Đài',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '4',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Phật giáo Hòa Hảo',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '5',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Hồi giáo',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '6',
+    ],
+    [
+        'key' => 'religion',
+        'value' => "Tôn giáo Baha'i",
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '7',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Tịnh độ Cư sỹ Phật hội Việt Nam',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '8',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Đạo Tứ Ân Hiếu nghĩa',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '9',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Bửi Sơn Kỳ hương',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '10',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Giáo hội Phật đường Nam Tông Minh Sư đạo',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '11',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Hội thánh Minh lý đạo - Tam Tông Miếu',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '12',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Chăm Bà la môn',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '13',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Giáo hội Các thành hữu Ngày sau của Chúa Giê su Ky tô (Mormon)',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '14',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Phật giáo Hiếu Nghĩa Tà Lơn (Cấp đăng ký hoạt động)',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '15',
+    ],
+    [
+        'key' => 'religion',
+        'value' => 'Giáo hội Cơ đốc Phục lâm Việt Nam',
+        'type' => App\Enums\EMasterData::TYPE_RELIGION,
+        'order' => '16',
+    ],
+];

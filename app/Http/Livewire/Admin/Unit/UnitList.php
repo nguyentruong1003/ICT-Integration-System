@@ -4,9 +4,7 @@ namespace App\Http\Livewire\Admin\Unit;
 
 use App\Http\Livewire\Base\BaseLive;
 use App\Models\Department;
-use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Illuminate\Support\Str;
 
 class UnitList extends BaseLive
