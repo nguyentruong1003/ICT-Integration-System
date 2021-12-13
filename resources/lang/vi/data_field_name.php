@@ -27,14 +27,14 @@ return [
         'new_password' => 'Mật khẩu mới',
 
     ],
-    'unit' => [
+    'department' => [
         'management' => 'Quản lý đơn vị',
         'list' => 'Danh sách đơn vị',
         'create' => 'Tạo mới đơn vị',
         'edit' => 'Cập nhật đơn vị',
         'code' => 'Mã đơn vị',
         'name' => 'Tên đơn vị',
-        'unit_father' => 'Đơn vị cha',
+        'department_father' => 'Đơn vị cha',
         'description' => 'Mô tả',
         'note' => 'Ghi chú',
     ],
@@ -44,7 +44,7 @@ return [
         'birthday' => 'Ngày sinh',
         'sex' => 'Giới tính',
         'address' => 'Địa chỉ',
-        'unit' => 'Đơn vị',
+        'department' => 'Đơn vị',
         'note' => 'Ghi chú',
         'list' => 'Danh sách nhân viên',
         'management' => 'Quản lý nhân viên',
@@ -56,7 +56,7 @@ return [
         'phone' => 'Số điện thoại',
         'email' => 'Thư điện tử',
         'identity_code' => 'CMND/CCCD',
-        'unit' => 'Đơn vị công tác',
+        'department' => 'Đơn vị công tác',
         'description' => 'Tiểu sử',
         
     ],

@@ -58,8 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group([
-        'prefix' => 'unit',
+        'prefix' => 'department',
     ], function () {
-        Route::get('/', 'App\Http\Controllers\Admin\UnitController@index')->name('admin.unit.index');
+        Route::get('/', 'App\Http\Controllers\Admin\DepartmentController@index')->name('admin.department.index');
     });
 });

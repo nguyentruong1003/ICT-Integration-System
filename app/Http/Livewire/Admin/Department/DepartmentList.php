@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Unit;
+namespace App\Http\Livewire\Admin\Department;
 
 use App\Http\Livewire\Base\BaseLive;
 use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class UnitList extends BaseLive
+class DepartmentList extends BaseLive
 {
     public $searchName;
-    public $unit_id, $name, $code, $description, $father_id, $created_by, $note;
+    public $department_id, $name, $code, $description, $father_id, $created_by, $note;
     
     public function render()
     {
@@ -25,13 +25,13 @@ class UnitList extends BaseLive
 
         $data = $query->orderBy('name','asc')->paginate($this->perPage);
         $current_user = Auth::user();
-        $unit_list = Department::select('name', 'id')->get();
+        $department_list = Department::select('name', 'id')->get();
         // dd($current_user);
 
-        return view('livewire.admin.unit.unit-list', [
+        return view('livewire.admin.department.department-list', [
             'data' => $data,
             'current_user' => $current_user,
-            'unit_list' => $unit_list,
+            'department_list' => $department_list,
         ]);
     }
 
@@ -40,13 +40,13 @@ class UnitList extends BaseLive
             'code' => 'required|unique:departments',
             'name' => 'required',
         ]);
-        $unit = new Department();
-        $unit->code = Str::upper($this->code);
-        $unit->name = $this->name;
-        $unit->description = $this->description;
-        $unit->note = $this->note;
-        $unit->created_by = Auth::user()->id;
-        $unit->save();
+        $department = new Department();
+        $department->code = Str::upper($this->code);
+        $department->name = $this->name;
+        $department->description = $this->description;
+        $department->note = $this->note;
+        $department->created_by = Auth::user()->id;
+        $department->save();
 
         $this->resetInputFields();
         $this->emit('close-modal-create');
@@ -65,43 +65,43 @@ class UnitList extends BaseLive
     }
 
     public function delete(){
-        $unit = Department::findOrFail($this->deleteId);
-        // $employees = Employee::where('unit',$unit->id)->get();
+        $department = Department::findOrFail($this->deleteId);
+        // $employees = Employee::where('department',$department->id)->get();
         // foreach ($employees as $employee) {
         //     $tmp = User::findorfail($employee->id);
-        //     $tmp->unit = $unit->unit_father;
+        //     $tmp->department = $department->department_father;
         //     $tmp->save();
         // }
-        $unit->delete();
+        $department->delete();
         $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.delete')] );
         
     }
 
     public function edit($id){
         $this->updateMode = true;
-        $unit = Department::findOrFail($id);
-        $this->unit_id = $id;
-        $this->name = $unit->name;
-        $this->code = $unit->code;
-        $this->father_id = $unit->father_id;
-        $this->description = $unit->description;
-        $this->note = $unit->note;
+        $department = Department::findOrFail($id);
+        $this->department_id = $id;
+        $this->name = $department->name;
+        $this->code = $department->code;
+        $this->father_id = $department->father_id;
+        $this->description = $department->description;
+        $this->note = $department->note;
         $this->resetValidation();
     }
 
     public function update() {
         $this->validate([
-            'code' => 'required|unique:departments,code,'. $this->unit_id,
+            'code' => 'required|unique:departments,code,'. $this->department_id,
             'name' => 'required',
         ]);
-        $unit = Department::findorfail($this->unit_id);
-        $unit->code = Str::upper($this->code);
-        $unit->name = $this->name;
-        $unit->father_id = ($this->father_id) ?? '1';
-        $unit->description = $this->description;
-        $unit->note = $this->note;
-        $unit->updated_by = Auth::user()->id;
-        $unit->save();
+        $department = Department::findorfail($this->department_id);
+        $department->code = Str::upper($this->code);
+        $department->name = $this->name;
+        $department->father_id = ($this->father_id) ?? '1';
+        $department->description = $this->description;
+        $department->note = $this->note;
+        $department->updated_by = Auth::user()->id;
+        $department->save();
 
         $this->resetInputFields();
         $this->emit('close-modal-edit');

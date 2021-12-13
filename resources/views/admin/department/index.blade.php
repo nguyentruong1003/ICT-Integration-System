@@ -1,13 +1,13 @@
 @extends('layouts.master')
 @section('title')
-    <title>{{__('data_field_name.unit.list')}}</title>
+    <title>{{__('data_field_name.department.list')}}</title>
 @endsection
 @section('content')
     <div class="body-content p-2">
         <div class="p-2 pb-3 d-flex align-items-center justify-content-between">
             <div class="">
                 <h4 class="m-0">
-                    {{__('data_field_name.unit.list')}}
+                    {{__('data_field_name.department.list')}}
                 </h4>
             </div>
             <div class="paginate">
@@ -17,11 +17,11 @@
                     </div>
                     <span class="px-2">/</span>
                     <div class="">
-                        <div class="disable">{{__('data_field_name.unit.management')}}</div>
+                        <div class="disable">{{__('data_field_name.department.management')}}</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   @livewire('admin.unit.unit-list')
+   @livewire('admin.department.department-list')
 @endsection

@@ -70,9 +70,9 @@
           </li> --}}
 
           <li class="nav-item">
-            <a href="{{ route('admin.unit.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.unit.index') active @endif">
+            <a href="{{ route('admin.department.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.department.index') active @endif">
               <i class="fas fa-box nav-icon"></i>
-              <p>{{__('data_field_name.unit.management')}}</p>
+              <p>{{__('data_field_name.department.management')}}</p>
             </a>
           </li>
 

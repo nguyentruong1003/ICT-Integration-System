@@ -28,13 +28,14 @@
                 <thead class="">
                     <tr>
                         <th>{{__('data_field_name.common.order_number')}}</th>
-                        <th>{{__('data_field_name.unit.code')}}</th>
-                        <th>{{__('data_field_name.unit.name')}}</th>
-                        <th>{{__('data_field_name.unit.unit_father')}}</th>
-                        <th>{{__('data_field_name.unit.description')}}</th>
-                        <th>{{__('data_field_name.unit.note')}}</th>
-                        <th>{{__('data_field_name.common.creator')}}</th>
-                        <th>{{__('data_field_name.common.create_date')}}</th>
+                        <th>{{__('data_field_name.department.code')}}</th>
+                        <th>{{__('data_field_name.department.name')}}</th>
+                        <th>Trưởng phòng</th>
+                        <th>{{__('data_field_name.department.description')}}</th>
+                        <th>{{__('data_field_name.department.note')}}</th>
+                        <th>Trạng thái</th>
+                        {{-- <th>{{__('data_field_name.common.creator')}}</th>
+                        <th>{{__('data_field_name.common.create_date')}}</th> --}}
                         <th>{{__('data_field_name.common.action')}}</th>
                     </tr>
                 </thead>
@@ -44,11 +45,12 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{!! boldTextSearch($row->code, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->name, $searchTerm) !!}</td>
-                            <td>{{ ($row->father_unit->name) ?? '' }}</td>
+                            <td>{!! boldTextSearch($row->leader_id, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->description, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->note, $searchTerm) !!}</td>
-                            <td>{{ ($row->creator->name) ?? '' }}</td>
-                            <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
+                            <td>{{ $row->status }}</td>
+                            {{-- <td>{{ ($row->creator->name) ?? '' }}</td>
+                            <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td> --}}
                             <td>
                                 <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
                                     class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">
@@ -68,8 +70,8 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
-    @include('livewire.admin.unit._modalCreate')
-    @include('livewire.admin.unit._modalEdit')
+    @include('livewire.admin.department._modalCreate')
+    @include('livewire.admin.department._modalEdit')
 </div>
 
 <script>
