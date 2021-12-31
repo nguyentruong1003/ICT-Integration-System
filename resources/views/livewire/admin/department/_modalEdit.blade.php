@@ -24,12 +24,29 @@
                             <label >{{__('data_field_name.department.description')}}</label>
                             <input type="text" class="form-control"  wire:model.lazy="description" placeholder="{{__('data_field_name.department.description')}}">
                         </div>
-                        <div class="form-group">
-                            <label >{{__('data_field_name.department.department_father')}}</label>
-                            <select name="father_id" class="form-control"  wire:model.lazy="father_id" placeholder="{{__('data_field_name.department.department_father')}}">
+                        {{-- <div class="form-group">
+                            <label >{{__('data_field_name.department.department_leader')}}</label>
+                            <select name="leader_id" class="form-control"  wire:model.lazy="leader_id" placeholder="{{__('data_field_name.department.department_leader')}}">
                                 <option value="">{{__('common.select.default')}}</option>
                                 @foreach ($department_list as $value)
                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                @endforeach
+                            </select>
+                        </div> --}}
+                        <div class="form-group">
+                            <label >Trưởng phòng</label>
+                            <select name="leader_id" class="form-control"  wire:model.lazy="leader_id" placeholder="{{__('data_field_name.department.department_leader')}}">
+                                <option value="">{{__('common.select.default')}}</option>
+                                @foreach ($leaders as $value)
+                                    <option value="{{ $value->id }}" @if($value->id == $leader_id) selected @endif>{{ $value->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label >{{__('data_field_name.department.status')}}</label>
+                            <select class="form-control"  wire:model.lazy="status" placeholder="{{__('data_field_name.department.status')}}">
+                                @foreach (\App\Enums\ECommon::getListData()['3'] as $id => $value)
+                                    <option value="{{ $id }}">{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>

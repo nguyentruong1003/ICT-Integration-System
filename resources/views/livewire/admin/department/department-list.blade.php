@@ -34,8 +34,6 @@
                         <th>{{__('data_field_name.department.description')}}</th>
                         <th>{{__('data_field_name.department.note')}}</th>
                         <th>Trạng thái</th>
-                        {{-- <th>{{__('data_field_name.common.creator')}}</th>
-                        <th>{{__('data_field_name.common.create_date')}}</th> --}}
                         <th>{{__('data_field_name.common.action')}}</th>
                     </tr>
                 </thead>
@@ -45,12 +43,10 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{!! boldTextSearch($row->code, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->name, $searchTerm) !!}</td>
-                            <td>{!! boldTextSearch($row->leader_id, $searchTerm) !!}</td>
+                            <td>{!! boldTextSearch($row->getLeaderName->name ?? '', $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->description, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->note, $searchTerm) !!}</td>
-                            <td>{{ $row->status }}</td>
-                            {{-- <td>{{ ($row->creator->name) ?? '' }}</td>
-                            <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td> --}}
+                            <td>{{ \App\Enums\ECommon::codeToValue(3, $row->status) }}</td>
                             <td>
                                 <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
                                     class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">

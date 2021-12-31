@@ -4,17 +4,18 @@ namespace App\Http\Livewire\Admin\Department;
 
 use App\Http\Livewire\Base\BaseLive;
 use App\Models\Department;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class DepartmentList extends BaseLive
 {
     public $searchName;
-    public $department_id, $name, $code, $description, $father_id, $created_by, $note;
+    public $department_id, $name, $code, $description, $leader_id, $created_by, $note, $status;
     
     public function render()
     {
-        $query = Department::query()->where('id', '!=', '1');
+        $query = Department::query();
 
         if ($this->searchTerm) {
             $query->where('code', 'like', '%' . trim($this->searchTerm) . '%')
@@ -25,13 +26,13 @@ class DepartmentList extends BaseLive
 
         $data = $query->orderBy('name','asc')->paginate($this->perPage);
         $current_user = Auth::user();
-        $department_list = Department::select('name', 'id')->get();
-        // dd($current_user);
+        $leaders = Employee::where('position_id', '!=' , '1')
+                        ->orwhere('position_id', null)->get();
 
         return view('livewire.admin.department.department-list', [
             'data' => $data,
             'current_user' => $current_user,
-            'department_list' => $department_list,
+            'leaders' => $leaders,
         ]);
     }
 
@@ -45,7 +46,10 @@ class DepartmentList extends BaseLive
         $department->name = $this->name;
         $department->description = $this->description;
         $department->note = $this->note;
+        $department->leader_id = $this->leader_id;
         $department->created_by = Auth::user()->id;
+        $department->status = $this->status;
+        $this->update_leader();
         $department->save();
 
         $this->resetInputFields();
@@ -58,9 +62,10 @@ class DepartmentList extends BaseLive
             'name',
             'code',
             'description',
-            'father_id',
+            'leader_id',
             'note',
             'created_by',
+            'status',
         ]);
     }
 
@@ -69,7 +74,7 @@ class DepartmentList extends BaseLive
         // $employees = Employee::where('department',$department->id)->get();
         // foreach ($employees as $employee) {
         //     $tmp = User::findorfail($employee->id);
-        //     $tmp->department = $department->department_father;
+        //     $tmp->department = $department->department_leader;
         //     $tmp->save();
         // }
         $department->delete();
@@ -83,9 +88,10 @@ class DepartmentList extends BaseLive
         $this->department_id = $id;
         $this->name = $department->name;
         $this->code = $department->code;
-        $this->father_id = $department->father_id;
+        $this->leader_id = $department->leader_id;
         $this->description = $department->description;
         $this->note = $department->note;
+        $this->status = $department->status;
         $this->resetValidation();
     }
 
@@ -97,14 +103,23 @@ class DepartmentList extends BaseLive
         $department = Department::findorfail($this->department_id);
         $department->code = Str::upper($this->code);
         $department->name = $this->name;
-        $department->father_id = ($this->father_id) ?? '1';
+        $department->leader_id = $this->leader_id;
         $department->description = $this->description;
         $department->note = $this->note;
+        $department->status = $this->status;
         $department->updated_by = Auth::user()->id;
+        $this->update_leader();
         $department->save();
 
         $this->resetInputFields();
         $this->emit('close-modal-edit');
         $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.update')] );
+    }
+
+    public function update_leader() {
+        $emp = Employee::findorfail($this->leader_id);
+        $emp->department_id = $this->department_id;
+        $emp->position_id = 1;
+        $emp->save();
     }
 }

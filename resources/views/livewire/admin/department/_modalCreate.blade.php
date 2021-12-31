@@ -25,10 +25,10 @@
                             <input type="text" class="form-control"  wire:model.lazy="description" placeholder="{{__('data_field_name.department.description')}}">
                         </div>
                         <div class="form-group">
-                            <label >{{__('data_field_name.department.department_father')}}</label>
+                            <label >Trưởng phòng</label>
                             <select name="father_id" class="form-control"  wire:model.lazy="father_id" placeholder="{{__('data_field_name.department.department_father')}}">
                                 <option value="">{{__('common.select.default')}}</option>
-                                @foreach ($department_list as $value)
+                                @foreach ($leaders as $value)
                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                                 @endforeach
                             </select>

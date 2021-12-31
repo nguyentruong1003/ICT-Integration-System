@@ -20,6 +20,12 @@ class ECommon {
                 2 => 'Đã kết hôn',
                 3 => 'Đã ly hôn',
             ],
+
+            // Trạng thái
+            3 => [
+                1 => 'Hoạt động',
+                2 => 'Không hoạt động',
+            ],
         ];
     }
 

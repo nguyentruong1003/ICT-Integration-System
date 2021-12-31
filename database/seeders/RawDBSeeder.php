@@ -28,11 +28,11 @@ class RawDBSeeder extends Seeder
                                     ->where('name', 'not like', 'admin.system' . '%' . '.index')->get();
         $role_hrm->syncPermissions($permission_hrm);
 
-        $permission_staff = Permission::where('name', 'not like', 'admin.system' . '%' . '.index')
-                                    ->orwhere('name', 'not like', 'admin.system' . '%' . '.download')
-                                    ->where('name', 'like', 'admin.' . '%' . '.index')->get();
+        $permission_staff = Permission::where('name', 'like', 'admin.' . '%' . '.index')
+                                    ->where('name', 'not like', 'admin.system' . '%')
+                                    ->orwhere('name', 'like', 'admin.' . '%' . '.download')
+                                    ->where('name', 'not like', 'admin.system' . '%')->get();
         $role_staff->syncPermissions($permission_staff);
-
         // unit
     }
 }

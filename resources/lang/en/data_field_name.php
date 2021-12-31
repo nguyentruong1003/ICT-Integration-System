@@ -104,6 +104,6 @@ return [
     ],
     'system' => [
         'admin_right' => 'Administration',
-        'hrm' => 'HRM', // Human resource management
+        'hrm' => 'Human resource management', // Human resource management
     ],
 ];

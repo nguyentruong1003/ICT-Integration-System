@@ -15,4 +15,8 @@ class Department extends Model implements Auditable
     public function creator() {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function getLeaderName() {
+        return $this->belongsTo(Employee::class, 'leader_id');
+    }
 }
