@@ -48,8 +48,8 @@ class DepartmentList extends BaseLive
         $department->note = $this->note;
         $department->leader_id = $this->leader_id;
         $department->created_by = Auth::user()->id;
-        $department->status = $this->status;
-        $this->update_leader();
+        $department->status = $this->status ?? 1;
+        if ($this->leader_id) $this->update_leader();
         $department->save();
 
         $this->resetInputFields();
