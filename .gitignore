@@ -1,10 +1,7 @@
 /node_modules
 /public/hot
+/storage/framework/views/
 /public/storage
-/storage/
-/storage/*.key
-/storage/
-/storage/
 /config/oracle.php
 /storage/framework/views/
 /vendor
