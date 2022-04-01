@@ -96,11 +96,3 @@
     </div>
     @include('livewire.common._modalDelete')
 </div>
-
-<script>
-    $('document').ready(function() {
-        setTimeout(function() {
-            $('.session-area').fadeOut(2500);
-        }, 2500);
-    })
-</script>

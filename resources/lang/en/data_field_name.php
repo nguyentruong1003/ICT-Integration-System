@@ -13,6 +13,10 @@ return [
         'create_date' => 'Create date',
         'view_detail' => 'View detail',
     ],
+    'home' => [
+        'dashboard' => 'Dashboard',
+        'message' => 'You are logged in!',
+    ],
     'user' => [
         'management' => 'User Management',
         'list' => 'User List',

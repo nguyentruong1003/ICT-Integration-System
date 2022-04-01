@@ -13,6 +13,10 @@ return [
         'create_date' => 'Ngày tạo',
         'view_detail' => 'Xem chi tiết',
     ],
+    'home' => [
+        'dashboard' => 'Bảng điều khiển',
+        'message' => 'Bạn đã đăng nhập',
+    ],
     'user' => [
         'management' => 'Quản lý người dùng',
         'list' => 'Danh sách người dùng',
