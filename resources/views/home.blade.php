@@ -18,7 +18,7 @@
                         </div>
                     @endif
 
-                    {{ __('data_field_name.home.message') }}!
+                    {{ __('data_field_name.home.message', ['name' => auth()->user()->name]) }}!
                 </div>
             </div>
         </div>

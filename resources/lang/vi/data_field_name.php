@@ -15,7 +15,7 @@ return [
     ],
     'home' => [
         'dashboard' => 'Bảng điều khiển',
-        'message' => 'Bạn đã đăng nhập',
+        'message' => 'Chào mừng trở lại, :name',
     ],
     'user' => [
         'management' => 'Quản lý người dùng',

@@ -1,7 +1,8 @@
 <?php
 return [
     'button' => [
-        'create' => 'Create new',
+        'create' => 'Create',
+        'create_upper' => 'CREATE',
         'add' => 'Add new',
         'add2' => 'Add',
         'delete' => 'Delete',

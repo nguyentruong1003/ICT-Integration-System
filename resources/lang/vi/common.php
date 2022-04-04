@@ -3,6 +3,7 @@
 return [
     'button' => [
         'create' => 'Tạo mới',
+        'create_upper' => 'TẠO MỚI',
         'add' => 'Thêm mới',
         'add2' => 'Thêm',
         'delete' => 'Xóa',

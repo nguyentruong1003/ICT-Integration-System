@@ -14,6 +14,7 @@ abstract class BaseLive extends Component
 	public $deleteId;
     public $reset = false;
     public $searchTerm;
+    public $mode = 'create';
 
     public $perPage = 25;
     protected  static function paginationView()

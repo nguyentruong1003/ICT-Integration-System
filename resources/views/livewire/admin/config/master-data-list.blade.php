@@ -19,7 +19,7 @@
                     <div class="col-md-6">
                         <div class="form-group search-expertise">
                             <div class="search-expertise inline-block">
-                                <input type="text" placeholder="{{__('data_field_name.common.search_by_name')}}" name="search"
+                                <input type="text" placeholder="{{__('data_field_name.common.search')}}" name="search"
                                     class="form-control" id='input_vn_name' autocomplete="off" wire:model.debounce.1000ms="searchTerm">
                             </div>
                         </div>
@@ -37,15 +37,9 @@
                 </div>
                 
                 <div>
-                    @if($checkCreatePermission)
-                    <div class="input-group">
-                        <a href="{{route('admin.employee.create')}}" class="btn btn-viewmore-news mr0">
-                            <div class="btn-sm btn-primary">
-                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
-                            </div>
-                        </a>
-                    </div>
-                    @endif
+                    {{-- @if($checkCreatePermission) --}}
+                    @include('livewire.common.buttons._create')
+                    {{-- @endif --}}
                 </div>
             </div>
             
@@ -53,10 +47,10 @@
                 <thead class="">
                     <tr>
                         <th>{{__('data_field_name.common.order_number')}}</th>
-                        <th>Type</th>
-                        <th>ID</th>
-                        <th>Key</th>
-                        <th>Value</th>
+                        <th>Thể loại</th>
+                        <th>Từ khóa</th>
+                        <th>Giá trị</th>
+                        <th>Thứ tự ưu tiên</th>
                         {{-- @if($checkEditPermission || $checkDestroyPermission) --}}
                         <th>{{__('data_field_name.common.action')}}</th>
                         {{-- @endif --}}
@@ -67,17 +61,14 @@
                         <tr>
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ \App\Enums\EMasterData::typeToName($row->type) }}</td>
-                            <td>{{ $row->order }}</td>
                             <td>{!! boldTextSearch($row->key, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->value, $searchTerm) !!}</td>
+                            <td>{{ $row->order }}</td>
                             {{-- @if($checkEditPermission || $checkDestroyPermission) --}}
                             <td>
-                                {{-- @if($checkEditPermission)
-                                <a href="{{ route('admin.employee.edit', ['id' => $row->id]) }}"
-                                    class="btn border-0 bg-transparent">
-                                    <img src="/images/pent2.svg" alt="Edit">
-                                </a>
-                                @endif --}}
+                                {{-- @if($checkEditPermission) --}}
+                                @include('livewire.common.buttons._edit')
+                                {{-- @endif --}}
                                 {{-- @if($checkDestroyPermission) --}}
                                     @include('livewire.common.buttons._delete')
                                 {{-- @endif --}}
@@ -95,4 +86,79 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
+    <div wire:ignore.self class="modal fade" id="modalCreateEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{$mode=='create'?'Thêm mới':($mode=='edit'?'Chỉnh sửa':'Chi tiết')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" wire:click="resetInputFields()" id="closeModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Thể loại <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <select wire:model.lazy="type" class="form-control" @if($mode == 'show') disabled @endif>
+                                    <option value="">
+                                        --Chọn thể loại--
+                                    </option>
+                                    @foreach (\App\Enums\EMasterData::getListData() as $id => $value)
+                                        <option value="{{ $id }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                                @error("type")
+                                    @include("layouts.partials.text._error")
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                             <div class="form-group">
+                                <label>Từ khóa <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <input @if($mode == 'show') disabled @endif type="text" class="form-control" wire:model.lazy="key">
+                                @error("key")
+                                    @include("layouts.partials.text._error")
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Giá trị <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <input @if($mode == 'show') disabled @endif type="text" class="form-control" wire:model.lazy="value">
+                                @error("value")
+                                    @include("layouts.partials.text._error")
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                             <div class="form-group">
+                                <label>Thứ tự ưu tiên <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <input @if($mode == 'show') disabled @endif type="text" class="form-control" wire:model.lazy="order">
+                                @error("order")
+                                    @include("layouts.partials.text._error")
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>URL</label>
+                        <input type="text" @if($mode == 'show') disabled @endif class="form-control" wire:model.lazy="url">
+                    </div>
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <input type="text" @if($mode == 'show') disabled @endif class="form-control" wire:model.lazy="note">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" wire:click='saveData'>Lưu thông tin</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

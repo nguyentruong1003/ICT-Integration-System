@@ -9,7 +9,6 @@ use Livewire\Component;
 class RoleList extends BaseLive
 {
     public $searchName;
-    public $checkEdit = true;
 
     public function render() {
         $query=Role::query();

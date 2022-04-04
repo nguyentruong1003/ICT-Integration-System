@@ -54,7 +54,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.config.master.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.config.master.index') active @endif">
+                <a href="{{ route('admin.config.master-data.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.config.master-data.index') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Master Data</p>
                 </a>

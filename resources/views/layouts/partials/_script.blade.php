@@ -94,3 +94,14 @@
       }, 2500);
   })
 </script>
+
+<script>
+  $("document").ready(() => {
+      window.livewire.on('closeModalCreateEdit', () => {
+          $('#modalCreateEdit').modal('hide');
+      });
+      $('#modalCreateEdit').on('hidden.bs.modal', function(){
+          $('#closeModal').click();
+      })
+  });
+</script>

@@ -15,7 +15,7 @@ return [
     ],
     'home' => [
         'dashboard' => 'Dashboard',
-        'message' => 'You are logged in!',
+        'message' => 'Welcome back, :name',
     ],
     'user' => [
         'management' => 'User Management',

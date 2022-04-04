@@ -15,7 +15,6 @@ class UserList extends BaseLive
     public $email;
     public $password;
     public $confirm_password;
-    public $checkEdit = true;
 
     public function render() {
         $query=User::query();

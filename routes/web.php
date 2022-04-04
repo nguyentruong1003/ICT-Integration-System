@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group([
         'prefix' => 'config',
     ], function () {
-        Route::get('/master', 'App\Http\Controllers\Admin\Config\MasterController@index')->name('admin.config.master.index');
+        Route::get('/master-data', 'App\Http\Controllers\Admin\Config\MasterDataController@index')->name('admin.config.master-data.index');
     });
 
     Route::group([
