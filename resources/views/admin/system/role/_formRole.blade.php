@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <select name="status" class="form-control form-control-sm">
                         <option value="1">{{__('data_field_name.role.active')}}</option>
                         <option value="2">{{__('data_field_name.role.inactive')}}</option>
@@ -45,14 +45,14 @@
                         <tr class="border-radius">
                             <th rowspan="2" scope="col" class="border-radius-left">{{__('data_field_name.role.function')}}</th>
                             <th scope="col" class="text-center" rowspan="2">{{__('data_field_name.role.function_code')}}</th>
-                            {{-- <th scope="col" class="text-center"><img src="/images/eye.svg" alt="eye"/></th>
+                            <th scope="col" class="text-center"><img src="/images/eye.svg" alt="eye"/></th>
                             <th scope="col" class="text-center"><img src="/images/pent2.svg" alt="pent"/> </th>
                             <th scope="col" class="text-center"><img src="/images/trash.svg" alt="trash"></th>
                             <th scope="col" class="text-center"><img src="/images/add.svg" alt="add"></th>
-                            <th scope="col" class="text-center"><img src="/images/Download.svg" alt="download"/></th>
-                            <th scope="col" class="text-center"><img src="/images/eye.svg" alt="eye"/></th>
-                            <th scope="col" class="text-center"><img src="/images/eye.svg" alt="eye"/></th>
-                            <th scope="col" class="border-radius-right text-center"></th> --}}
+                            <th scope="col" class="text-center"><img src="/images/Export.svg" alt="download"/></th>
+                            {{-- <th scope="col" class="text-center"><img src="/images/eye.svg" alt="eye"/></th>
+                            <th scope="col" class="text-center"><img src="/images/eye.svg" alt="eye"/></th> --}}
+                            <th scope="col" class="border-radius-right text-center"></th>
                         </tr>
                         <tr class="border-radius">
                             <th scope="col" class="text-center">{{__('data_field_name.role.permission.view')}}</th>
