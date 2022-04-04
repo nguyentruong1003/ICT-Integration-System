@@ -1,13 +1,13 @@
 @extends('layouts.master')
 @section('title')
-    <title>Danh sách cấu hình</title>
+    <title>{{__('data_field_name.master-data.list')}}</title>
 @endsection
 @section('content')
     <div class="body-content p-2">
         <div class="p-2 pb-3 d-flex align-items-center justify-content-between">
             <div class="">
                 <h4 class="m-0">
-                    Danh sách cấu hình
+                    {{__('data_field_name.master-data.list')}}
                 </h4>
             </div>
             <div class="paginate">
@@ -17,7 +17,7 @@
                     </div>
                     <span class="px-2">/</span>
                     <div class="">
-                        <div class="disable">MasterData</div>
+                        <div class="disable">{{__('data_field_name.master-data.management')}}</div>
                     </div>
                 </div>
             </div>

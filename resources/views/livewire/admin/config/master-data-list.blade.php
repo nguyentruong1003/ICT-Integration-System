@@ -27,7 +27,7 @@
                     <div wire:ignore class="col-md-6">
                         <select wire:model.debounce.1000ms="searchType" class="form-control">
                             <option value="">
-                                --Chọn thể loại--
+                                {{__('common.select.default')}}
                             </option>
                             @foreach (\App\Enums\EMasterData::getListData() as $id => $value)
                                 <option value="{{ $id }}">{{ $value }}</option>
@@ -47,10 +47,10 @@
                 <thead class="">
                     <tr>
                         <th>{{__('data_field_name.common.order_number')}}</th>
-                        <th>Thể loại</th>
-                        <th>Từ khóa</th>
-                        <th>Giá trị</th>
-                        <th>Thứ tự ưu tiên</th>
+                        <th>{{__('data_field_name.master-data.type')}}</th>
+                        <th>{{__('data_field_name.master-data.key')}}</th>
+                        <th>{{__('data_field_name.master-data.value')}}</th>
+                        <th>{{__('data_field_name.master-data.order')}}</th>
                         {{-- @if($checkEditPermission || $checkDestroyPermission) --}}
                         <th>{{__('data_field_name.common.action')}}</th>
                         {{-- @endif --}}
@@ -90,7 +90,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{$mode=='create'?'Thêm mới':($mode=='edit'?'Chỉnh sửa':'Chi tiết')}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{$mode=='create'?__('data_field_name.common.create'):($mode=='update'?__('data_field_name.common.update'):__('data_field_name.common.show'))}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" wire:click="resetInputFields()" id="closeModal">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -99,10 +99,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Thể loại <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <label>{{__('data_field_name.master-data.type')}} <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
                                 <select wire:model.lazy="type" class="form-control" @if($mode == 'show') disabled @endif>
                                     <option value="">
-                                        --Chọn thể loại--
+                                        {{__('common.select.default')}}
                                     </option>
                                     @foreach (\App\Enums\EMasterData::getListData() as $id => $value)
                                         <option value="{{ $id }}">{{ $value }}</option>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="col-md-6">
                              <div class="form-group">
-                                <label>Từ khóa <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <label>{{__('data_field_name.master-data.key')}} <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
                                 <input @if($mode == 'show') disabled @endif type="text" class="form-control" wire:model.lazy="key">
                                 @error("key")
                                     @include("layouts.partials.text._error")
@@ -126,7 +126,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Giá trị <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <label>{{__('data_field_name.master-data.value')}} <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
                                 <input @if($mode == 'show') disabled @endif type="text" class="form-control" wire:model.lazy="value">
                                 @error("value")
                                     @include("layouts.partials.text._error")
@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-md-6">
                              <div class="form-group">
-                                <label>Thứ tự ưu tiên <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
+                                <label>{{__('data_field_name.master-data.order')}} <span @if ($mode == 'show') hidden @endif style="color:red">*</span></label>
                                 <input @if($mode == 'show') disabled @endif type="text" class="form-control" wire:model.lazy="order">
                                 @error("order")
                                     @include("layouts.partials.text._error")
@@ -145,18 +145,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label>URL</label>
+                        <label>{{__('data_field_name.master-data.url')}}</label>
                         <input type="text" @if($mode == 'show') disabled @endif class="form-control" wire:model.lazy="url">
                     </div>
                     <div class="form-group">
-                        <label>Ghi chú</label>
+                        <label>{{__('data_field_name.master-data.note')}}</label>
                         <input type="text" @if($mode == 'show') disabled @endif class="form-control" wire:model.lazy="note">
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" wire:click='saveData'>Lưu thông tin</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">Hủy</button>
+                    <button type="button" class="btn btn-primary" wire:click='saveData'>{{__('common.button.save')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">{{__('common.button.cancel')}}</button>
                 </div>
             </div>
         </div>

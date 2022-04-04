@@ -12,6 +12,9 @@ return [
         'last_updater' => 'Last updated by',
         'create_date' => 'Create date',
         'view_detail' => 'View detail',
+        'create' => 'Add new',
+        'update' => 'Update record',
+        'show' => 'Record\'s detail',
     ],
     'home' => [
         'dashboard' => 'Dashboard',
@@ -109,5 +112,22 @@ return [
     'system' => [
         'admin_right' => 'Administration',
         'hrm' => 'Human resource management', // Human resource management
+    ],
+    'master-data' => [
+        'management' => 'Master Data',
+        'list' => 'Master Data',
+        'key' => 'Key',
+        'type' => 'Type',
+        'value' => 'Value',
+        'order' => 'Order Number',
+        'url' => 'URL',
+        'note' => 'Note',
+        'type_list' => [
+            'position' => 'Position',
+            'ethnic' => 'Ethnic',
+            'religion' => 'Religion',
+            'nation' => 'Nation',
+            'work_place' => 'Work Place',
+        ],
     ],
 ];

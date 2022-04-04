@@ -12,6 +12,9 @@ return [
         'last_updater' => 'Người cập nhật cuối cùng',
         'create_date' => 'Ngày tạo',
         'view_detail' => 'Xem chi tiết',
+        'create' => 'Thêm mới',
+        'update' => 'Cập nhật bản ghi',
+        'show' => 'Chi tiết bản ghi',
     ],
     'home' => [
         'dashboard' => 'Bảng điều khiển',
@@ -110,5 +113,22 @@ return [
     'system' => [
         'admin_right' => 'Quản trị điều hành',
         'hrm' => 'Quản lý nhân sự',
+    ],
+    'master-data' => [
+        'management' => 'Quản lý cấu hình',
+        'list' => 'Danh sách cấu hình',
+        'key' => 'Từ khóa',
+        'type' => 'Thể loại',
+        'value' => 'Giá trị',
+        'order' => 'Thứ tự ưu tiên',
+        'url' => 'Đường dẫn',
+        'note' => 'Ghi chú',
+        'type_list' => [
+            'position' => 'Chức danh',
+            'ethnic' => 'Dân tộc',
+            'religion' => 'Tôn giáo',
+            'nation' => 'Quốc tịch',
+            'work_place' => 'Địa chỉ làm việc',
+        ],
     ],
 ];

@@ -35,7 +35,7 @@ class MasterDataList extends BaseLive
     public function edit($id) {
         $this->resetInputFields();
         $this->editId = $id;
-        $this->mode = 'edit';
+        $this->mode = 'update';
         $item = MasterData::findorfail($id);
         $this->key = $item->key;
         $this->type = $item->type;

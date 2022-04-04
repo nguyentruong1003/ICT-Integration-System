@@ -12,11 +12,11 @@ class EMasterData {
     public static function getListData()
     {
         return [
-            1 => 'Chức danh',
-            2 => 'Dân tộc',
-            3 => 'Tôn giáo',
-            4 => 'Quốc tịch',
-            5 => 'Địa chỉ làm việc',
+            1 => __('data_field_name.master-data.type_list.position'),
+            2 => __('data_field_name.master-data.type_list.ethnic'),
+            3 => __('data_field_name.master-data.type_list.religion'),
+            4 => __('data_field_name.master-data.type_list.nation'),
+            5 => __('data_field_name.master-data.type_list.work_place'),
         ];
     }
 
