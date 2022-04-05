@@ -39,7 +39,7 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{!! boldTextSearch($row->code, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->name, $searchTerm) !!}</td>
-                            <td>{!! boldTextSearch($row->getLeaderName->name ?? '', $searchTerm) !!}</td>
+                            <td>{!! boldTextSearch($row->leader->name ?? '', $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->description, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->note, $searchTerm) !!}</td>
                             <td>{{ \App\Enums\ECommon::codeToValue(3, $row->status) }}</td>
@@ -111,15 +111,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="form-group">
-                        <label >{{__('data_field_name.department.department_leader')}}</label>
-                        <select name="leader_id" class="form-control"  wire:model.lazy="leader_id" placeholder="{{__('data_field_name.department.department_leader')}}">
-                            <option value="">{{__('common.select.default')}}</option>
-                            @foreach ($department_list as $value)
-                                <option value="{{ $value->id }}">{{ $value->name }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
                     <div class="form-group">
                         <label >{{__('data_field_name.department.description')}}</label>
                         <input @if($mode == 'show') disabled @endif type="text" class="form-control"  wire:model.lazy="description" placeholder="{{__('data_field_name.department.description')}}">
@@ -127,10 +118,6 @@
                     <div class="form-group">
                         <label >{{__('data_field_name.department.note')}}</label>
                         <input @if($mode == 'show') disabled @endif type="text" class="form-control"  wire:model.lazy="note" placeholder="{{__('data_field_name.department.note')}}">
-                    </div>
-                    <div class="form-group">
-                        <label >{{__('data_field_name.common.updater')}}</label>
-                        <input type="text" class="form-control" disabled value="{{ $current_user->name }}" placeholder="{{__('data_field_name.common.updater')}}">
                     </div>
                 </div>
 

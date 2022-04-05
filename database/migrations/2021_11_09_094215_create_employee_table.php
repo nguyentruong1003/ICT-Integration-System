@@ -21,13 +21,10 @@ class CreateEmployeeTable extends Migration
             $table->string('phone')->comment("SĐT");
             $table->date('birthday')->comment("Ngày sinh");
             $table->tinyInteger('sex')->comment("Giới tính: 1 = Nam, 2 = Nữ");
-            $table->integer('department_id')->nullable()->comment('Đơn vị');
             $table->unsignedBigInteger('position_id')->nullable()->comment("Chức vụ");
             $table->unsignedBigInteger('working_address_id')->nullable()->comment('Địa điểm làm việc');
             $table->unsignedBigInteger('manager_id')->nullable()->comment('Người quản lý');
             $table->unsignedBigInteger('user_id')->nullable()->comment('Map với user');
-            $table->integer('created_by')->nullable()->comment('Người tạo - Map với user');
-            $table->integer('updated_by')->nullable()->comment('Người cập nhật - Map với user');
             $table->timestamps();
         });
     }

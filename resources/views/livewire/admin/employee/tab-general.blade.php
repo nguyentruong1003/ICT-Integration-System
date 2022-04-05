@@ -76,4 +76,13 @@
         @endif
         <a href="{{ route('admin.employee.index') }}" type="submit" class="btn btn-secondary float-right mr-1">{{__('common.button.back')}}</a>          
     </div>
+    @include('livewire.admin.employee._warningModal')
 </form>
+
+<script>
+    $("document").ready(() => {
+        window.livewire.on('open-warning-modal', () => {
+            $('#warningModal').modal('show');
+        });
+    });
+</script>

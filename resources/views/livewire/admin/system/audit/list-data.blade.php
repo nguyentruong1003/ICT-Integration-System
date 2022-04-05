@@ -71,7 +71,6 @@
                                 <a href="" data-toggle="modal" data-target="{{'#show' . $row['id']}}">
                                     {{__('data_field_name.common.view_detail')}}
                                 </a>
-                                @if (checkRoutePermission('show'))
                                 @include('livewire.admin.system.audit.detail')
                                 @endif
                             </td>

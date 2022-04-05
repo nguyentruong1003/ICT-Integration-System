@@ -12,21 +12,18 @@ class Department extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     protected $table = "departments";
     protected $fillable = [
-        'editId',
         'name',
         'code',
         'description',
-        'leader_id',
         'note',
-        'created_by',
         'status',
     ];
 
-    public function creator() {
-        return $this->belongsTo(User::class, 'created_by');
+    public function member() {
+        return $this->hasMany(Employee::class);
     }
 
-    public function getLeaderName() {
-        return $this->belongsTo(Employee::class, 'leader_id');
+    public function leader() {
+        return $this->hasOne(Employee::class)->where('position_id', '1');
     }
 }

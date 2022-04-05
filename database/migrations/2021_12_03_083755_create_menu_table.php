@@ -19,7 +19,6 @@ class CreateMenuTable extends Migration
             $table->string('code', 255)->unique()->comment('ma chuc nang');
             $table->string('permission_name')->unique()->comment('tuong ung voi ten quyen han base');
             $table->string('note',1000)->nullable()->comment('Mo ta chuc nang');
-            $table->bigInteger('admin_id')->nullable()->comment('Nguoi tao');
             $table->timestamps();
         });
     }

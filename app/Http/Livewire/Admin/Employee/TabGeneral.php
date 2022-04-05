@@ -16,7 +16,7 @@ class TabGeneral extends Component
     }
 
     public $employee;
-    public $fullname, $code, $emp_id, $sex, $birthday, $unit_id, $phone, $email;
+    public $fullname, $code, $editId, $sex, $birthday, $unit_id, $phone, $email;
     public $departments;
     public $positions;
     public $editable = true;
@@ -27,28 +27,6 @@ class TabGeneral extends Component
     //     'set-working-address-id' => 'setWorkingAddressId'
     // ];
 
-    // protected function rules()
-    // {
-    //     return [
-    //         'staff.name' => 'required',
-    //         'staff.code' => 'required|unique:staff,code' . ($this->staff->exists ? ',' . $this->staff->id : ''),
-    //         'staff.department_id' => 'required',
-    //         'staff.position_id' => 'required',
-    //         'staff.phone' => 'required',
-    //         'staff.birthday' => 'required|date',
-    //         'staff.sex' => 'required',
-    //         'staff.email' => 'nullable|email|unique:staff,email' . ($this->staff->exists ? ',' . $this->staff->id : ''),
-    //         'staff.other_contact' => 'nullable',
-    //         'staff.working_address_id' => 'nullable',
-    //         'staff.manager_id' => 'nullable'
-    //     ];
-    // }
-
-    // protected function getValidationAttributes()
-    // {
-    //     return Staff::lang();
-    // }
-
     public function mount($id, $editable)
     {
         $this->departments = Department::all();
@@ -56,7 +34,7 @@ class TabGeneral extends Component
         $this->editable = $editable;
         $employee = Employee::query()->findOrNew($id);
         if ($employee) {
-            $this->emp_id = $id;
+            $this->editId = $id;
             $this->name = $employee->name;
             $this->code = $employee->code;
             $this->birthday = $employee->birthday;
@@ -70,13 +48,20 @@ class TabGeneral extends Component
         }
     }
 
-    public function save()
+    public function save() {
+        if ($this->position_id == 1) {
+            $item = Department::findorfail($this->department_id);
+            if (isset($item->leader)) $this->emit('open-warning-modal');
+        } else {
+            $this->saveData();
+        }
+    }
+
+    public function saveData($check = true)
     {
-        // dd($this);
-        // $this->validate();
-        if ($this->emp_id) {
+        if ($this->editId) {
             $edit = true;
-            $employee = Employee::findorfail($this->emp_id);
+            $employee = Employee::findorfail($this->editId);
         }
         else {
             $employee = new Employee;
@@ -89,9 +74,22 @@ class TabGeneral extends Component
         $employee->phone = $this->phone;
         $employee->email = $this->email;
         $employee->department_id = $this->department_id;
-        $employee->position_id = $this->position_id;
         $employee->working_address_id = $this->working_address_id;
         $employee->manager_id = $this->manager_id;
+        if ($this->position_id != 1) {
+            $employee->position_id = $this->position_id;
+        } else {
+            if ($check) {
+                Employee::query()->where('department_id', $this->department_id)
+                    ->where('position_id', 1)->update([
+                        'position_id' => 2,
+                    ]);
+                $employee->position_id = 1;
+            } else {
+                $employee->position_id = 2;
+            }
+        }
+        
         $employee->save();
         return redirect()->route('admin.employee.index')->with('success', ($edit) ? __('notification.common.success.update') : __('notification.common.success.add'));
     }

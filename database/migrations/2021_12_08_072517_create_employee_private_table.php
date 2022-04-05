@@ -28,8 +28,6 @@ class CreateEmployeePrivateTable extends Migration
             $table->string('identity_card_place')->nullable()->comment('Nơi cấp');
             $table->string('description')->nullable()->comment("Mô tả");
             $table->string('note')->nullable()->comment("Ghi chú");
-            $table->integer('created_by')->nullable()->comment('Người tạo - Map với user');
-            $table->integer('updated_by')->nullable()->comment('Người cập nhật - Map với user');
             $table->timestamps();
         });
     }

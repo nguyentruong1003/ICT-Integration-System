@@ -30,7 +30,6 @@ class MenuSeeder extends Seeder
                         'name' => $url,
                         'code' => $url,
                         'permission_name' => $url,
-                        'admin_id' => Auth::id(),
                     ]);
                 }
 
