@@ -7,5 +7,8 @@ return [
         'audit_list' => 'Audit data'
     ],
     'hrm' => 'Human resource management',
-    'unit_mgr' => 'Unit management',
+    'unit_mgr' => 'Department management',
+    'config' => [
+        'master-data_mgr' => 'Master Data management',
+    ],
 ];

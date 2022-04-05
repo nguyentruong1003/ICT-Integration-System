@@ -61,7 +61,7 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{{ $row->code }}</td>
                             <td>
-                                <a href="{{ route('admin.employee.show', ['id' => $row->id]) }}">
+                                <a @if (!checkRoutePermission('show')) disabled @endif href="{{ route('admin.employee.show', ['id' => $row->id]) }}">
                                     {!! boldTextSearch($row->name, $searchName) !!}
                                 </a>
                             </td>
@@ -70,7 +70,7 @@
                             <td>{{ ($row->department->name) ?? '' }}</td>
                             <td>{{ ($row->position->value) ?? '' }}</td>
                             <td>{{ $row->manager_id }}</td>
-                            @if($checkEditPermission || $checkDestroyPermission)
+                            @if($checkEditPermission || $checkDeletePermission)
                             <td>
                                 @if($checkEditPermission)
                                 <a href="{{ route('admin.employee.edit', ['id' => $row->id]) }}"
@@ -78,9 +78,7 @@
                                     <img src="/images/pent2.svg" alt="Edit">
                                 </a>
                                 @endif
-                                @if($checkDestroyPermission)
-                                    @include('livewire.common.buttons._delete')
-                                @endif
+                                @include('livewire.common.buttons._delete')
                             </td>
                             @endif
                         </tr>

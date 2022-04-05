@@ -10,7 +10,7 @@ class UserList extends BaseLive
 {
 
     public $searchName;
-    public $user_id;
+    public $editId;
     public $name;
     public $email;
     public $password;
@@ -29,76 +29,71 @@ class UserList extends BaseLive
 
     public function resetInputFields() {
         $this->reset([
+            'editId',
             'name',
             'email',
             'password',
             'confirm_password',
         ]);
-    }
-
-    public function store() {
-        $this->validate([
-            
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required',
-            'confirm_password'=> 'required_with:password|same:password',
-        ],[],[
-
-        ]);
-
-        // dd($this);
-        $user = new User;
-        $user->name = $this->name;
-        $user->email = $this->email;
-        $user->password = bcrypt($this->password);
-        $user->save();
-
-        $this->resetInputFields();
-        $this->emit('close-modal-create');
-        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.add')] );
-    }
-
-    public function edit($id){
-        $this->updateMode = true;
-        $user = User::findOrFail($id);
-        $this->user_id = $id;
-        $this->name = $user->name;
-        $this->email = $user->email;
-        // $this->password = $user->password;
-        // $this->confirm_password = '';
         $this->resetValidation();
     }
 
-    public function update(){
-        // dd($this);
+    public function create() {
+        $this->resetInputFields();
+        $this->mode = 'create';
+    }
+
+    public function saveData() {
+        $this->standardData();
         $this->validate([
-            
             'name' => 'required',
-            'email' => 'required|unique:users,email,' .$this->user_id,
+            'email' => 'required|unique:users,email,'. $this->editId,
             'password' => 'required',
             'confirm_password'=> 'required_with:password|same:password',
-        ],[],[
-
         ]);
-
-        $user = User::findorfail($this->user_id);
-        $user->name = $this->name;
-        $user->email = $this->email;
-        $user->password = bcrypt($this->password);
-        $user->save();
+        if($this->mode=='create'){
+            User::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+            ]);
+        }
+        else {
+            User::findorfail($this->editId)->update([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+            ]);
+        }
 
         $this->resetInputFields();
-        $this->emit('close-modal-edit');
-        $this->updateMode = false;
+        if($this->mode=='create'){
+            $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => 'Thêm mới thành công']);
+        }
+        else {
+            $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => 'Chỉnh sửa thành công']);
+        }
+        $this->emit('closeModalCreateEdit');
+    }
 
-        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.update')] );
+    public function edit($id){
+        $this->mode = 'update';
+        $user = User::findOrFail($id);
+        $this->editId = $id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->resetValidation();
     }
 
     public function delete(){
         User::findOrFail($this->deleteId)->delete();
         $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.delete')] );
-        
+    }
+
+    public function standardData(){
+        $this->name = trim($this->name);
+        $this->email = trim($this->email);
+        $this->password = trim($this->password);
     }
 
 }

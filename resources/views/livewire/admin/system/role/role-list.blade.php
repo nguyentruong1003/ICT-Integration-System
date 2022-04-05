@@ -27,6 +27,7 @@
                 </div>
                 
                 <div>
+                    @if ($checkCreatePermission)
                     <div class="input-group">
                         <a href="{{ route('admin.system.role.create') }}" class="btn btn-viewmore-news mr0">
                             <div class="btn-sm btn-primary">
@@ -34,6 +35,7 @@
                             </div>
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
             
@@ -43,7 +45,9 @@
                         <th>{{__('data_field_name.common.order_number')}}</th>
                         <th>{{__('data_field_name.role.name')}}</th>
                         <th>{{__('data_field_name.common.create_date')}}</th>
+                        @if ($checkEditPermission || $checkDeletePermission)
                         <th>{{__('data_field_name.common.action')}}</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -52,14 +56,18 @@
                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td>{!! boldTextSearch($row->name, $searchName) !!}</td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
+                            @if ($checkEditPermission || $checkDeletePermission)
                             <td>
                                 @if ($row->name != 'admin')
+                                @if ($checkEditPermission)
                                 <a href="{{ route('admin.system.role.edit', ['id' => $row->id]) }}" class="btn border-0 bg-transparent">
                                     <img src="/images/pent2.svg" alt="Edit">
                                 </a>
+                                @endif
                                 @include('livewire.common.buttons._delete')
                                 @endif
                             </td>
+                            @endif
                         </tr>
                     @empty
                         <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>

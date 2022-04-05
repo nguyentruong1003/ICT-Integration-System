@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Config;
 use App\Models\MasterData;
 use App\Http\Livewire\Base\BaseLive;
+use Route;
 
 class MasterDataList extends BaseLive
 {

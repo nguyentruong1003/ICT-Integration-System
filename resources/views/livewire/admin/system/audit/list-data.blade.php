@@ -70,7 +70,9 @@
                                 <a href="" data-toggle="modal" data-target="{{'#show' . $row['id']}}">
                                     {{__('data_field_name.common.view_detail')}}
                                 </a>
+                                @if (checkRoutePermission('show'))
                                 @include('livewire.admin.system.audit.detail')
+                                @endif
                             </td>
                             <td class="text-left">{!! boldTextSearch($row['audittable_type'], $searchTerm) !!}</td>
                             {{-- <td class="text-left">{!! boldTextSearch($row['audittable_id'], $searchTerm) !!}</td> --}}
