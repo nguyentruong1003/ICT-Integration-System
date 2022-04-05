@@ -17,7 +17,6 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('permissions')->truncate();
         $prefix = config('common.permission.prefix');
         $urls = [];
         foreach (\Route::getRoutes() as $value) {

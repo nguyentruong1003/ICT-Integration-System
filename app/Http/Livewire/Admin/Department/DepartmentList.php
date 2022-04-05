@@ -25,14 +25,12 @@ class DepartmentList extends BaseLive
         }
 
         $data = $query->orderBy('name','asc')->paginate($this->perPage);
-        $current_user = Auth::user();
         $leaders = Employee::where('position_id', '!=' , '1')
                         ->orwhere('position_id', null)->get();
 
         return view('livewire.admin.department.department-list', [
             'data' => $data,
-            'current_user' => $current_user,
-            'leaders' => $leaders,
+            'leaders' => $leaders
         ]);
     }
 
@@ -42,9 +40,7 @@ class DepartmentList extends BaseLive
             'name',
             'code',
             'description',
-            'leader_id',
             'note',
-            'created_by',
             'status',
         ]);
         $this->resetValidation();
@@ -75,7 +71,6 @@ class DepartmentList extends BaseLive
         $item = Department::findorfail($id);
         $this->name = $item->name;
         $this->code = $item->code;
-        $this->leader_id = $item->leader_id;
         $this->description = $item->description;
         $this->note = $item->note;
         $this->status = $item->status;
@@ -100,24 +95,19 @@ class DepartmentList extends BaseLive
                 'code' => Str::upper($this->code),
                 'name' => $this->name,
                 'description' => $this->description,
-                'leader_id' => $this->leader_id,
                 'status' => $this->status ?? 1,
                 'note' => $this->note,
-                'created_by' => Auth::user()->id,
             ]);
         }
         else {
             Department::findorfail($this->editId)->update([
                 'code' => Str::upper($this->code),
                 'name' => $this->name,
-                'leader_id' => $this->leader_id,
                 'description' => $this->description,
                 'status' => $this->status,
                 'note' => $this->note,
-                'updated_by' => Auth::user()->id,
             ]);
         }
-        if ($this->leader_id) $this->update_leader();
         $this->resetInputFields();
         if($this->mode=='create'){
             $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => 'Thêm mới thành công']);
@@ -128,10 +118,10 @@ class DepartmentList extends BaseLive
         $this->emit('closeModalCreateEdit');
     }
 
-    public function update_leader() {
-        $emp = Employee::findorfail($this->leader_id);
-        $emp->department_id = $this->department_id;
-        $emp->position_id = 1;
-        $emp->save();
-    }
+    // public function updateLeader() {
+    //     $emp = Employee::findorfail($this->leader_id);
+    //     $emp->department_id = $this->department_id;
+    //     $emp->position_id = 1;
+    //     $emp->save();
+    // }
 }

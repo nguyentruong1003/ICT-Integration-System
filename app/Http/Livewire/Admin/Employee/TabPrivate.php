@@ -26,43 +26,6 @@ class TabPrivate extends Component
     public $provinces;
     public $editable = true;
 
-    // protected $listeners = [
-    //     'set-start-working-date' =>'setStartWorkingDate',
-    //     'set-end-working-date' =>'setEndWorkingDate',
-    //     'set-identity-card-date' =>'setIdentityCardDate',
-    //     'set-passport-date' =>'setPassportDate'
-    // ];
-
-    // protected function rules()
-    // {
-    //     return [
-    //         'profile.start_working_date' => 'required',
-    //         'profile.end_working_date' => 'nullable',
-    //         'profile.private_email' => 'required|email',
-    //         'profile.marital_status' => 'nullable',
-    //         'profile.address' => 'required',
-    //         'profile.temporary_address' => 'nullable',
-    //         'profile.ethnic_id' => 'required',
-    //         'profile.religion_id' => 'required',
-    //         'profile.nationality_id' => 'required',
-    //         'profile.identity_card' => 'required',
-    //         'profile.identity_card_date' => 'required',
-    //         'profile.identity_card_place' => 'required',
-    //         'profile.passport_number' => 'nullable',
-    //         'profile.passport_date' => 'nullable',
-    //         'profile.passport_place' => 'nullable',
-    //         'profile.insurance_number' => 'nullable',
-    //         'profile.tax_number' => 'nullable',
-    //         'profile.depenedency_tax_number' => 'nullable',
-    //         'profile.note' => 'nullable',
-    //     ];
-    // }
-
-    // protected function getValidationAttributes()
-    // {
-    //     return Profile::lang();
-    // }
-
     public function mount($id, $editable)
     {
         $profile = EmployeePrivate::query()->where('emp_id', $id)->firstOrNew();
@@ -92,7 +55,15 @@ class TabPrivate extends Component
 
     public function save()
     {
-        // $this->validate();
+        if ($this->identity_card) {
+            $this->validate([
+                'identity_card_date' => 'required',
+                'identity_card_place' => 'required',
+            ],[
+                'identity_card_date.required' => 'Trường bắt buộc nhập với CMND/CCCD',
+                'identity_card_place.required' => 'Trường bắt buộc nhập với CMND/CCCD',
+            ]);
+        }
         if ($this->profile_id) {
             $profile = EmployeePrivate::findorfail($this->profile_id);
         }

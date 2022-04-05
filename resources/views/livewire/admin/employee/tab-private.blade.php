@@ -3,13 +3,11 @@
         <div class="form-group col-lg-12">
             <label>Họ và tên</label>
             <input type="text" class="form-control" wire:model.lazy="emp_name" disabled>
-            {{-- @error('emp_name') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-6">
             <label>Email cá nhân</label>
             <input type="text" class="form-control" wire:model.lazy="other_email" {{ $editable ? '' : 'disabled' }}>
-            {{-- @error('other_email') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-6">
@@ -20,19 +18,16 @@
                     <option value="{{ $id }}">{{ $value }}</option>
                 @endforeach
             </select>
-            {{-- @error('marital_status') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-6">
             <label>Hộ khẩu thường trú</label>
             <input type="text" class="form-control" wire:model.lazy="address" {{ $editable ? '' : 'disabled' }}>
-            {{-- @error('address') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-6">
             <label>Địa chỉ tạm trú</label>
             <input type="text" class="form-control" wire:model.lazy="temporary_address" {{ $editable ? '' : 'disabled' }}>
-            {{-- @error('temporary_address') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-4">
@@ -43,7 +38,6 @@
                 <option value="{{ $religion->id }}">{{ $religion->value }}</option>
                 @endforeach
             </select>
-            {{-- @error('religion_id') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-4">
@@ -54,7 +48,6 @@
                 <option value="{{ $ethnic->id }}">{{ $ethnic->value }}</option>
                 @endforeach
             </select>
-            {{-- @error('ethnic_id') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-4">
@@ -65,19 +58,17 @@
                 <option value="{{ $nationality->id }}">{{ $nationality->value }}</option>
                 @endforeach
             </select>
-            {{-- @error('nationality_id') @include('layouts.partials.text._error') @enderror --}}
         </div>
 
         <div class="form-group col-lg-4">
             <label>CMND/CCCD </label>
             <input type="text" class="form-control" wire:model.lazy="identity_card" {{ $editable ? '' : 'disabled' }}>
-            {{-- @error('identity_card') @include('layouts.partials.text._error') @enderror --}}
             
         </div>
         <div class="form-group col-lg-4">
             <label>Ngày cấp</label>
             <input type="date" class="form-control" wire:model.lazy="identity_card_date" {{ $editable ? '' : 'disabled' }} max={{ now()->format('Y-m-d') }}>
-            {{-- @error('identity_card_date') @include('layouts.partials.text._error') @enderror --}}
+            @error('identity_card_date') @include('layouts.partials.text._error') @enderror
             
         </div>
 
@@ -89,20 +80,18 @@
                 <option value="{{ $value }}">{{ $value }}</option>
                 @endforeach
             </select>
-            {{-- @error('identity_card_place') @include('layouts.partials.text._error') @enderror --}}
+            @error('identity_card_place') @include('layouts.partials.text._error') @enderror
             
         </div>
 
         <div class="form-group col-lg-12">
             <label>Tiểu sử </label>
             <input type="text" class="form-control" wire:model.lazy="description" {{ $editable ? '' : 'disabled' }}>
-            {{-- @error('description') @include('layouts.partials.text._error') @enderror --}}
             
         </div>
         <div class="form-group col-lg-12">
             <label>Ghi chú </label>
             <input type="text" class="form-control" wire:model.lazy="note" {{ $editable ? '' : 'disabled' }}>
-            {{-- @error('note') @include('layouts.partials.text._error') @enderror --}}
             
         </div>
     </div>
