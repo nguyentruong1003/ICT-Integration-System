@@ -14,13 +14,6 @@
                 </div>
                 
                 <div>
-                    {{-- <div class="input-group">
-                        <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalCreate" wire:click="resetInputFields">
-                            <div class="btn-sm btn-primary">
-                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
-                            </div>
-                        </a>
-                    </div> --}}
                     @include('livewire.common.buttons._create')
                 </div>
             </div>
@@ -31,11 +24,13 @@
                         <th>{{__('data_field_name.common.order_number')}}</th>
                         <th>{{__('data_field_name.department.code')}}</th>
                         <th>{{__('data_field_name.department.name')}}</th>
-                        <th>Trưởng phòng</th>
+                        <th>{{__('data_field_name.department.leader')}}</th>
                         <th>{{__('data_field_name.department.description')}}</th>
                         <th>{{__('data_field_name.department.note')}}</th>
-                        <th>Trạng thái</th>
+                        <th>{{__('data_field_name.department.status')}}</th>
+                        @if($checkEditPermission || $checkDeletePermission)
                         <th>{{__('data_field_name.common.action')}}</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -48,14 +43,12 @@
                             <td>{!! boldTextSearch($row->description, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->note, $searchTerm) !!}</td>
                             <td>{{ \App\Enums\ECommon::codeToValue(3, $row->status) }}</td>
+                            @if($checkEditPermission || $checkDeletePermission)
                             <td>
-                                {{-- <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
-                                    class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">
-                                    <img src="/images/pent2.svg" alt="Edit">
-                                </a> --}}
                                 @include('livewire.common.buttons._edit')
                                 @include('livewire.common.buttons._delete')
                             </td>
+                            @endif
                         </tr>
                     @empty
                         <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>
@@ -98,7 +91,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Trưởng phòng</label>
+                                <label>{{__('data_field_name.department.leader')}}</label>
                                 <select @if($mode == 'show') disabled @endif name="leader_id" class="form-control"  wire:model.lazy="leader_id" placeholder="{{__('data_field_name.department.department_leader')}}">
                                     <option value="">{{__('common.select.default')}}</option>
                                     @foreach ($leaders as $value)

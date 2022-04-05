@@ -45,6 +45,7 @@ return [
         'description' => 'Description',
         'note' => 'Note',
         'status' => 'Status',
+        'leader' => 'Leader',
     ],
     'employee' => [
         'code' => 'Code',
