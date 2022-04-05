@@ -26,7 +26,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           @if (checkPermission('admin.system.user.index'))
-          <li class="nav-item @if (in_array(Route::currentRouteName(), ['admin.system.user.index', 'admin.system.audit.index', 'admin.system.role.index', 'admin.config.master.index'])) menu-open @endif">
+          <li class="nav-item {{setOpen('user')}} {{setOpen('audit')}} {{setOpen('role')}} {{setOpen('master-data')}}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-lock"></i>
               <p>
@@ -36,48 +36,55 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.system.user.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.user.index') active @endif">
+                <a href="{{ route('admin.system.user.index') }}" class="nav-link {{setActive('user')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.user.management')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.system.role.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.role.index') active @endif">
+                <a href="{{ route('admin.system.role.index') }}" class="nav-link {{setActive('role')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.role.management')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.system.audit.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.system.audit.index') active @endif">
+                <a href="{{ route('admin.system.audit.index') }}" class="nav-link {{setActive('audit')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.audit.list')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.config.master-data.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.config.master-data.index') active @endif">
+                <a href="{{ route('admin.config.master-data.index') }}" class="nav-link {{setActive('master-data')}}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Master Data</p>
+                  <p>{{__('data_field_name.master-data.list')}}</p>
                 </a>
               </li>
             </ul>
           </li>
           @endif
-          {{-- <li class="nav-item">
-            <a href="{{ route('admin.employee.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.employee.index') active @endif">
-              <i class="fas fa-user nav-icon"></i>
-              <p>{{__('data_field_name.employee.management')}}</p>
-            </a>
-          </li> --}}
 
-          <li class="nav-item">
-            <a href="{{ route('admin.department.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.department.index') active @endif">
+          @if (checkPermission('admin.department.index'))
+          <li class="nav-item {{setOpen('department')}}">
+            <a href="#" class="nav-link">
               <i class="fas fa-box nav-icon"></i>
-              <p>{{__('data_field_name.department.management')}}</p>
+              <p>
+                {{__('data_field_name.department.management')}}
+                <i class="fas fa-angle-left right"></i>
+              </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.department.index') }}" class="nav-link {{setActive('department')}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>{{__('data_field_name.department.list')}}</p>
+                </a>
+              </li>
+            </ul>
           </li>
+          @endif
 
           @if (checkPermission('admin.employee.index'))
-          <li class="nav-item @if (in_array(Route::currentRouteName(), ['admin.employee.index'])) menu-open @endif">
+          <li class="nav-item {{setOpen('employee')}}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -87,7 +94,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.employee.index') }}" class="nav-link @if (Route::currentRouteName() == 'admin.employee.index') active @endif">
+                <a href="{{ route('admin.employee.index') }}" class="nav-link {{setActive('employee')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('data_field_name.employee.management')}}</p>
                 </a>

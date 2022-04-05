@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Log;
 
 trait BasePermission
 {
-    public $checkDestroyPermission;
+    public $checkDeletePermission;
     public $checkCreatePermission;
     public $checkEditPermission;
     public function mountBasePermission()
     {
-        $this->checkDestroyPermission = checkRoutePermission('destroy');
+        $this->checkDeletePermission = checkRoutePermission('delete');
         $this->checkCreatePermission = checkRoutePermission('create');
         $this->checkEditPermission = checkRoutePermission('edit');
     }
@@ -25,7 +25,7 @@ trait BasePermission
     }
     public function delete(){
 
-        if(!$this->checkDestroyPermission){
+        if(!$this->checkDeletePermission){
             abort(403, 'Unauthorized action.');
         }
     }

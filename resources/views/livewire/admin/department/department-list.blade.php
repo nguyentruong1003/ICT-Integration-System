@@ -14,13 +14,7 @@
                 </div>
                 
                 <div>
-                    <div class="input-group">
-                        <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalCreate" wire:click="resetInputFields">
-                            <div class="btn-sm btn-primary">
-                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
-                            </div>
-                        </a>
-                    </div>
+                    @include('livewire.common.buttons._create')
                 </div>
             </div>
             
@@ -30,11 +24,13 @@
                         <th>{{__('data_field_name.common.order_number')}}</th>
                         <th>{{__('data_field_name.department.code')}}</th>
                         <th>{{__('data_field_name.department.name')}}</th>
-                        <th>Trưởng phòng</th>
+                        <th>{{__('data_field_name.department.leader')}}</th>
                         <th>{{__('data_field_name.department.description')}}</th>
                         <th>{{__('data_field_name.department.note')}}</th>
-                        <th>Trạng thái</th>
+                        <th>{{__('data_field_name.department.status')}}</th>
+                        @if($checkEditPermission || $checkDeletePermission)
                         <th>{{__('data_field_name.common.action')}}</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -47,13 +43,12 @@
                             <td>{!! boldTextSearch($row->description, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->note, $searchTerm) !!}</td>
                             <td>{{ \App\Enums\ECommon::codeToValue(3, $row->status) }}</td>
+                            @if($checkEditPermission || $checkDeletePermission)
                             <td>
-                                <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
-                                    class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">
-                                    <img src="/images/pent2.svg" alt="Edit">
-                                </a>
+                                @include('livewire.common.buttons._edit')
                                 @include('livewire.common.buttons._delete')
                             </td>
+                            @endif
                         </tr>
                     @empty
                         <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>
@@ -66,17 +61,84 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
-    @include('livewire.admin.department._modalCreate')
-    @include('livewire.admin.department._modalEdit')
-</div>
+    <div wire:ignore.self class="modal fade" id="modalCreateEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{$mode=='create'?__('data_field_name.common.create'):($mode=='update'?__('data_field_name.common.update'):__('data_field_name.common.show'))}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" wire:click="resetInputFields()" id="closeModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{__('data_field_name.department.name')}}<span @if ($mode == 'show') hidden @endif class="text-danger"> *</span></label>
+                                <input @if($mode == 'show') disabled @endif type="text" class="form-control"  wire:model.lazy="name" placeholder="{{__('data_field_name.department.name')}}">
+                                @error('name') @include("layouts.partials.text._error") @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{__('data_field_name.department.code')}}<span @if ($mode == 'show') hidden @endif class="text-danger"> *</span></label>
+                                <input @if($mode == 'show') disabled @endif type="text" class="form-control"  wire:model.lazy="code" placeholder="{{__('data_field_name.department.code')}}">
+                                @error('code') @include("layouts.partials.text._error") @enderror
+                            </div>
+                        </div>
+                    </div>
 
-<script>
-    $("document").ready(function () {
-        window.livewire.on('close-modal-create', () => {
-            document.getElementById('close-modal-create').click()
-        });
-        window.livewire.on('close-modal-edit', () => {
-            document.getElementById('close-modal-edit').click()
-        });
-    })
-</script>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{__('data_field_name.department.leader')}}</label>
+                                <select @if($mode == 'show') disabled @endif name="leader_id" class="form-control"  wire:model.lazy="leader_id" placeholder="{{__('data_field_name.department.department_leader')}}">
+                                    <option value="">{{__('common.select.default')}}</option>
+                                    @foreach ($leaders as $value)
+                                        <option value="{{ $value->id }}" @if($value->id == $leader_id) selected @endif>{{ $value->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{__('data_field_name.department.status')}}</label>
+                                <select @if($mode == 'show') disabled @endif class="form-control"  wire:model.lazy="status" placeholder="{{__('data_field_name.department.status')}}">
+                                    @foreach (\App\Enums\ECommon::getListData()['3'] as $id => $value)
+                                        <option value="{{ $id }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="form-group">
+                        <label >{{__('data_field_name.department.department_leader')}}</label>
+                        <select name="leader_id" class="form-control"  wire:model.lazy="leader_id" placeholder="{{__('data_field_name.department.department_leader')}}">
+                            <option value="">{{__('common.select.default')}}</option>
+                            @foreach ($department_list as $value)
+                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    <div class="form-group">
+                        <label >{{__('data_field_name.department.description')}}</label>
+                        <input @if($mode == 'show') disabled @endif type="text" class="form-control"  wire:model.lazy="description" placeholder="{{__('data_field_name.department.description')}}">
+                    </div>
+                    <div class="form-group">
+                        <label >{{__('data_field_name.department.note')}}</label>
+                        <input @if($mode == 'show') disabled @endif type="text" class="form-control"  wire:model.lazy="note" placeholder="{{__('data_field_name.department.note')}}">
+                    </div>
+                    <div class="form-group">
+                        <label >{{__('data_field_name.common.updater')}}</label>
+                        <input type="text" class="form-control" disabled value="{{ $current_user->name }}" placeholder="{{__('data_field_name.common.updater')}}">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" wire:click='saveData'>{{__('common.button.save')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">{{__('common.button.cancel')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

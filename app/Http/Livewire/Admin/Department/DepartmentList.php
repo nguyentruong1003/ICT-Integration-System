@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class DepartmentList extends BaseLive
 {
     public $searchName;
-    public $department_id, $name, $code, $description, $leader_id, $created_by, $note, $status;
+    public $editId, $name, $code, $description, $leader_id, $created_by, $note, $status;
     
     public function render()
     {
@@ -36,29 +36,9 @@ class DepartmentList extends BaseLive
         ]);
     }
 
-    public function store() {
-        $this->validate([
-            'code' => 'required|unique:departments',
-            'name' => 'required',
-        ]);
-        $department = new Department();
-        $department->code = Str::upper($this->code);
-        $department->name = $this->name;
-        $department->description = $this->description;
-        $department->note = $this->note;
-        $department->leader_id = $this->leader_id;
-        $department->created_by = Auth::user()->id;
-        $department->status = $this->status ?? 1;
-        if ($this->leader_id) $this->update_leader();
-        $department->save();
-
-        $this->resetInputFields();
-        $this->emit('close-modal-create');
-        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.add')] );
-    }
-
     public function resetInputFields() {
         $this->reset([
+            'editId',
             'name',
             'code',
             'description',
@@ -67,6 +47,7 @@ class DepartmentList extends BaseLive
             'created_by',
             'status',
         ]);
+        $this->resetValidation();
     }
 
     public function delete(){
@@ -82,38 +63,69 @@ class DepartmentList extends BaseLive
         
     }
 
-    public function edit($id){
-        $this->updateMode = true;
-        $department = Department::findOrFail($id);
-        $this->department_id = $id;
-        $this->name = $department->name;
-        $this->code = $department->code;
-        $this->leader_id = $department->leader_id;
-        $this->description = $department->description;
-        $this->note = $department->note;
-        $this->status = $department->status;
+    public function create() {
+        $this->resetInputFields();
+        $this->mode = 'create';
+    }
+
+    public function edit($id) {
+        $this->resetInputFields();
+        $this->editId = $id;
+        $this->mode = 'update';
+        $item = Department::findorfail($id);
+        $this->name = $item->name;
+        $this->code = $item->code;
+        $this->leader_id = $item->leader_id;
+        $this->description = $item->description;
+        $this->note = $item->note;
+        $this->status = $item->status;
         $this->resetValidation();
     }
 
-    public function update() {
+    public function standardData(){
+        $this->name = trim($this->name);
+        $this->code = trim($this->code);
+        $this->description = trim($this->description);
+        $this->note = trim($this->note);
+    }
+
+    public function saveData (){
+        $this->standardData();
         $this->validate([
-            'code' => 'required|unique:departments,code,'. $this->department_id,
+            'code' => 'required|unique:departments,code,'. $this->editId,
             'name' => 'required',
         ]);
-        $department = Department::findorfail($this->department_id);
-        $department->code = Str::upper($this->code);
-        $department->name = $this->name;
-        $department->leader_id = $this->leader_id;
-        $department->description = $this->description;
-        $department->note = $this->note;
-        $department->status = $this->status;
-        $department->updated_by = Auth::user()->id;
-        $this->update_leader();
-        $department->save();
-
+        if($this->mode=='create'){
+            Department::create([
+                'code' => Str::upper($this->code),
+                'name' => $this->name,
+                'description' => $this->description,
+                'leader_id' => $this->leader_id,
+                'status' => $this->status ?? 1,
+                'note' => $this->note,
+                'created_by' => Auth::user()->id,
+            ]);
+        }
+        else {
+            Department::findorfail($this->editId)->update([
+                'code' => Str::upper($this->code),
+                'name' => $this->name,
+                'leader_id' => $this->leader_id,
+                'description' => $this->description,
+                'status' => $this->status,
+                'note' => $this->note,
+                'updated_by' => Auth::user()->id,
+            ]);
+        }
+        if ($this->leader_id) $this->update_leader();
         $this->resetInputFields();
-        $this->emit('close-modal-edit');
-        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.update')] );
+        if($this->mode=='create'){
+            $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => 'Thêm mới thành công']);
+        }
+        else {
+            $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => 'Chỉnh sửa thành công']);
+        }
+        $this->emit('closeModalCreateEdit');
     }
 
     public function update_leader() {

@@ -67,10 +67,12 @@
                         <tr>
                             <td class="text-left">{!! boldTextSearch($row['perfomer'], $searchTerm) !!}</td>
                             <td class="text-left">{!! boldTextSearch($row['event'], $searchTerm) !!}<br>
+                                @if (checkRoutePermission('show'))
                                 <a href="" data-toggle="modal" data-target="{{'#show' . $row['id']}}">
                                     {{__('data_field_name.common.view_detail')}}
                                 </a>
                                 @include('livewire.admin.system.audit.detail')
+                                @endif
                             </td>
                             <td class="text-left">{!! boldTextSearch($row['audittable_type'], $searchTerm) !!}</td>
                             {{-- <td class="text-left">{!! boldTextSearch($row['audittable_id'], $searchTerm) !!}</td> --}}

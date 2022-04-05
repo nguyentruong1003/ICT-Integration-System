@@ -44,6 +44,8 @@ return [
         'department_father' => 'Department\'s father',
         'description' => 'Description',
         'note' => 'Note',
+        'status' => 'Status',
+        'leader' => 'Leader',
     ],
     'employee' => [
         'code' => 'Code',

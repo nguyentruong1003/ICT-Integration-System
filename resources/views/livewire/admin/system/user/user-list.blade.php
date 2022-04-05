@@ -14,13 +14,7 @@
                 </div>
                 
                 <div>
-                    <div class="input-group">
-                        <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalCreate" wire:click="resetInputFields">
-                            <div class="btn-sm btn-primary">
-                                <i class="fa fa-plus"></i> {{__('common.button.create')}}
-                            </div>
-                        </a>
-                    </div>
+                    @include('livewire.common.buttons._create')
                 </div>
             </div>
             
@@ -32,7 +26,9 @@
                         <th>{{__('data_field_name.user.email')}}</th>
                         <th>{{__('data_field_name.user.role')}}</th>
                         <th>{{__('data_field_name.common.create_date')}}</th>
+                        @if ($checkEditPermission || $checkDeletePermission)
                         <th>{{__('data_field_name.common.action')}}</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -47,13 +43,12 @@
                                 @endforeach
                             </td>
                             <td>{{ ReFormatDate($row->created_at,'d-m-Y') }}</td>
+                            @if ($checkEditPermission || $checkDeletePermission)
                             <td>
-                                <a href="#" id="modal" class="btn btn-viewmore-news mr0 " data-toggle="modal" data-target="#ModalEdit"
-                                    class="btn-sm border-0 bg-transparent" wire:click="edit({{ $row->id }})">
-                                    <img src="/images/pent2.svg" alt="Edit">
-                                </a>
+                                @include('livewire.common.buttons._edit')
                                 @include('livewire.common.buttons._delete')
                             </td>
+                            @endif
                         </tr>
                     @empty
                         <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>
@@ -66,16 +61,45 @@
         @endif
     </div>
     @include('livewire.common._modalDelete')
-    @include('livewire.admin.system.user._modalCreateEdit')
-</div>
+    <div wire:ignore.self class="modal fade" id="modalCreateEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{$mode=='create'?__('data_field_name.common.create'):($mode=='update'?__('data_field_name.common.update'):__('data_field_name.common.show'))}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" wire:click="resetInputFields()" id="closeModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label >{{__('data_field_name.user.username')}}<span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control"  wire:model="name" placeholder="{{__('data_field_name.user.username')}}">
+                            @error('name') @include("layouts.partials.text._error") @enderror
+                        </div>
+                        <div class="form-group">
+                            <label >{{__('data_field_name.user.email')}}<span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control"  wire:model="email" placeholder="{{__('data_field_name.user.email')}}">
+                            @error('email') @include("layouts.partials.text._error") @enderror
+                        </div>
+                        <div class="form-group">
+                            <label >{{__('data_field_name.user.new_password')}}<span class="text-danger"> *</span></label>
+                            <input type="password" class="form-control"  wire:model="password" placeholder="{{__('data_field_name.user.new_password')}}">
+                            @error('password') @include("layouts.partials.text._error") @enderror
+                        </div>
+                        <div class="form-group">
+                            <label >{{__('data_field_name.user.confirm_password')}}<span class="text-danger"> *</span></label>
+                            <input type="password" class="form-control"  wire:model.lazy="confirm_password" placeholder="{{__('data_field_name.user.confirm_password')}}">
+                            @error('confirm_password') @include("layouts.partials.text._error") @enderror
+                        </div>
+                    </form>
+                </div>
 
-<script>
-    $("document").ready(function () {
-        window.livewire.on('close-modal-create', () => {
-            document.getElementById('close-modal-create').click()
-        });
-        window.livewire.on('close-modal-edit', () => {
-            document.getElementById('close-modal-edit').click()
-        });
-    })
-</script>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" wire:click='saveData'>{{__('common.button.save')}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">{{__('common.button.cancel')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
