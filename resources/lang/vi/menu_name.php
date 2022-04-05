@@ -8,4 +8,7 @@ return [
     ],
     'hrm' => 'Quản lý nhân sự',
     'unit_mgr' => 'Quản lý đơn vị',
+    'config' => [
+        'master-data_mgr' => 'Quản lý cấu hình',
+    ],
 ];

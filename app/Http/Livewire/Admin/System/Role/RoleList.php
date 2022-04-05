@@ -22,9 +22,8 @@ class RoleList extends BaseLive
         return view('livewire.admin.system.role.role-list' ,compact('data'));
     }
 
-    // public function delete(){
-    //     Role::findOrFail($this->deleteId)->delete();
-    //     $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.delete')] );
-        
-    // }
+    public function delete(){
+        Role::findOrFail($this->deleteId)->delete();
+        $this->dispatchBrowserEvent('show-toast', ["type" => "success", "message" => __('notification.common.success.delete')] );
+    }
 }

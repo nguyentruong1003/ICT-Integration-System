@@ -37,9 +37,7 @@
                 </div>
                 
                 <div>
-                    {{-- @if($checkCreatePermission) --}}
                     @include('livewire.common.buttons._create')
-                    {{-- @endif --}}
                 </div>
             </div>
             
@@ -51,9 +49,9 @@
                         <th>{{__('data_field_name.master-data.key')}}</th>
                         <th>{{__('data_field_name.master-data.value')}}</th>
                         <th>{{__('data_field_name.master-data.order')}}</th>
-                        {{-- @if($checkEditPermission || $checkDestroyPermission) --}}
+                        @if($checkEditPermission || $checkDeletePermission)
                         <th>{{__('data_field_name.common.action')}}</th>
-                        {{-- @endif --}}
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -64,16 +62,12 @@
                             <td>{!! boldTextSearch($row->key, $searchTerm) !!}</td>
                             <td>{!! boldTextSearch($row->value, $searchTerm) !!}</td>
                             <td>{{ $row->order }}</td>
-                            {{-- @if($checkEditPermission || $checkDestroyPermission) --}}
+                            @if($checkEditPermission || $checkDeletePermission)
                             <td>
-                                {{-- @if($checkEditPermission) --}}
                                 @include('livewire.common.buttons._edit')
-                                {{-- @endif --}}
-                                {{-- @if($checkDestroyPermission) --}}
-                                    @include('livewire.common.buttons._delete')
-                                {{-- @endif --}}
+                                @include('livewire.common.buttons._delete')
                             </td>
-                            {{-- @endif --}}
+                            @endif
                         </tr>
                     @empty
                         <td colspan='12' class='text-center'>{{__('common.message.no_record')}}</td>

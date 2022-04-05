@@ -44,6 +44,8 @@ return [
         'department_father' => 'Đơn vị cha',
         'description' => 'Mô tả',
         'note' => 'Ghi chú',
+        'status' => 'Trạng thái',
+        'leader' => 'Trưởng phòng',
     ],
     'employee' => [
         'code' => 'Mã nhân viên',

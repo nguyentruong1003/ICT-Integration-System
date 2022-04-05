@@ -11,6 +11,16 @@ class Department extends Model implements Auditable
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
     protected $table = "departments";
+    protected $fillable = [
+        'editId',
+        'name',
+        'code',
+        'description',
+        'leader_id',
+        'note',
+        'created_by',
+        'status',
+    ];
 
     public function creator() {
         return $this->belongsTo(User::class, 'created_by');

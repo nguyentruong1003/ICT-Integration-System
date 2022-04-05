@@ -18,12 +18,12 @@ use Illuminate\Support\Carbon;
 
 function setActive($path)
 {
-    return \Request::is($path . '*') ? ' class=active' : '';
+    return \Request::is('*' . $path . '*') ? ' active' : '';
 }
 
 function setOpen($path)
 {
-    return \Request::is($path . '*') ? ' class=open' : '';
+    return \Request::is('*' . $path . '*') ? ' menu-is-opening menu-open' : '';
 }
 
 function getAdminName($id)
@@ -130,7 +130,7 @@ function getTodayPicker()
 //diepth: dung cho trang hien thi link
 function checkPermission($permission)
 {
-    if (Auth::user()->hasRole('administrator')) {
+    if (Auth::user()->hasAnyRole(['administrator', 'admin'])) {
         return true;
     }
     if (Auth::user()->can($permission)) {
