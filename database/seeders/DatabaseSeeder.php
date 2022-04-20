@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             RawDBSeeder::class,
             EmployeeMasterDataSeeder::class,
+            DepartmentSeeder::class,
+            EmployeeSeeder::class,
         ]);
     }
 }
