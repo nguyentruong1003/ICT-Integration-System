@@ -14,7 +14,7 @@
 
         <div class="form-group col-lg-6">
             <label>Ngày sinh <span class="text-danger">*</span></label>
-            <input type="date" class="form-control" wire:model.lazy="birthday" {{ $editable ? '' : 'disabled' }} max={{ now()->format('Y-m-d') }}>
+            @livewire('component.date-picker', ['name' => 'birthday', 'value' => $birthday, 'disabled' => !$editable])
             @error('birthday') @include('layouts.partials.text._error') @enderror
         </div>
 

@@ -21,11 +21,11 @@ class TabGeneral extends Component
     public $positions;
     public $editable = true;
 
-    // protected $listeners = [
-    //     'set-manager-id' => 'setManagerId',
-    //     'set-birthday' => 'setBirthday',
-    //     'set-working-address-id' => 'setWorkingAddressId'
-    // ];
+    protected $listeners = [
+        // 'set-manager-id' => 'setManagerId',
+        'set-birthday' => 'setBirthday',
+        // 'set-working-address-id' => 'setWorkingAddressId'
+    ];
 
     public function mount($id, $editable)
     {
@@ -104,9 +104,9 @@ class TabGeneral extends Component
     //     $this->staff->working_address_id = array_keys($workingAddress)[0] ?? null;
     // }
 
-    // public function setBirthday($birthday)
-    // {
-    //     $this->staff->birthday = date('Y-m-d', strtotime($birthday));
-    // }
+    public function setBirthday($birthday)
+    {
+        $this->birthday = date('Y-m-d', strtotime($birthday));
+    }
 }
 

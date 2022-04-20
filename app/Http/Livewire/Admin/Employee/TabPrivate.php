@@ -26,6 +26,10 @@ class TabPrivate extends Component
     public $provinces;
     public $editable = true;
 
+    protected $listeners = [
+        'set-identity_card_date' => 'setIdentityCardDate'
+    ];
+
     public function mount($id, $editable)
     {
         $profile = EmployeePrivate::query()->where('emp_id', $id)->firstOrNew();
@@ -112,10 +116,10 @@ class TabPrivate extends Component
     //     $this->profile->end_working_date = $date;
     // }
 
-    // public function setIdentityCardDate($date)
-    // {
-    //     $this->profile->identity_card_date = $date;
-    // }
+    public function setIdentityCardDate($date)
+    {
+        $this->identity_card_date = $date;
+    }
 
     // public function setPassportDate($date)
     // {

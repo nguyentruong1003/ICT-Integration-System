@@ -67,7 +67,7 @@
         </div>
         <div class="form-group col-lg-4">
             <label>Ngày cấp</label>
-            <input type="date" class="form-control" wire:model.lazy="identity_card_date" {{ $editable ? '' : 'disabled' }} max={{ now()->format('Y-m-d') }}>
+            @livewire('component.date-picker', ['name' => 'identity_card_date', 'value' => $identity_card_date, 'disabled' => !$editable])
             @error('identity_card_date') @include('layouts.partials.text._error') @enderror
             
         </div>
