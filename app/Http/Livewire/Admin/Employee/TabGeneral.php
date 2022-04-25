@@ -52,6 +52,7 @@ class TabGeneral extends Component
         if ($this->position_id == 1) {
             $item = Department::findorfail($this->department_id);
             if (isset($item->leader)) $this->emit('open-warning-modal');
+            else $this->saveData();
         } else {
             $this->saveData();
         }

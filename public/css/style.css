@@ -45,3 +45,9 @@
 .text-upper {
     text-transform: uppercase;
 }
+
+.main-sidebar {
+    height: 100%!important;
+    position: fixed!important;
+    top: 0;
+}
