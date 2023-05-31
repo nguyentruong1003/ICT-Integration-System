@@ -8,9 +8,13 @@ if [ ! -d /.composer ]; then
     mkdir /.composer
 fi
 
+cd storage/
+mkdir -p framework/{sessions,views,cache}
+chmod -R 775 framework
+
 npm install
-composer install
-php artisan migrate
+composer install --no-dev --ignore-platform-reqs
+# php artisan migrate
 chmod -R ugo+rw /.composer
 
 if [ ! -z "$PORT" ]; then
